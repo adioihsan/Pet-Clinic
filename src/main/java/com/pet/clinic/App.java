@@ -19,6 +19,7 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("login"), 1280, 800);
         stage.setScene(scene);
+        stage.setTitle("Pet Clinic");
         stage.setMaximized(true);
         stage.show();
     }

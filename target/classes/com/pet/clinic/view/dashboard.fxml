@@ -1,14 +1,161 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.pet.clinic.controller.DashboardController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #F6FCFF;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <VBox prefHeight="800.0" prefWidth="208.0" style="-fx-background-color: #002e00;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="62.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/LogoWhite.png" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </ImageView>
+            <Line endX="83.5" startX="-100.0" stroke="#ffffff73">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" right="20.0" />
+               </VBox.margin>
+            </Line>
+            <Pane layoutX="10.0" layoutY="127.0" prefHeight="50.0" prefWidth="225.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000002e" height="54.0" layoutX="12.0" layoutY="-3.0" stroke="TRANSPARENT" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="20.0" width="194.0" />
+                  <ImageView fitHeight="30.0" fitWidth="28.0" layoutX="20.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Dashboard.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="57.0" layoutY="16.0" prefHeight="20.0" prefWidth="157.0" text="Dashboard" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane prefHeight="50.0" prefWidth="225.0">
+               <children>
+                  <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="11.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/petowner.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="59.0" layoutY="16.0" prefHeight="20.0" prefWidth="157.0" text="Pasien" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="10.0" layoutY="177.0" prefHeight="50.0" prefWidth="225.0">
+               <children>
+                  <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="19.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/RekamMedis.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="59.0" layoutY="16.0" prefHeight="20.0" prefWidth="157.0" text="Rekam Medis" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="10.0" layoutY="227.0" prefHeight="50.0" prefWidth="225.0">
+               <children>
+                  <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="19.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Pembayaran.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="59.0" layoutY="16.0" prefHeight="20.0" prefWidth="157.0" text="Pembayaran" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="10.0" layoutY="277.0" prefHeight="50.0" prefWidth="225.0">
+               <children>
+                  <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="17.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Laporan.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="59.0" layoutY="16.0" prefHeight="20.0" prefWidth="157.0" text="Laporan" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="10.0" layoutY="327.0" prefHeight="50.0" prefWidth="225.0">
+               <children>
+                  <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="16.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/BukuTamu.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="59.0" layoutY="16.0" prefHeight="20.0" prefWidth="157.0" text="Buku Tamu" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="10.0" layoutY="377.0" prefHeight="50.0" prefWidth="225.0">
+               <children>
+                  <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="16.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/obat.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="59.0" layoutY="16.0" prefHeight="20.0" prefWidth="157.0" text="Obat" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="10.0" layoutY="427.0" prefHeight="50.0" prefWidth="225.0">
+               <children>
+                  <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="16.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/dokter.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="59.0" layoutY="16.0" prefHeight="20.0" prefWidth="157.0" text="Dokter" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane layoutX="10.0" layoutY="477.0" prefHeight="50.0" prefWidth="225.0">
+               <children>
+                  <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="16.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Admin.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="59.0" layoutY="16.0" prefHeight="20.0" prefWidth="157.0" text="Admin" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </VBox>
+   </left>
+</BorderPane>
