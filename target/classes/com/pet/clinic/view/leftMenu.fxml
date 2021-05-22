@@ -2,19 +2,22 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="800.0" prefWidth="270.0" style="-fx-background-color: #002e00;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.LeftMenuController">
+<VBox alignment="TOP_RIGHT" pickOnBounds="false" prefHeight="800.0" prefWidth="270.0" style="-fx-background-color: #003d33;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.LeftMenuController">
    <children>
-      <AnchorPane prefHeight="106.0" prefWidth="314.0">
+      <AnchorPane pickOnBounds="false" prefHeight="106.0" prefWidth="314.0">
          <children>
             <ImageView fitHeight="55.0" fitWidth="185.0" layoutX="14.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -25,134 +28,192 @@
             <JFXHamburger fx:id="hmbMenu" layoutX="205.0" layoutY="29.0" prefHeight="56.0" prefWidth="63.0" stylesheets="@../css/hamburger-menu.css" />
          </children>
       </AnchorPane>
-      <Pane layoutX="10.0" layoutY="127.0" prefHeight="50.0" prefWidth="225.0">
+      <Pane layoutX="10.0" layoutY="127.0" pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
          <children>
-            <ImageView fitHeight="30.0" fitWidth="28.0" layoutX="20.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+            <JFXButton fx:id="btnDashboard" layoutX="8.0" opacity="0.5" prefHeight="51.0" prefWidth="194.0" style="-fx-background-color: #000; -fx-background-radius: 10px;" text=" " />
+            <ImageView fitHeight="30.0" fitWidth="28.0" layoutX="20.0" layoutY="11.0" mouseTransparent="true" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/Dashboard.png" />
                </image>
             </ImageView>
-            <Label layoutX="57.0" layoutY="16.0" prefHeight="20.0" prefWidth="157.0" text="Dashboard" textFill="WHITE">
+            <Label layoutX="57.0" layoutY="16.0" mouseTransparent="true" opacity="0.8" prefHeight="20.0" prefWidth="157.0" text="Dashboard" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <JFXButton fx:id="btnDashboard" prefHeight="51.0" prefWidth="226.0" text=" " />
          </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Pane>
-      <Pane prefHeight="50.0" prefWidth="225.0">
+      <Pane pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000cd" height="54.0" stroke="TRANSPARENT" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="20.0" width="194.0" />
-            <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="11.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+            <JFXButton fx:id="btnPatient" layoutX="9.0" opacity="0.0" prefHeight="51.0" prefWidth="194.0" style="-fx-background-color: #000; -fx-background-radius: 10px;" text=" " />
+            <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="11.0" layoutY="11.0" mouseTransparent="true" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/petowner.png" />
                </image>
             </ImageView>
-            <Label layoutX="59.0" layoutY="16.0" prefHeight="20.0" prefWidth="157.0" text="Pasien" textFill="WHITE">
+            <Label layoutX="59.0" layoutY="16.0" mouseTransparent="true" opacity="0.8" prefHeight="20.0" prefWidth="157.0" text="Pasien" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <JFXButton fx:id="btnPatient" prefHeight="51.0" prefWidth="224.0" text=" " />
          </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Pane>
-      <Pane layoutX="10.0" layoutY="177.0" prefHeight="50.0" prefWidth="225.0">
+      <Pane layoutX="10.0" layoutY="177.0" pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
          <children>
-            <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="19.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="19.0" layoutY="11.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/RekamMedis.png" />
                </image>
             </ImageView>
-            <Label layoutX="59.0" layoutY="16.0" prefHeight="20.0" prefWidth="157.0" text="Rekam Medis" textFill="WHITE">
+            <Label layoutX="59.0" layoutY="16.0" opacity="0.8" prefHeight="20.0" prefWidth="157.0" text="Rekam Medis" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
          </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Pane>
-      <Pane layoutX="10.0" layoutY="227.0" prefHeight="50.0" prefWidth="225.0">
+      <Pane layoutX="10.0" layoutY="227.0" pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
          <children>
-            <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="19.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="19.0" layoutY="11.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/Pembayaran.png" />
                </image>
             </ImageView>
-            <Label layoutX="59.0" layoutY="16.0" prefHeight="20.0" prefWidth="157.0" text="Pembayaran" textFill="WHITE">
+            <Label layoutX="59.0" layoutY="16.0" opacity="0.8" prefHeight="20.0" prefWidth="157.0" text="Pembayaran" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
          </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Pane>
-      <Pane layoutX="10.0" layoutY="277.0" prefHeight="50.0" prefWidth="225.0">
+      <Pane layoutX="10.0" layoutY="277.0" pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
          <children>
-            <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="17.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="17.0" layoutY="11.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/Laporan.png" />
                </image>
             </ImageView>
-            <Label layoutX="59.0" layoutY="16.0" prefHeight="20.0" prefWidth="157.0" text="Laporan" textFill="WHITE">
+            <Label layoutX="59.0" layoutY="16.0" opacity="0.8" prefHeight="20.0" prefWidth="157.0" text="Laporan" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
          </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Pane>
-      <Pane layoutX="10.0" layoutY="327.0" prefHeight="50.0" prefWidth="226.0">
+      <Pane layoutX="10.0" layoutY="327.0" pickOnBounds="false" prefHeight="50.0" prefWidth="226.0">
          <children>
-            <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="16.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="16.0" layoutY="11.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/BukuTamu.png" />
                </image>
             </ImageView>
-            <Label layoutX="59.0" layoutY="16.0" prefHeight="20.0" prefWidth="157.0" text="Buku Tamu" textFill="WHITE">
+            <Label layoutX="59.0" layoutY="16.0" opacity="0.8" prefHeight="20.0" prefWidth="157.0" text="Buku Tamu" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
          </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Pane>
-      <Pane layoutX="10.0" layoutY="377.0" prefHeight="50.0" prefWidth="225.0">
+      <Pane layoutX="10.0" layoutY="377.0" pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
          <children>
-            <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="16.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="16.0" layoutY="11.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/obat.png" />
                </image>
             </ImageView>
-            <Label layoutX="59.0" layoutY="16.0" prefHeight="20.0" prefWidth="157.0" text="Obat" textFill="WHITE">
+            <Label layoutX="59.0" layoutY="16.0" opacity="0.8" prefHeight="20.0" prefWidth="157.0" text="Obat" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
          </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Pane>
-      <Pane layoutX="10.0" layoutY="427.0" prefHeight="50.0" prefWidth="225.0">
+      <Pane layoutX="10.0" layoutY="427.0" pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
          <children>
-            <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="16.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="16.0" layoutY="11.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/dokter.png" />
                </image>
             </ImageView>
-            <Label layoutX="59.0" layoutY="16.0" prefHeight="20.0" prefWidth="157.0" text="Dokter" textFill="WHITE">
+            <Label layoutX="59.0" layoutY="16.0" opacity="0.8" prefHeight="20.0" prefWidth="157.0" text="Dokter" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
          </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Pane>
-      <Pane layoutX="10.0" layoutY="477.0" prefHeight="50.0" prefWidth="225.0">
+      <Pane layoutX="10.0" layoutY="477.0" pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
          <children>
-            <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="16.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="16.0" layoutY="11.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/Admin.png" />
                </image>
             </ImageView>
-            <Label layoutX="59.0" layoutY="16.0" prefHeight="20.0" prefWidth="157.0" text="Admin" textFill="WHITE">
+            <Label layoutX="59.0" layoutY="16.0" opacity="0.8" prefHeight="20.0" prefWidth="157.0" text="Admin" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
          </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Pane>
+      <VBox alignment="BOTTOM_CENTER" VBox.vgrow="ALWAYS">
+         <children>
+            <Pane prefHeight="244.0" prefWidth="270.0">
+               <children>
+                  <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="90.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/logout.png" />
+                     </image>
+                  </ImageView>
+                  <Circle fx:id="imgUserCircle" fill="DODGERBLUE" layoutX="131.0" layoutY="85.0" radius="56.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" />
+                  <ImageView fx:id="imgUser" fitHeight="84.0" fitWidth="100.0" layoutX="81.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@../images/admin2.png" />
+                     </image>
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+                  <Label layoutX="106.0" layoutY="149.0" text="Admin" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="91.0" layoutY="171.0" text="7822354456" textFill="WHITE" />
+                  <Label layoutX="123.0" layoutY="201.0" text="Logout" textFill="WHITE" />
+               </children>
+            </Pane>
+         </children>
+      </VBox>
    </children>
+   <padding>
+      <Insets bottom="20.0" />
+   </padding>
 </VBox>
