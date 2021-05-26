@@ -5,6 +5,14 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import com.pet.clinic.database.DbConnect;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.pet.clinic.model.dao.UserDao;
 
 public class ValidateUser {
 
@@ -15,19 +23,19 @@ public class ValidateUser {
     private String salt;
 
     public ValidateUser(String username,String password){
-        //user from login input
-        userLogin = new User();
-        userLogin.setUsername(username);
-        userLogin.setSalt(getSalt());
-        userLogin.setPassword(generatePassword(password,userLogin.getSalt()));
-
-        //user from db
-
+        this.username = username;
+        this.password = password;
     }
 
-    public static boolean isValid(){
+    public boolean isValid(){
+        userDb = UserDao.getUser(username);
+        if (userDb != null) {
+            String  hashPassword =  generatePassword(password,userDb.getSalt().getBytes());
+            if(hashPassword.equals(userDb.getPassword()))
+                return true;
+        }
+        return  false;
 
-      return false;
     };
 
     protected static byte[] getSalt() {
@@ -37,7 +45,7 @@ public class ValidateUser {
         try {
             sr = SecureRandom.getInstance("SHA1PRNG");
             //create array for salt
-            salt = new byte[32];
+            salt = new byte[16];
             //get random salt
             sr.nextBytes(salt);
         } catch (NoSuchAlgorithmException e) {
@@ -65,5 +73,13 @@ public class ValidateUser {
         }
         return  generatedPassword;
     }
+/*    public  static  void main(String[] args){
+        String password = "123456";
+        String salt = "[B@5bcab519";
+        String generatedPass = generatePassword(password,salt.getBytes());
+        System.out.println(salt);
+        System.out.println(generatedPass);
+    }*/
+
 
 }

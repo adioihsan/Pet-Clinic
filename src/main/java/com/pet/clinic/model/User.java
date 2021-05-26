@@ -3,7 +3,7 @@ package com.pet.clinic.model;
 public class User {
     private String username;
     private String password;
-    private byte[] salt;
+    private String salt;
 
     public String getUsername() {
         return username;
@@ -21,11 +21,11 @@ public class User {
         this.password = password;
     }
 
-    public byte[] getSalt() {
+    public String getSalt() {
         return salt;
     }
 
-    public void setSalt(byte[] salt) {
+    public void setSalt(String salt) {
         this.salt = salt;
     }
 }

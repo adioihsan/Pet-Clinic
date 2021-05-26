@@ -37,7 +37,7 @@ public class LoginController {
     @FXML
     void initialize() {
         btnLogin.setOnAction(event -> {
-            // loginUser();
+            loginUser();
         });
 
     }
@@ -45,7 +45,8 @@ public class LoginController {
         String username = tfUsername.getText().trim();
         String password = tfPassword.getText().trim();
         if(!username.equals("") || !password.equals("")){
-            if(ValidateUser.isValid()){
+            ValidateUser vds = new ValidateUser(username,password);
+            if(vds.isValid()){
                 try {
                     App.setRoot("dashboard/dashboard");
                 } catch (IOException e) {
