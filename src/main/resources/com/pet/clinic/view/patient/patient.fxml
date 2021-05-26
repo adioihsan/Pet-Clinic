@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -16,26 +18,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.PatientController">
-   <center>
-      <StackPane pickOnBounds="false" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.patient.PatientController">
+   <left>
+      <StackPane pickOnBounds="false" prefHeight="800.0" prefWidth="260.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox>
-               <children>
-                  <GridPane prefHeight="721.0" prefWidth="1280.0" VBox.vgrow="ALWAYS">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="669.0" minWidth="10.0" prefWidth="575.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="677.0" minWidth="10.0" prefWidth="605.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints maxHeight="713.0" minHeight="10.0" prefHeight="701.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <padding>
-                        <Insets left="100.0" top="25.0" />
-                     </padding>
-                  </GridPane>
-               </children>
-            </VBox>
             <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="175.0" layoutX="650.0" layoutY="410.0" maxWidth="0.0" resizeContent="true" style="-fx-background-color: rgba(0,0,0,0.5);" viewOrder="-1.0" StackPane.alignment="TOP_LEFT" />
             <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="800.0" prefWidth="278.0" style="-fx-background-color: #00695c;" StackPane.alignment="TOP_LEFT">
                <StackPane.margin>
@@ -45,7 +31,7 @@
                   <Insets left="80.0" top="42.0" />
                </padding>
                <children>
-                  <Pane>
+                  <Pane mouseTransparent="true">
                      <children>
                         <Label prefHeight="16.0" prefWidth="175.0" text="Pasien" textFill="WHITE">
                            <font>
@@ -54,7 +40,7 @@
                         </Label>
                         <ImageView fitHeight="36.0" fitWidth="49.0" layoutX="77.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/petowner.png" />
+                              <Image url="@../../images/petowner.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -64,12 +50,17 @@
                   </Pane>
                   <Pane prefHeight="36.0" prefWidth="199.0">
                      <children>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" opacity="0.85" pickOnBounds="true" preserveRatio="true">
+                        <JFXButton fx:id="btnRegister" layoutX="-11.0" layoutY="-9.0" opacity="0.5" prefHeight="43.0" prefWidth="163.0" style="-fx-background-color: #000; -fx-background-radius: 15px;">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" mouseTransparent="true" opacity="0.85" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/regitstrasi.png" />
+                              <Image url="@../../images/regitstrasi.png" />
                            </image>
                         </ImageView>
-                        <Label opacity="0.85" prefHeight="24.0" prefWidth="193.0" text="Registrasi" textFill="WHITE">
+                        <Label mouseTransparent="true" opacity="0.85" prefHeight="24.0" prefWidth="193.0" text="Registrasi" textFill="WHITE">
                            <padding>
                               <Insets left="32.0" />
                            </padding>
@@ -84,12 +75,12 @@
                   </Pane>
                   <Pane layoutX="90.0" layoutY="149.0" prefHeight="36.0" prefWidth="199.0">
                      <children>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" opacity="0.85" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="24.0" fitWidth="24.0" mouseTransparent="true" opacity="0.85" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/pet.png" />
+                              <Image url="@../../images/pet.png" />
                            </image>
                         </ImageView>
-                        <Label opacity="0.85" prefHeight="24.0" prefWidth="193.0" text="Hewan" textFill="WHITE">
+                        <Label mouseTransparent="true" opacity="0.85" prefHeight="24.0" prefWidth="193.0" text="Hewan" textFill="WHITE">
                            <padding>
                               <Insets left="32.0" />
                            </padding>
@@ -104,12 +95,12 @@
                   </Pane>
                   <Pane layoutX="90.0" layoutY="210.0" prefHeight="36.0" prefWidth="199.0">
                      <children>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" opacity="0.85" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="24.0" fitWidth="24.0" mouseTransparent="true" opacity="0.85" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/pemilik.png" />
+                              <Image url="@../../images/pemilik.png" />
                            </image>
                         </ImageView>
-                        <Label opacity="0.85" prefHeight="24.0" prefWidth="193.0" text="Pemilik" textFill="WHITE">
+                        <Label mouseTransparent="true" opacity="0.85" prefHeight="24.0" prefWidth="193.0" text="Pemilik" textFill="WHITE">
                            <padding>
                               <Insets left="32.0" />
                            </padding>
@@ -124,12 +115,12 @@
                   </Pane>
                   <Pane layoutX="90.0" layoutY="271.0" prefHeight="36.0" prefWidth="199.0">
                      <children>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" opacity="0.85" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="24.0" fitWidth="24.0" mouseTransparent="true" opacity="0.85" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/kartu.png" />
+                              <Image url="@../../images/kartu.png" />
                            </image>
                         </ImageView>
-                        <Label opacity="0.85" prefHeight="24.0" prefWidth="193.0" text="Kartu" textFill="WHITE">
+                        <Label mouseTransparent="true" opacity="0.85" prefHeight="24.0" prefWidth="193.0" text="Kartu" textFill="WHITE">
                            <padding>
                               <Insets left="32.0" />
                            </padding>
@@ -148,12 +139,25 @@
                <children>
                   <AnchorPane maxWidth="100.0" pickOnBounds="false" prefHeight="106.0" prefWidth="100.0">
                      <children>
-                        <JFXHamburger fx:id="hmbFake" layoutY="29.0" prefHeight="56.0" prefWidth="63.0" stylesheets="@../css/hamburger-menu.css" />
+                        <JFXHamburger fx:id="hmbFake" layoutY="29.0" prefHeight="56.0" prefWidth="63.0" stylesheets="@../../css/hamburger-menu.css" />
                      </children>
                   </AnchorPane>
                </children>
             </VBox>
          </children>
       </StackPane>
+   </left>
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
    </center>
 </BorderPane>

@@ -17,7 +17,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("login"), 1280, 800);
+        scene = new Scene(loadFXML("login/login"), 1280, 800);
         stage.setScene(scene);
         stage.setTitle("Pet Clinic");
         stage.setMaximized(true);

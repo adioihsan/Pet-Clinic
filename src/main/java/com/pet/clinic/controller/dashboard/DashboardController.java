@@ -1,9 +1,7 @@
-package com.pet.clinic.controller;
+package com.pet.clinic.controller.dashboard;
 
-import com.jfoenix.controls.JFXButton;
 import com.pet.clinic.App;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import com.pet.clinic.controller.navigation.LeftMenuController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
@@ -19,7 +17,7 @@ public class DashboardController {
 
     @FXML
     void initialize() throws IOException {
-        URL fxmllocation = App.class.getResource("view/leftMenu.fxml");
+        URL fxmllocation = App.class.getResource("view/navigation/leftMenu.fxml");
         FXMLLoader loadLeftMenu = new FXMLLoader(fxmllocation);
         VBox leftMenu = loadLeftMenu.load();
         mainPane.setLeft(leftMenu);

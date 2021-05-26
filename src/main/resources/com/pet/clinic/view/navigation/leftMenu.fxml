@@ -15,17 +15,17 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_RIGHT" pickOnBounds="false" prefHeight="800.0" prefWidth="270.0" style="-fx-background-color: #003d33;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.LeftMenuController">
+<VBox alignment="TOP_RIGHT" pickOnBounds="false" prefHeight="800.0" prefWidth="270.0" style="-fx-background-color: #003d33;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.navigation.LeftMenuController">
    <children>
       <AnchorPane pickOnBounds="false" prefHeight="106.0" prefWidth="314.0">
          <children>
             <ImageView fitHeight="55.0" fitWidth="185.0" layoutX="14.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/LogoWhite.png" />
+                  <Image url="@../../images/LogoWhite.png" />
                </image>
             </ImageView>
             <Line endX="77.0" layoutX="122.0" layoutY="89.0" startX="-105.0" stroke="#ffffff73" />
-            <JFXHamburger fx:id="hmbMenu" layoutX="205.0" layoutY="29.0" prefHeight="56.0" prefWidth="63.0" stylesheets="@../css/hamburger-menu.css" />
+            <JFXHamburger fx:id="hmbMenu" layoutX="205.0" layoutY="29.0" prefHeight="56.0" prefWidth="63.0" stylesheets="@../../css/hamburger-menu.css" />
          </children>
       </AnchorPane>
       <Pane layoutX="10.0" layoutY="127.0" pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
@@ -33,7 +33,7 @@
             <JFXButton fx:id="btnDashboard" layoutX="8.0" opacity="0.5" prefHeight="51.0" prefWidth="194.0" style="-fx-background-color: #000; -fx-background-radius: 10px;" text=" " />
             <ImageView fitHeight="30.0" fitWidth="28.0" layoutX="20.0" layoutY="11.0" mouseTransparent="true" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/Dashboard.png" />
+                  <Image url="@../../images/Dashboard.png" />
                </image>
             </ImageView>
             <Label layoutX="57.0" layoutY="16.0" mouseTransparent="true" opacity="0.8" prefHeight="20.0" prefWidth="157.0" text="Dashboard" textFill="WHITE">
@@ -51,7 +51,7 @@
             <JFXButton fx:id="btnPatient" layoutX="9.0" opacity="0.0" prefHeight="51.0" prefWidth="194.0" style="-fx-background-color: #000; -fx-background-radius: 10px;" text=" " />
             <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="11.0" layoutY="11.0" mouseTransparent="true" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/petowner.png" />
+                  <Image url="@../../images/petowner.png" />
                </image>
             </ImageView>
             <Label layoutX="59.0" layoutY="16.0" mouseTransparent="true" opacity="0.8" prefHeight="20.0" prefWidth="157.0" text="Pasien" textFill="WHITE">
@@ -68,7 +68,7 @@
          <children>
             <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="19.0" layoutY="11.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/RekamMedis.png" />
+                  <Image url="@../../images/RekamMedis.png" />
                </image>
             </ImageView>
             <Label layoutX="59.0" layoutY="16.0" opacity="0.8" prefHeight="20.0" prefWidth="157.0" text="Rekam Medis" textFill="WHITE">
@@ -85,7 +85,7 @@
          <children>
             <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="19.0" layoutY="11.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/Pembayaran.png" />
+                  <Image url="@../../images/Pembayaran.png" />
                </image>
             </ImageView>
             <Label layoutX="59.0" layoutY="16.0" opacity="0.8" prefHeight="20.0" prefWidth="157.0" text="Pembayaran" textFill="WHITE">
@@ -102,7 +102,7 @@
          <children>
             <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="17.0" layoutY="11.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/Laporan.png" />
+                  <Image url="@../../images/Laporan.png" />
                </image>
             </ImageView>
             <Label layoutX="59.0" layoutY="16.0" opacity="0.8" prefHeight="20.0" prefWidth="157.0" text="Laporan" textFill="WHITE">
@@ -119,7 +119,7 @@
          <children>
             <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="16.0" layoutY="11.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/BukuTamu.png" />
+                  <Image url="@../../images/BukuTamu.png" />
                </image>
             </ImageView>
             <Label layoutX="59.0" layoutY="16.0" opacity="0.8" prefHeight="20.0" prefWidth="157.0" text="Buku Tamu" textFill="WHITE">
@@ -136,7 +136,7 @@
          <children>
             <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="16.0" layoutY="11.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/obat.png" />
+                  <Image url="@../../images/obat.png" />
                </image>
             </ImageView>
             <Label layoutX="59.0" layoutY="16.0" opacity="0.8" prefHeight="20.0" prefWidth="157.0" text="Obat" textFill="WHITE">
@@ -153,7 +153,7 @@
          <children>
             <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="16.0" layoutY="11.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/dokter.png" />
+                  <Image url="@../../images/dokter.png" />
                </image>
             </ImageView>
             <Label layoutX="59.0" layoutY="16.0" opacity="0.8" prefHeight="20.0" prefWidth="157.0" text="Dokter" textFill="WHITE">
@@ -170,7 +170,7 @@
          <children>
             <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="16.0" layoutY="11.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/Admin.png" />
+                  <Image url="@../../images/Admin.png" />
                </image>
             </ImageView>
             <Label layoutX="59.0" layoutY="16.0" opacity="0.8" prefHeight="20.0" prefWidth="157.0" text="Admin" textFill="WHITE">
@@ -189,13 +189,13 @@
                <children>
                   <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="90.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/logout.png" />
+                        <Image url="@../../images/logout.png" />
                      </image>
                   </ImageView>
                   <Circle fx:id="imgUserCircle" fill="DODGERBLUE" layoutX="131.0" layoutY="85.0" radius="56.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" />
                   <ImageView fx:id="imgUser" fitHeight="84.0" fitWidth="100.0" layoutX="81.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
-                        <Image url="@../images/admin2.png" />
+                        <Image url="@../../images/admin2.png" />
                      </image>
                      <viewport>
                         <Rectangle2D />

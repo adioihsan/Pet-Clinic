@@ -1,4 +1,4 @@
-package com.pet.clinic.controller;
+package com.pet.clinic.controller.navigation;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
@@ -45,7 +45,7 @@ public class LeftMenuController {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    App.setRoot("dashboard");
+                    App.setRoot("dashboard/dashboard");
                     removeActive();
                     btnDashboard.setOpacity(0.5);
                 } catch (IOException e) {
@@ -57,7 +57,7 @@ public class LeftMenuController {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    App.setRoot("patient");
+                    App.setRoot("patient/patient");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
