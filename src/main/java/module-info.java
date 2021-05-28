@@ -2,6 +2,7 @@ module com.pet.clinic {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.jfoenix;
+    requires tornadofx.controls;
     requires java.sql;
     requires org.mariadb.jdbc;
 

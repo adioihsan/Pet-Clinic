@@ -8,15 +8,20 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.pet.clinic.App;
+import com.pet.clinic.model.User;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import com.pet.clinic.controller.login.ValidateUser;
 
 public class LeftMenuController {
+
+    private User loggedUser = ValidateUser.getLoggeduser();
 
     @FXML
     private ResourceBundle resources;
@@ -38,6 +43,15 @@ public class LeftMenuController {
 
     @FXML
     private ImageView imgUser;
+
+    @FXML
+    private Label lblUserType;
+
+    @FXML
+    private Label lblUserId;
+
+    @FXML
+    private Label lblUsername;
 
     @FXML
     void initialize() {
@@ -64,9 +78,11 @@ public class LeftMenuController {
             }
         });
 
-        // Logged User Image
+        // Logged User
        imgUserCircle.setFill(new ImagePattern(imgUser.getImage()));
-
+       lblUsername.setText(loggedUser.getUsername());
+       lblUserId.setText(Integer.toString(loggedUser.getId()));
+       lblUserType.setText(loggedUser.getType());
        //Active Butoon
 
     }

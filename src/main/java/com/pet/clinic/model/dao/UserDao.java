@@ -25,8 +25,12 @@ public class UserDao {
         ResultSet res = ps.executeQuery();
         if(res.next()) {
             user = new User();
+            user.setId(res.getInt("id"));
+            user.setType(res.getString("type"));
+            user.setFirstName(res.getString("firstname"));
+            user.setLastName(res.getString("lastname"));
             user.setUsername(res.getString("username"));
-            user.setPassword(res.getString("password"));
+            user.setHash(res.getString("hash"));
             user.setSalt(res.getString("salt"));
         }
         }

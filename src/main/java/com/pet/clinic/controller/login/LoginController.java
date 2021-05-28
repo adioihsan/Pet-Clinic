@@ -45,9 +45,9 @@ public class LoginController {
         String username = tfUsername.getText().trim();
         String password = tfPassword.getText().trim();
         if(!username.equals("") || !password.equals("")){
-            ValidateUser vds = new ValidateUser(username,password);
-            if(vds.isValid()){
+            if(ValidateUser.isValid(username,password)){
                 try {
+
                     App.setRoot("dashboard/dashboard");
                 } catch (IOException e) {
                     e.printStackTrace();

@@ -18,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 
@@ -94,13 +95,19 @@ public class PatientController {
             }
         });
         // Main Menu
-        btnRegister.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Register Clicked");
-            }
-        });
+    btnRegister.setOnAction(event -> {
+            setCenterPane("registration");
+    });
 
-
+    }
+    private void setCenterPane(String paneName){
+        URL fxmllocation = App.class.getResource("view/patient/"+paneName+".fxml");
+        FXMLLoader loadPane = new FXMLLoader(fxmllocation);
+        try {
+            VBox thePane = loadPane.load();
+            mainPane.setCenter(thePane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

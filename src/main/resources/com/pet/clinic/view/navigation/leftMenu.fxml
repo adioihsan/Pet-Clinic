@@ -187,12 +187,12 @@
          <children>
             <Pane prefHeight="244.0" prefWidth="270.0">
                <children>
-                  <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="90.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="85.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/logout.png" />
                      </image>
                   </ImageView>
-                  <Circle fx:id="imgUserCircle" fill="DODGERBLUE" layoutX="131.0" layoutY="85.0" radius="56.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" />
+                  <Circle fx:id="imgUserCircle" fill="DODGERBLUE" layoutX="127.0" layoutY="75.0" radius="47.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" />
                   <ImageView fx:id="imgUser" fitHeight="84.0" fitWidth="100.0" layoutX="81.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
                         <Image url="@../../images/admin2.png" />
@@ -201,13 +201,14 @@
                         <Rectangle2D />
                      </viewport>
                   </ImageView>
-                  <Label layoutX="106.0" layoutY="149.0" text="Admin" textFill="WHITE">
+                  <Label fx:id="lblUsername" layoutX="102.0" layoutY="128.0" text="Admin" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="91.0" layoutY="171.0" text="7822354456" textFill="WHITE" />
-                  <Label layoutX="123.0" layoutY="201.0" text="Logout" textFill="WHITE" />
+                  <Label fx:id="lblUserId" layoutX="82.0" layoutY="167.0" prefHeight="16.0" prefWidth="86.0" style="-fx-alignment: center;" text="1000" textFill="WHITE" />
+                  <Label layoutX="118.0" layoutY="199.0" text="Logout" textFill="WHITE" />
+                  <Label fx:id="lblUserType" layoutX="85.0" layoutY="148.0" text="Super Admin" textFill="WHITE" />
                </children>
             </Pane>
          </children>

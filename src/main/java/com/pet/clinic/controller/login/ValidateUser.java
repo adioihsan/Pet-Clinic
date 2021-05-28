@@ -15,28 +15,22 @@ import java.sql.SQLException;
 import com.pet.clinic.model.dao.UserDao;
 
 public class ValidateUser {
+    private static User userDb;
 
-    private User userLogin;
-    private User userDb;
-    private String username;
-    private String password;
-    private String salt;
-
-    public ValidateUser(String username,String password){
-        this.username = username;
-        this.password = password;
-    }
-
-    public boolean isValid(){
+    public static boolean isValid(String username,String password){
         userDb = UserDao.getUser(username);
         if (userDb != null) {
             String  hashPassword =  generatePassword(password,userDb.getSalt().getBytes());
-            if(hashPassword.equals(userDb.getPassword()))
+            if(hashPassword.equals(userDb.getHash()))
                 return true;
         }
         return  false;
 
     };
+
+    public static User getLoggeduser(){
+        return userDb;
+    }
 
     protected static byte[] getSalt() {
         byte[] salt = null;
