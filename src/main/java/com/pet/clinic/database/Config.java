@@ -6,4 +6,6 @@ public class Config {
     protected static String dbUser = "k3";
     protected static String dbName = "petclinic";
     protected static  String dbPass = "123456";
+
+
 }
