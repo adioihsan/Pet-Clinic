@@ -11,7 +11,7 @@ public class PetDao {
     public static int savePet(Pet pet){
         boolean isOk = false;
         int id = 0;
-        String query = "insert into pet(ownerId,name,dob,gender,kind,race,color,photo,timestamp) values(?,?,?,?,?,?,?,?,?)";
+        String query = "insert into pet(ownerId,name,dob,gender,kind,race,color,timestamp) values(?,?,?,?,?,?,?,?)";
         String query2 = "select LAST_INSERT_ID()";
         Connection con = DbConnect.getConnection();
         try {
@@ -23,9 +23,9 @@ public class PetDao {
             ps.setString(5,pet.getKind());
             ps.setString(6,pet.getRace());
             ps.setString(7, pet.getColor());
-            ps.setString(8,pet.getPhoto());
-            ps.setTimestamp(9,pet.getTimestamp());
+            ps.setTimestamp(8,pet.getTimestamp());
             isOk = ps.executeUpdate() > 0;
+            System.out.println(isOk);
             if(isOk){
                 ResultSet res = con.createStatement().executeQuery(query2);
                 res.next();
@@ -36,6 +36,20 @@ public class PetDao {
             throwables.printStackTrace();
         }
         return id;
+    }
+
+    public static void savePetPhoto(int id,String photoName){
+        String query = "update pet set photo=? where id=?";
+        Connection con = DbConnect.getConnection();
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,photoName);
+            ps.setInt(2,id);
+            ps.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
     }
 
     public static void main(String[] args){

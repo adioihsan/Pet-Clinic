@@ -41,6 +41,11 @@
             <artifactId>tornadofx-controls</artifactId>
             <version>1.0.4</version>
         </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.5</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

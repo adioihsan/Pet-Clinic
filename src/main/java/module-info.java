@@ -5,6 +5,7 @@ module com.pet.clinic {
     requires tornadofx.controls;
     requires java.sql;
     requires org.mariadb.jdbc;
+    requires commons.lang;
 
     opens com.pet.clinic to javafx.fxml;
 //    opens com.pet.clinic.controller to javafx.fxml;

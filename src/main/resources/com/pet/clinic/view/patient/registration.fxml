@@ -38,8 +38,8 @@
             <ColumnConstraints hgrow="NEVER" maxWidth="685.0" minWidth="10.0" prefWidth="268.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="640.0" minHeight="10.0" prefHeight="344.0" valignment="CENTER" vgrow="ALWAYS" />
-            <RowConstraints maxHeight="640.0" minHeight="10.0" prefHeight="229.0" valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints maxHeight="640.0" minHeight="10.0" prefHeight="346.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="640.0" minHeight="10.0" prefHeight="227.0" valignment="CENTER" vgrow="ALWAYS" />
             <RowConstraints maxHeight="640.0" minHeight="10.0" prefHeight="81.0" valignment="CENTER" vgrow="ALWAYS" />
         </rowConstraints>
          <children>
@@ -108,8 +108,16 @@
                   <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                </padding>
             </VBox>
-            <VBox fx:id="boxOwnerForm1" layoutX="10.0" layoutY="10.0" prefHeight="269.0" prefWidth="366.0" style="-fx-background-color: #f7f7f7;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <VBox fx:id="boxOwnerForm1" layoutX="10.0" layoutY="10.0" prefHeight="327.0" prefWidth="366.0" style="-fx-background-color: #f7f7f7;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <children>
+                  <Label prefHeight="28.0" prefWidth="152.0" text=" ">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
                   <JFXComboBox fx:id="comOwnerGender" focusColor="#005b4f" maxWidth="1.7976931348623157E308" promptText="Jenis Kelamin" style="-fx-font-size: 16px;" unFocusColor="#4ebaaa">
                      <padding>
                         <Insets left="10.0" />
@@ -134,7 +142,7 @@
                         <Insets left="10.0" />
                      </VBox.margin>
                   </Label>
-                  <JFXTextArea fx:id="taOwnerAddress" focusColor="#005b4f" prefHeight="69.0" prefWidth="306.0" text=" " unFocusColor="#4ebaaa" VBox.vgrow="ALWAYS">
+                  <JFXTextArea fx:id="taOwnerAddress" focusColor="#005b4f" prefHeight="57.0" prefWidth="306.0" text=" " unFocusColor="#4ebaaa" VBox.vgrow="ALWAYS">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -142,7 +150,7 @@
                         <Insets />
                      </VBox.margin>
                   </JFXTextArea>
-                  <HBox prefHeight="27.0" prefWidth="410.0" />
+                  <HBox prefHeight="45.0" prefWidth="306.0" />
                </children>
                <padding>
                   <Insets bottom="15.0" left="30.0" right="30.0" top="30.0" />
@@ -158,11 +166,12 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <ImageView fitHeight="122.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
+                        <ImageView fx:id="imgAddOwnerPhoto" fitHeight="122.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
                            <image>
                               <Image url="@../../images/pickpicture.png" />
                            </image>
                         </ImageView>
+                        <ImageView fx:id="imgOwner" fitHeight="217.0" fitWidth="227.0" pickOnBounds="true" preserveRatio="true" />
                         <JFXButton fx:id="btnOwnerPhoto" alignment="BOTTOM_CENTER" prefHeight="227.0" prefWidth="227.0" text="Pilih Foto">
                            <font>
                               <Font size="16.0" />
@@ -256,7 +265,8 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <ImageView fitHeight="122.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
+                        <ImageView fx:id="imgPet" fitHeight="217.0" fitWidth="228.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imgAddPetPhoto" fitHeight="122.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
                            <image>
                               <Image url="@../../images/pickpicture.png" />
                            </image>
