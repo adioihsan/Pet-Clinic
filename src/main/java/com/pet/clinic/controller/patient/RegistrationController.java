@@ -257,17 +257,17 @@ public class RegistrationController {
         Timestamp timestamp = Timestamp.from(Instant.now());
         if(chkIsRegistered.isSelected()){
             int ownerId = Integer.valueOf(tfOwnerId.getText());
-            int petId = setPet(ownerId,timestamp);
+            int petId = savePet(ownerId,timestamp);
             return petId != 0;
         }
         else {
-            int ownerId = setPetOwner(timestamp);
-            int petId = setPet(ownerId, timestamp);
+            int ownerId = savePetOwner(timestamp);
+            int petId = savePet(ownerId, timestamp);
             return ownerId != 0 && petId != 0;
         }
     }
 
-    private int setPet(int ownerId,Timestamp timestamp){
+    private int savePet(int ownerId, Timestamp timestamp){
         int id = 0;
         Pet pet = new Pet();
         pet.setOwnerId(ownerId);
@@ -284,7 +284,7 @@ public class RegistrationController {
         return id;
     };
 
-    private int setPetOwner(Timestamp timestamp){
+    private int savePetOwner(Timestamp timestamp){
         int id = 0;
         PetOwner petOwner = new PetOwner();
         petOwner.setFirstName(tfOwnerFirstName.getText());

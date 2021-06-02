@@ -43,8 +43,19 @@
                <children>
                   <HBox>
                      <children>
-                        <Label text="Detail ID :" />
-                        <Label text="20034" />
+                        <Label text="ID :" />
+                        <Label fx:id="lblId" text="20034" />
+                        <Label text="|">
+                           <HBox.margin>
+                              <Insets left="15.0" right="15.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="10.0" text="ID Pemilik:">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="lblOwnerId" layoutX="33.0" layoutY="10.0" text="20034" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="15.0" />
@@ -64,7 +75,7 @@
                               <Image url="@../../images/pickpicture.png" />
                            </image>
                         </ImageView>
-                        <JFXButton fx:id="btnPetPhoto" alignment="BOTTOM_CENTER" prefHeight="216.0" prefWidth="251.0" text="Pilih Foto">
+                        <JFXButton fx:id="btnPetPhoto" alignment="BOTTOM_CENTER" prefHeight="216.0" prefWidth="251.0" text="Ganti Foto">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -90,12 +101,12 @@
                   <HBox prefHeight="27.0" prefWidth="410.0">
                      <children>
                         <JFXComboBox fx:id="comPetKind" focusColor="#005b4f" maxWidth="1.7976931348623157E308" promptText="Jenis Hewan" style="-fx-font-size: 16px;" unFocusColor="#4ebaaa" HBox.hgrow="ALWAYS">
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding>
                            <HBox.margin>
                               <Insets bottom="20.0" />
                            </HBox.margin>
+                           <padding>
+                              <Insets left="10.0" />
+                           </padding>
                         </JFXComboBox>
                      </children>
                      <VBox.margin>
@@ -126,8 +137,13 @@
                         <Insets bottom="20.0" />
                      </VBox.margin>
                   </TextField>
-                  <HBox alignment="BOTTOM_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                  <HBox fx:id="boxBtns" alignment="BOTTOM_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0">
                      <children>
+                        <JFXButton fx:id="btnSave" layoutX="10.0" layoutY="26.0" stylesheets="@../../css/buttonSave.css" text="Simpan">
+                           <HBox.margin>
+                              <Insets right="30.0" />
+                           </HBox.margin>
+                        </JFXButton>
                         <JFXButton fx:id="btnEdit" stylesheets="@../../css/buttonEdit.css" text="Edit">
                            <HBox.margin>
                               <Insets right="30.0" />

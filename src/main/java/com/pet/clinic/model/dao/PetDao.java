@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class PetDao {
 
@@ -40,6 +41,40 @@ public class PetDao {
         return id;
     }
 
+    public static  boolean updatePet(Pet pet){
+        boolean status = false;
+        String query = "update pet set name=?,dob=?,gender=?,kind=?,race=?,color=? where id=?";
+        Connection con = DbConnect.getConnection();
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,pet.getName());
+            ps.setDate(2,Date.valueOf(pet.getDob()));
+            ps.setString(3,pet.getGender());
+            ps.setString(4,pet.getKind());
+            ps.setString(5,pet.getRace());
+            ps.setString(6, pet.getColor());
+            ps.setInt(7,pet.getId());
+            status = ps.executeUpdate() > 0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return status;
+    }
+
+    public static  boolean deletePet(int id){
+        boolean status = false;
+        String query = "delete from pet where id=?";
+        Connection con = DbConnect.getConnection();
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,id);
+            status = ps.executeUpdate() > 0 ;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return status;
+    }
+
     public static void insertPetPhoto(int id, String photoName){
         String query = "update pet set photo=? where id=?";
         Connection con = DbConnect.getConnection();
@@ -54,18 +89,58 @@ public class PetDao {
 
     }
 
-/*    public static void getAllPet(){
+
+    public static Pet getPet(int id){
+        String query = "select * from pet where id=?";
+        Pet pet = null;
+        Connection con = DbConnect.getConnection();
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,id);
+            ResultSet res = ps.executeQuery();
+            if(res != null){
+                res.next();
+                pet = new Pet();
+                pet.setId(res.getInt("id"));
+                pet.setOwnerId(res.getInt("ownerId"));
+                pet.setName(res.getString("name"));
+                pet.setDob(res.getDate("dob").toLocalDate());
+                pet.setGender(res.getString("gender"));
+                pet.setKind(res.getString("kind"));
+                pet.setRace(res.getString("race"));
+                pet.setColor(res.getString("color"));
+                pet.setPhoto(res.getString("photo"));
+                pet.setTimestamp(res.getTimestamp("timestamp"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return pet;
+    }
+
+    public static ArrayList<Pet> getAllPet(){
         String query = "select * from pet";
-        ArrayList petsList = new ArrayList();
+        ArrayList<Pet> petsList = new ArrayList();
         Connection con = DbConnect.getConnection();
         try {
            ResultSet res = con.createStatement().executeQuery(query);
            while(res.next()){
-               petsList.add()
+               System.out.println("Result Not Empty");
+               Pet pet = new Pet();
+               pet.setId(res.getInt("id"));
+               pet.setOwnerId(res.getInt("ownerId"));
+               pet.setName(res.getString("name"));
+               pet.setDob(res.getDate("dob").toLocalDate());
+               pet.setGender(res.getString("gender"));
+               pet.setKind(res.getString("kind"));
+               pet.setRace(res.getString("race"));
+               pet.setColor(res.getString("color"));
+               pet.setTimestamp(res.getTimestamp("timestamp"));
+               petsList.add(pet);
            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
-    }*/
+        return petsList;
+    }
 }
