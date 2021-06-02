@@ -278,9 +278,9 @@ public class RegistrationController {
         pet.setRace(tfPetRace.getText());
         pet.setColor(tfPetColor.getText());
         pet.setTimestamp(timestamp);
-        id = PetDao.savePet(pet);
+        id = PetDao.insertPet(pet);
         String photoName = saveLocalPetPhotos(id,pet.getName());
-        PetDao.savePetPhoto(id,photoName);
+        PetDao.insertPetPhoto(id,photoName);
         return id;
     };
 
@@ -294,9 +294,9 @@ public class RegistrationController {
         petOwner.setPhoneNumber(Integer.valueOf(tfOwnerPhone.getText()));
         petOwner.setAddress(taOwnerAddress.getText());
         petOwner.setTimestamp(timestamp);
-        id = PetOwnerDao.savePetOwner(petOwner);
+        id = PetOwnerDao.insertPetOwner(petOwner);
         String photoName = saveLocalOwnerPhotos(id,petOwner.getFirstName());
-        PetOwnerDao.savePetOwnerPhoto(id,photoName);
+        PetOwnerDao.insertPetOwnerPhoto(id,photoName);
         return id;
     }
 

@@ -20,7 +20,7 @@
 
 <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #f7f7f7;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.patient.RegistrationController">
    <children>
-      <HBox fx:id="boxHeader" alignment="BOTTOM_LEFT" maxHeight="-Infinity" prefHeight="150.0" prefWidth="1000.0" stylesheets="@../../css/boxHeader.css" VBox.vgrow="NEVER">
+      <HBox fx:id="boxHeader" alignment="BOTTOM_LEFT" maxHeight="-Infinity" prefHeight="150.0" prefWidth="1000.0" stylesheets="@../../css/boxHeaderRegistration.css" VBox.vgrow="NEVER">
          <children>
             <Label alignment="BOTTOM_LEFT" text="Registrasi" textFill="WHITE">
                <font>
@@ -172,7 +172,7 @@
                            </image>
                         </ImageView>
                         <ImageView fx:id="imgOwner" fitHeight="217.0" fitWidth="227.0" pickOnBounds="true" preserveRatio="true" />
-                        <JFXButton fx:id="btnOwnerPhoto" alignment="BOTTOM_CENTER" prefHeight="227.0" prefWidth="227.0" text="Pilih Foto">
+                        <JFXButton fx:id="btnOwnerPhoto" alignment="BOTTOM_CENTER" prefHeight="230.0" prefWidth="230.0" text="Pilih Foto">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -271,7 +271,7 @@
                               <Image url="@../../images/pickpicture.png" />
                            </image>
                         </ImageView>
-                        <JFXButton fx:id="btnPetPhoto" alignment="BOTTOM_CENTER" prefHeight="227.0" prefWidth="227.0" text="Pilih Foto">
+                        <JFXButton fx:id="btnPetPhoto" alignment="BOTTOM_CENTER" prefHeight="230.0" prefWidth="230.0" text="Pilih Foto">
                            <font>
                               <Font size="16.0" />
                            </font>

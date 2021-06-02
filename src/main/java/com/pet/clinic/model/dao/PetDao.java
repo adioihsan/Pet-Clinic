@@ -2,13 +2,15 @@ package com.pet.clinic.model.dao;
 
 import com.pet.clinic.database.DbConnect;
 import com.pet.clinic.model.Pet;
+import javafx.collections.FXCollections;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class PetDao {
 
-    public static int savePet(Pet pet){
+    public static int insertPet(Pet pet){
         boolean isOk = false;
         int id = 0;
         String query = "insert into pet(ownerId,name,dob,gender,kind,race,color,timestamp) values(?,?,?,?,?,?,?,?)";
@@ -38,7 +40,7 @@ public class PetDao {
         return id;
     }
 
-    public static void savePetPhoto(int id,String photoName){
+    public static void insertPetPhoto(int id, String photoName){
         String query = "update pet set photo=? where id=?";
         Connection con = DbConnect.getConnection();
         try {
@@ -52,20 +54,18 @@ public class PetDao {
 
     }
 
-    public static void main(String[] args){
-        Pet pet = new Pet();
-        pet.setOwnerId(2003);
-        pet.setName("Keni");
-        pet.setDob(LocalDate.of(2020,01,03));
-        pet.setGender("Jantan");
-        pet.setKind("Kucing");
-        pet.setRace("Lokal");
-        pet.setColor("Putih");
-        pet.setPhoto("keni.png");
-        java.util.Date date = new java.util.Date();
-        pet.setTimestamp(new Timestamp(date.getTime()));
-        System.out.println(savePet(pet));
+/*    public static void getAllPet(){
+        String query = "select * from pet";
+        ArrayList petsList = new ArrayList();
+        Connection con = DbConnect.getConnection();
+        try {
+           ResultSet res = con.createStatement().executeQuery(query);
+           while(res.next()){
+               petsList.add()
+           }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
-    }
-
+    }*/
 }

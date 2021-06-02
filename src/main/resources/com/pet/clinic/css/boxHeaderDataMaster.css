@@ -1,0 +1,7 @@
+#boxHeader{
+        -fx-background-image: url("../images/headerDataMaster.png");
+        -fx-background-color: green;
+        -fx-background-repeat: stretch;
+        -fx-background-size: cover;
+        -fx-background-position: center;
+}

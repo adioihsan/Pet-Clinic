@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 public class PetOwnerDao {
 
-    public static int savePetOwner(PetOwner petOwner){
+    public static int insertPetOwner(PetOwner petOwner){
         int  id = 0;
         boolean isOk = false;
         String query = "insert into petOwner(firstname,lastName,dob,gender,phoneNumber,address,timestamp) values(?,?,?,?,?,?,?)";
@@ -37,7 +37,7 @@ public class PetOwnerDao {
         return id;
     }
 
-    public static void savePetOwnerPhoto(int id,String photoName){
+    public static void insertPetOwnerPhoto(int id, String photoName){
         String query = "update petOwner set photo=? where id=?";
         Connection con = DbConnect.getConnection();
         try {

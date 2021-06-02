@@ -46,6 +46,9 @@ public class PatientController {
     private JFXButton btnRegister;
 
     @FXML
+    private JFXButton btnPet;
+
+    @FXML
     void initialize() throws IOException {
 
         //side Menu
@@ -58,7 +61,6 @@ public class PatientController {
         leftMenuController = loadLeftMenu.getController();
         leftMenuController.removeActive();
         leftMenuController.setActive("patient");
-
         HamburgerBackArrowBasicTransition transition = new HamburgerBackArrowBasicTransition(leftMenuController.hmbMenu);
         leftMenuController.hmbMenu.setOnMouseClicked((new EventHandler<MouseEvent>() {
             @Override
@@ -95,9 +97,22 @@ public class PatientController {
             }
         });
         // Main Menu
-    btnRegister.setOnAction(event -> {
+            //set center pane to registration (default)
+        setCenterPane("registration");
+        btnRegister.setOnAction(event -> {
             setCenterPane("registration");
     });
+        // Menu butoon click action
+        btnRegister.setOnAction(e ->{
+            removeActive();
+            setActive("registration");
+            setCenterPane("registration");
+        });
+        btnPet.setOnAction(event -> {
+            removeActive();
+            setActive("petData");
+            setCenterPane("petData");
+        });
 
     }
     private void setCenterPane(String paneName){
@@ -108,6 +123,23 @@ public class PatientController {
             mainPane.setCenter(thePane);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    public void removeActive(){
+        btnRegister.setOpacity(0);
+        btnPet.setOpacity(0);
+    }
+    public void setActive(String btnActive){
+        switch (btnActive){
+            case "registration":
+                btnRegister.setOpacity(0.5);
+                break;
+            case "petData":
+                btnPet.setOpacity(0.5);
+                break;
+            default:
+                System.out.println("Cant Find Button");
+                break;
         }
     }
 }
