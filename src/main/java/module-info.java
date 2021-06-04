@@ -19,5 +19,9 @@ module com.pet.clinic {
     opens com.pet.clinic.controller.navigation to javafx.fxml;
     exports com.pet.clinic.controller.login;
     opens com.pet.clinic.controller.login to javafx.fxml;
-    // exports com.pet.clinic.model;
+    exports  com.pet.clinic.controller.medicRecord;
+    opens  com.pet.clinic.controller.medicRecord to javafx.fxml;
+    exports com.pet.clinic.controller.veterinarian;
+    opens com.pet.clinic.controller.veterinarian to javafx.fxml;
+
 }

@@ -25,6 +25,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -131,13 +132,13 @@ public class RegistrationController {
     void initialize() {
 
         // check is user registered
-        turnOnForm();
+        setEditableForm(true,1);
         chkIsRegistered.setOnAction(e->{
             if(chkIsRegistered.isSelected()){
-                turnOffForm();
+                setEditableForm(false,0.5);
             }
             else{
-                turnOnForm();
+                setEditableForm(true,1);
                 clearOwnerForm();
             }
 
@@ -205,43 +206,36 @@ public class RegistrationController {
         });
 
         btnSave.setOnAction(e->{
-            savePatient();
+
+           boolean status = savePatient();
+            if(status){
+                Alert success = new Alert(Alert.AlertType.INFORMATION,"Registrasi Berhasil");
+                success.show();
+            }
+            else{
+                Alert failed = new Alert(Alert.AlertType.ERROR,"Terjadi Kesalahan. Registrasi Gagal");
+                failed.show();
+            }
         });
 
     }
 
     // Turn on/off form based on registration status
-    private void turnOffForm(){
-        tfOwnerFirstName.setEditable(false);
-        tfOwnerLastName.setEditable(false);
-        tfOwnerPhone.setEditable(false);
-        comOwnerGender.setEditable(false);
-        dpOwnerDOB.setEditable(false);
-        taOwnerAddress.setEditable(false);
-        tfOwnerFirstName.setOpacity(0.5);
-        tfOwnerLastName.setOpacity(0.5);
-        tfOwnerPhone.setOpacity(0.5);
-        comOwnerGender.setOpacity(0.5);
-        dpOwnerDOB.setOpacity(0.5);
-        taOwnerAddress.setOpacity(0.5);
-        tfOwnerId.setEditable(true);
-        tfOwnerId.setOpacity(1);
-    }
-    private void turnOnForm(){
-        tfOwnerFirstName.setEditable(true);
-        tfOwnerLastName.setEditable(true);
-        tfOwnerPhone.setEditable(true);
-        comOwnerGender.setEditable(true);
-        dpOwnerDOB.setEditable(true);
-        taOwnerAddress.setEditable(true);
-        tfOwnerFirstName.setOpacity(1);
-        tfOwnerLastName.setOpacity(1);
-        tfOwnerPhone.setOpacity(1);
-        comOwnerGender.setOpacity(1);
-        dpOwnerDOB.setOpacity(1);
-        taOwnerAddress.setOpacity(1);
-        tfOwnerId.setEditable(false);
+    private void setEditableForm(boolean isEditable , double opacity){
+        tfOwnerFirstName.setEditable(isEditable);
+        tfOwnerLastName.setEditable(isEditable);
+        tfOwnerPhone.setEditable(isEditable);
+        comOwnerGender.setDisable(!isEditable);
+        dpOwnerDOB.setDisable(!isEditable);
+        taOwnerAddress.setEditable(isEditable);
+        tfOwnerFirstName.setOpacity(opacity);
+        tfOwnerLastName.setOpacity(opacity);
+        dpOwnerDOB.setOpacity(opacity);
+        taOwnerAddress.setOpacity(opacity);
+        tfOwnerId.setEditable(!isEditable);
+        if(isEditable)
         tfOwnerId.setOpacity(0.5);
+        tfOwnerId.setOpacity(1);
     }
     private  void clearOwnerForm(){
         tfOwnerFirstName.clear();
@@ -254,17 +248,19 @@ public class RegistrationController {
 
     //Save patient
     private boolean savePatient(){
+        boolean status = false;
         Timestamp timestamp = Timestamp.from(Instant.now());
         if(chkIsRegistered.isSelected()){
             int ownerId = Integer.valueOf(tfOwnerId.getText());
             int petId = savePet(ownerId,timestamp);
-            return petId != 0;
+            status = petId != 0;
         }
         else {
             int ownerId = savePetOwner(timestamp);
             int petId = savePet(ownerId, timestamp);
-            return ownerId != 0 && petId != 0;
+            status =  ownerId != 0 && petId != 0;
         }
+        return status;
     }
 
     private int savePet(int ownerId, Timestamp timestamp){
@@ -301,7 +297,7 @@ public class RegistrationController {
     }
 
     private String saveLocalOwnerPhotos(int ownerId,String name){
-        String extension = getFileExtension(petPhoto.getName()).get();
+        String extension = getFileExtension(ownerPhoto.getName()).get();
         String fileName = String.valueOf(ownerId)+name+"."+extension;
         Path copied = Paths.get("files/photos/petOwner/"+fileName);
         Path source = ownerPhoto.toPath();

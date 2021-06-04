@@ -23,10 +23,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -235,11 +232,14 @@ public class PetDataController {
                 boxBtns.getChildren().setAll(btnEdit,btnDelete);
                 setEditableForm(false , 0.5);
                 savePet();
+                Alert success = new Alert(Alert.AlertType.INFORMATION,"Data Berhasil di Ubah");
                 loadTableData();
             }
         });
         btnDelete.setOnAction(e->{
            deletePet(Integer.valueOf(lblId.getText()));
+                Alert success = new Alert(Alert.AlertType.INFORMATION,"Data Berhasil di Hapus");
+                success.show();
            loadTableData();
         });
 
@@ -363,7 +363,7 @@ class Pets extends RecursiveTreeObject<Pets> {
     StringProperty color;
     StringProperty timestamp;
 
-    public Pets(String id, String ownerId, String name,String dob,String gender,String kind,String race,
+    public Pets(String id, String ownerId, String name, String dob, String gender, String kind, String race,
                 String color, String timeStamp) {
         this.id = new SimpleStringProperty(id) ;
         this.ownerId = new SimpleStringProperty(ownerId) ;

@@ -20,11 +20,11 @@
 
 <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #f7f7f7;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.patient.RegistrationController">
    <children>
-      <HBox fx:id="boxHeader" alignment="BOTTOM_LEFT" maxHeight="-Infinity" prefHeight="150.0" prefWidth="1000.0" stylesheets="@../../css/boxHeaderRegistration.css" VBox.vgrow="NEVER">
+      <HBox fx:id="boxHeader" alignment="BOTTOM_LEFT" maxHeight="-Infinity" prefHeight="100.0" prefWidth="1000.0" stylesheets="@../../css/boxHeaderRegistration.css" VBox.vgrow="NEVER">
          <children>
             <Label alignment="BOTTOM_LEFT" text="Registrasi" textFill="WHITE">
                <font>
-                  <Font size="48.0" />
+                  <Font size="28.0" />
                </font>
                <HBox.margin>
                   <Insets bottom="25.0" left="25.0" />
@@ -47,7 +47,7 @@
                <children>
                   <Label prefHeight="28.0" prefWidth="152.0" text="Data Pemilik">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="21.0" />
                      </font>
                      <VBox.margin>
                         <Insets bottom="15.0" />
@@ -63,7 +63,7 @@
                         <Insets bottom="15.0" />
                      </VBox.margin>
                      <children>
-                        <TextField fx:id="tfOwnerId" editable="false" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="247.0" promptText="ID Pemilik" HBox.hgrow="ALWAYS">
+                        <TextField fx:id="tfOwnerId" editable="false" maxWidth="1.7976931348623157E308" prefHeight="36.0" prefWidth="247.0" promptText="ID Pemilik" HBox.hgrow="ALWAYS">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -71,9 +71,9 @@
                               <Insets />
                            </HBox.margin>
                         </TextField>
-                        <JFXButton alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="36.0" prefWidth="57.0" text=" " textAlignment="CENTER" HBox.hgrow="NEVER">
+                        <JFXButton nodeOrientation="RIGHT_TO_LEFT" prefHeight="36.0" prefWidth="45.0" text=" " textAlignment="CENTER" HBox.hgrow="NEVER">
                            <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="24.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../images/search.png" />
                                  </image>
@@ -185,7 +185,7 @@
                <children>
                   <Label prefHeight="30.0" prefWidth="204.0" text="Data Peliharaan">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="21.0" />
                      </font>
                      <VBox.margin>
                         <Insets bottom="15.0" />

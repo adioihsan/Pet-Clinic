@@ -54,6 +54,12 @@ public class LeftMenuController {
     private Label lblUsername;
 
     @FXML
+    private JFXButton btnMedicRecord;
+
+    @FXML
+    private JFXButton btnVeterinarian;
+
+    @FXML
     void initialize() {
         btnDashboard.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -75,6 +81,20 @@ public class LeftMenuController {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+        });
+        btnMedicRecord.setOnAction(e ->{
+            try {
+                App.setRoot("medicRecord/medicRecord");
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+        btnVeterinarian.setOnAction(e ->{
+            try {
+                App.setRoot("veterinarian/veterinarian");
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
             }
         });
 
@@ -99,6 +119,10 @@ public class LeftMenuController {
             case "patient":
                 btnPatient.setOpacity(0.5);
                 break;
+            case "medicRecord":
+                btnMedicRecord.setOpacity(0.5);
+            case "veterinarian":
+                btnVeterinarian.setOpacity(0.5);
             default:
                 System.out.println("Cant Find Button");
                 break;
