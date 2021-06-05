@@ -14,6 +14,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -23,16 +24,20 @@ import com.pet.clinic.model.PetOwner;
 import com.pet.clinic.model.dao.PetOwnerDao;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.converter.LocalDateStringConverter;
 import tornadofx.control.DateTimePicker;
 
 public class RegistrationController {
@@ -124,6 +129,11 @@ public class RegistrationController {
     @FXML
     private ImageView imgAddPetPhoto;
 
+    @FXML
+    private JFXButton btnSearch;
+    @FXML
+    private Label lblSearchStatus;
+
     //
     private File petPhoto;
     private File ownerPhoto;
@@ -176,6 +186,15 @@ public class RegistrationController {
         comPetKind.getItems().add("Anjing");
         comPetKind.getItems().add("Hamster");
 
+        //set dob
+        dpOwnerDOB.setOnShowing(new EventHandler<Event>() {
+            @Override
+            public void handle(Event event) {
+                if(dpOwnerDOB.getValue() == null)
+                dpOwnerDOB.setValue(LocalDate.of(2000,01,01));
+            }
+        });
+
         // photo chooser
         FileChooser choosePhoto = new FileChooser();
         choosePhoto.setTitle("Piih Foto");
@@ -205,6 +224,54 @@ public class RegistrationController {
             }
         });
 
+        btnSearch.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                int ownerId = 0;
+                if(!tfOwnerId.getText().equalsIgnoreCase("")){
+                    ownerId = Integer.valueOf(tfOwnerId.getText());
+                    boolean status = setOwner(ownerId);
+                    if(!status){
+                        lblSearchStatus.setText("Pemilik Tidak di Temukan");
+                        lblSearchStatus.setVisible(true);
+                    }
+                    else {
+                        lblSearchStatus.setVisible(false);
+                        btnOwnerPhoto.setDisable(true);
+                    }
+                }
+            }
+        });
+        tfOwnerId.setOnKeyTyped(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                int ownerId = 0;
+                if(!tfOwnerId.getText().equalsIgnoreCase("")){
+                    ownerId = Integer.valueOf(tfOwnerId.getText());
+                    boolean status = setOwner(ownerId);
+                    if(!status){
+                        lblSearchStatus.setText("Pemilik Tidak di Temukan");
+                        lblSearchStatus.setVisible(true);
+                        clearOwnerForm();
+                    }
+                    else {
+                        lblSearchStatus.setVisible(false);
+                        btnOwnerPhoto.setDisable(true);
+                    }
+                }
+            }
+        });
+
+        tfOwnerId.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                tfOwnerId.setText("");
+                clearOwnerForm();
+                setOwnerPhoto(null);
+            }
+        });
+
+
         btnSave.setOnAction(e->{
 
            boolean status = savePatient();
@@ -217,6 +284,8 @@ public class RegistrationController {
                 failed.show();
             }
         });
+
+
 
     }
 
@@ -233,9 +302,15 @@ public class RegistrationController {
         dpOwnerDOB.setOpacity(opacity);
         taOwnerAddress.setOpacity(opacity);
         tfOwnerId.setEditable(!isEditable);
-        if(isEditable)
-        tfOwnerId.setOpacity(0.5);
+        btnSearch.setDisable(isEditable);
+        btnOwnerPhoto.setDisable(!isEditable);
+        tfOwnerPhone.setOpacity(opacity);
         tfOwnerId.setOpacity(1);
+        tfOwnerId.setMouseTransparent(false);
+        if(isEditable) {
+            tfOwnerId.setOpacity(0.5);
+            tfOwnerId.setMouseTransparent(true);
+        }
     }
     private  void clearOwnerForm(){
         tfOwnerFirstName.clear();
@@ -244,6 +319,9 @@ public class RegistrationController {
         comOwnerGender.setPromptText("Jenis Kelamin");
         dpOwnerDOB.setPromptText("Tanggal Lahir");
         taOwnerAddress.clear();
+        dpOwnerDOB.setValue(null);
+        comOwnerGender.setValue(null);
+        setOwnerPhoto(null);
     }
 
     //Save patient
@@ -321,9 +399,33 @@ public class RegistrationController {
         return fileName;
     }
 
+    private boolean setOwner(int id){
+        PetOwner petOwner = PetOwnerDao.getOwner(id);
+        if(petOwner != null){
+            tfOwnerFirstName.setText(petOwner.getFirstName());
+            tfOwnerLastName.setText(petOwner.getLastName());
+            dpOwnerDOB.setValue(petOwner.getDob());
+            comOwnerGender.setValue(petOwner.getGender());
+            tfOwnerPhone.setText(String.valueOf(petOwner.getPhoneNumber()));
+            taOwnerAddress.setText(petOwner.getAddress());
+            setOwnerPhoto(petOwner.getPhoto());
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     private Optional<String> getFileExtension(String filename) {
         return Optional.ofNullable(filename)
                 .filter(f -> f.contains("."))
                 .map(f -> f.substring(filename.lastIndexOf(".") + 1));
+    }
+
+    private void setOwnerPhoto(String photoName){
+        File photo = new File("files/photos/petOwner/"+photoName);
+        if(photo != null){
+            imgOwner.setImage(new Image(photo.toURI().toString()));
+        }
     }
 }

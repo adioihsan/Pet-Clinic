@@ -51,4 +51,30 @@ public class PetOwnerDao {
 
     }
 
+    public static PetOwner getOwner(int id){
+        PetOwner petOwner = null;
+        String query = "select * from petOwner where id=?";
+        Connection con = DbConnect.getConnection();
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,id);
+            ResultSet res = ps.executeQuery();
+            if(res.next()){
+                petOwner = new PetOwner();
+                petOwner.setId(res.getInt("id"));
+                petOwner.setFirstName(res.getString("firstName"));
+                petOwner.setLastName(res.getString("lastName"));
+                petOwner.setDob(res.getDate("dob").toLocalDate());
+                petOwner.setGender(res.getString("gender"));
+                petOwner.setPhoneNumber(res.getDouble("phoneNumber"));
+                petOwner.setPhoto(res.getString("photo"));
+                petOwner.setAddress(res.getString("address"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return petOwner;
+    }
+
+
 }
