@@ -60,6 +60,9 @@ public class LeftMenuController {
     private JFXButton btnVeterinarian;
 
     @FXML
+    private JFXButton btnMedicine;
+
+    @FXML
     void initialize() {
         btnDashboard.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -97,7 +100,13 @@ public class LeftMenuController {
                 ioException.printStackTrace();
             }
         });
-
+        btnMedicine.setOnAction(e -> {
+            try {
+                App.setRoot("medicine/medicine");
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
         // Logged User
        imgUserCircle.setFill(new ImagePattern(imgUser.getImage()));
        lblUsername.setText(loggedUser.getUsername());
@@ -110,6 +119,9 @@ public class LeftMenuController {
     public void removeActive(){
        btnDashboard.setOpacity(0);
        btnPatient.setOpacity(0);
+       btnMedicRecord.setOpacity(0);
+       btnVeterinarian.setOpacity(0);
+       btnMedicine.setOpacity(0);
     }
     public void setActive(String btnActive){
         switch (btnActive){
@@ -121,8 +133,10 @@ public class LeftMenuController {
                 break;
             case "medicRecord":
                 btnMedicRecord.setOpacity(0.5);
+                break;
             case "veterinarian":
                 btnVeterinarian.setOpacity(0.5);
+                break;
             default:
                 System.out.println("Cant Find Button");
                 break;
