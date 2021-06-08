@@ -20,6 +20,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
@@ -175,6 +176,22 @@ public class MedicineDataController {
             }
         });
 
+        //add or save button
+        btnAdd.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                int id = saveMedicine();
+                if(id != 0){
+                    Alert sucsess = new Alert(Alert.AlertType.INFORMATION,"Obat Berhasil di Tambahkan");
+                    sucsess.show();
+                }
+                else
+                {
+                    Alert sucsess = new Alert(Alert.AlertType.ERROR,"Terjadi Kesalahan" +
+                            "Obat Berhasil Gagal di Tambahkan");
+                }
+            }
+        });
     }
 
     //load data into table
@@ -207,6 +224,19 @@ public class MedicineDataController {
         TreeItem<Medicines> rootFind = new RecursiveTreeItem<Medicines>(medicinesList, RecursiveTreeObject::getChildren);
         tvMedicine.setRoot(rootFind);
     }
+
+    private int saveMedicine(){
+        Medicine medicine = new Medicine();
+        medicine.setName(tfName.getText());
+        medicine.setFill(tfFill.getText());
+        medicine.setUnit(tfUnit.getText());
+        medicine.setStock(Integer.parseInt(tfStock.getText()));
+        medicine.setExpired(dpExpired.getValue());
+        medicine.setSellPrice(Double.parseDouble(tfSellPrice.getText()));
+        medicine.setBuyPrice(Double.parseDouble(tfSellPrice.getText()));
+        return MedicineDao.saveMedicine(medicine);
+    }
+
 
 }
 class Medicines extends RecursiveTreeObject<com.pet.clinic.controller.medicine.Medicines> {

@@ -3,14 +3,31 @@ package com.pet.clinic.model.dao;
 import com.pet.clinic.database.DbConnect;
 import com.pet.clinic.model.Medicine;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class MedicineDao {
+
+    public static int saveMedicine(Medicine medicine){
+        int id =0;
+        String query = "insert into medicine(name,fill,stock,unit,buyPrice,sellPrice,expired) values(?,?,?,?,?,?,?)";
+        Connection con = DbConnect.getConnection();
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,medicine.getName());
+            ps.setString(2,medicine.getFill());
+            ps.setInt(3,medicine.getStock());
+            ps.setString(4,medicine.getUnit());
+            ps.setDouble(5,medicine.getBuyPrice());
+            ps.setDouble(6,medicine.getSellPrice());
+            ps.setDate(7, Date.valueOf(medicine.getExpired()));
+            id = ps.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return id;
+    }
 
     public static ArrayList<Medicine> getAllMedicine(int limit){
         ArrayList<Medicine> medicineList = new ArrayList();
