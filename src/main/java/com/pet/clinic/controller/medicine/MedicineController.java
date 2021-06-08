@@ -12,6 +12,7 @@ import com.jfoenix.controls.events.JFXDrawerEvent;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import com.pet.clinic.App;
 import com.pet.clinic.controller.navigation.LeftMenuController;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -90,5 +91,23 @@ public class MedicineController {
             }
         });
 
+        //main menu
+        setCenterPane("medicineData");
+       btnMedicine.setOnAction(e ->{
+           setCenterPane("medicineData");
+
+       });
+
+    }
+
+    private void setCenterPane(String paneName){
+        URL fxmllocation = App.class.getResource("view/medicine/"+paneName+".fxml");
+        FXMLLoader loadPane = new FXMLLoader(fxmllocation);
+        try {
+            VBox thePane = loadPane.load();
+            mainPane.setCenter(thePane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,0 +1,84 @@
+package com.pet.clinic.model.dao;
+
+import com.pet.clinic.database.DbConnect;
+import com.pet.clinic.model.Medicine;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class MedicineDao {
+
+    public static ArrayList<Medicine> getAllMedicine(int limit){
+        ArrayList<Medicine> medicineList = new ArrayList();
+        String query = "select * from medicine limit "+limit;
+        Connection con = DbConnect.getConnection();
+        try {
+            ResultSet res = con.createStatement().executeQuery(query);
+            while(res.next()){
+                Medicine medicine = new Medicine();
+                medicine.setId(res.getInt("id"));
+                medicine.setName(res.getString("name"));
+                medicine.setFill(res.getString("fill"));
+                medicine.setUnit(res.getString("unit"));
+                medicine.setStock(res.getInt("stock"));
+                medicine.setIn(res.getInt("in"));
+                medicine.setOut(res.getInt("out"));
+                medicine.setExpired(res.getDate("expired").toLocalDate());
+                medicine.setBuyPrice(res.getDouble("buyPrice"));
+                medicine.setSellPrice(res.getDouble("sellPrice"));
+                medicineList.add(medicine);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return medicineList;
+    }
+
+    public static ArrayList<Medicine> findMedicine(String keyword, int limit){
+        ArrayList<Medicine> medicineList = new ArrayList();
+        String query = "select distinct * from medicine where id=? or name like(?)  or fill like(?) or unit like(?) or stock=?" +
+                "or expired=? or buyPrice=? or sellPrice=? limit "+limit;
+        Connection con = DbConnect.getConnection();
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,keyword);
+            ps.setString(2,"%"+keyword+"%");
+            ps.setString(3,"%"+keyword+"%");
+            ps.setString(4,"%"+keyword+"%");
+            ps.setString(5,keyword);
+            ps.setString(6,keyword);
+            ps.setString(7,keyword);
+            ps.setString(8,keyword);
+
+            ResultSet res = ps.executeQuery();
+            while(res.next()){
+                Medicine medicine = new Medicine();
+                medicine.setId(res.getInt("id"));
+                medicine.setName(res.getString("name"));
+                medicine.setFill(res.getString("fill"));
+                medicine.setUnit(res.getString("unit"));
+                medicine.setStock(res.getInt("stock"));
+                medicine.setIn(res.getInt("in"));
+                medicine.setOut(res.getInt("out"));
+                medicine.setExpired(res.getDate("expired").toLocalDate());
+                medicine.setBuyPrice(res.getDouble("buyPrice"));
+                medicine.setSellPrice(res.getDouble("sellPrice"));
+                medicineList.add(medicine);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return medicineList;
+    }
+/*    public static void main(String[] args){
+        ArrayList<Medicine> medicines = getAllMedicine(1);
+        Iterator<Medicine> iter = medicines.iterator();
+        while(iter.hasNext()){
+            System.out.println(iter.next().getName());
+        }
+    }*/
+}

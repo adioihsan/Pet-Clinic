@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import tornadofx.control.DateTimePicker?>
+
+<VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.medicine.MedicineDataController">
+   <children>
+      <HBox fx:id="boxHeader" alignment="BOTTOM_LEFT" maxHeight="-Infinity" prefHeight="100.0" prefWidth="1000.0" stylesheets="@../../css/boxHeaderMedicine.css">
+         <children>
+            <Label alignment="BOTTOM_LEFT" text="Data Obat" textFill="WHITE">
+               <font>
+                  <Font size="28.0" />
+               </font>
+               <HBox.margin>
+                  <Insets bottom="25.0" left="25.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="63.0" prefWidth="1000.0">
+         <children>
+            <TextField fx:id="tfFind" prefHeight="24.0" prefWidth="287.0" promptText="Cari">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+         </children>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </HBox>
+      <AnchorPane prefHeight="15.0" prefWidth="1000.0">
+         <VBox.margin>
+            <Insets bottom="5.0" left="30.0" right="30.0" />
+         </VBox.margin>
+         <children>
+            <TextField fx:id="tfLimit" layoutX="109.0" prefHeight="24.0" prefWidth="57.0" stylesheets="@../../css/textField2.css" text="100" />
+            <Label layoutX="2.0" layoutY="5.0" prefHeight="20.0" prefWidth="108.0" text="Jumlah Data" textFill="#666363bb">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btnAddLimit" layoutX="174.0" prefHeight="20.0" prefWidth="36.0" stylesheets="@../../css/buttonAddSmall.css" text="+" textFill="#233690">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <JFXTreeTableView fx:id="tvMedicine" prefHeight="506.0" prefWidth="940.0" VBox.vgrow="ALWAYS">
+         <VBox.margin>
+            <Insets left="30.0" right="30.0" />
+         </VBox.margin>
+      </JFXTreeTableView>
+      <HBox alignment="CENTER" maxHeight="-Infinity" prefHeight="78.0" prefWidth="1000.0" VBox.vgrow="NEVER">
+         <children>
+            <TextField fx:id="tfName" promptText="Nama obat" stylesheets="@../../css/textField.css" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="tfFill" layoutX="280.0" layoutY="37.0" promptText="Isi" stylesheets="@../../css/textField.css" />
+            <TextField fx:id="tfUnit" layoutX="425.0" layoutY="37.0" promptText="Satuan" stylesheets="@../../css/textField.css" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="tfStock" layoutX="510.0" layoutY="37.0" promptText="Stok" stylesheets="@../../css/textField.css" HBox.hgrow="ALWAYS" />
+            <DateTimePicker fx:id="dpExpired" editable="false" format="yyyy-MM-dd" maxWidth="1.7976931348623157E308" promptText="Kadaluarsa" style="-fx-font-size: 13px; -fx-background-color: #005b4f;" stylesheets="@../../css/textField.css" />
+            <TextField fx:id="tfBuyPrice" layoutX="596.0" layoutY="37.0" promptText="harga beli" stylesheets="@../../css/textField.css" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="tfSellPrice" layoutX="484.0" layoutY="37.0" promptText=" harga jual" stylesheets="@../../css/textField.css" />
+            <JFXButton fx:id="btnAdd" prefHeight="27.0" prefWidth="108.0" stylesheets="@../../css/buttonSave.css" text="Tambah" HBox.hgrow="ALWAYS" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets left="30.0" right="30.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+</VBox>

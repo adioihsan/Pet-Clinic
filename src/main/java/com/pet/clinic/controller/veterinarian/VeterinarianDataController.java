@@ -4,7 +4,6 @@ import com.jfoenix.controls.*;
 
 import java.io.File;
 import java.net.URL;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ResourceBundle;
@@ -331,7 +330,7 @@ public class VeterinarianDataController {
     }
 
 }
-class Vets extends RecursiveTreeObject<com.pet.clinic.controller.veterinarian.Vets> {
+class Vets extends RecursiveTreeObject<Vets> {
     StringProperty id;
     StringProperty firstName;
     StringProperty lastName;
