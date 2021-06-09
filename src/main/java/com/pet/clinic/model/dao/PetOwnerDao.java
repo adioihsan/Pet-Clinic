@@ -38,7 +38,7 @@ public class PetOwnerDao {
     }
 
     public static void insertPetOwnerPhoto(int id, String photoName){
-        String query = "update petOwner set photo=? where id=?";
+        String query = "update petOwner set photo=? where petOwnerId=?";
         Connection con = DbConnect.getConnection();
         try {
             PreparedStatement ps = con.prepareStatement(query);
@@ -53,7 +53,7 @@ public class PetOwnerDao {
 
     public static PetOwner getOwner(int id){
         PetOwner petOwner = null;
-        String query = "select * from petOwner where id=?";
+        String query = "select * from petOwner where petOwnerId=?";
         Connection con = DbConnect.getConnection();
         try {
             PreparedStatement ps = con.prepareStatement(query);
@@ -61,7 +61,7 @@ public class PetOwnerDao {
             ResultSet res = ps.executeQuery();
             if(res.next()){
                 petOwner = new PetOwner();
-                petOwner.setId(res.getInt("id"));
+                petOwner.setId(res.getInt("petOwnerId"));
                 petOwner.setFirstName(res.getString("firstName"));
                 petOwner.setLastName(res.getString("lastName"));
                 petOwner.setDob(res.getDate("dob").toLocalDate());

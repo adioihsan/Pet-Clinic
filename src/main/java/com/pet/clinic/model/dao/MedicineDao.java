@@ -37,7 +37,7 @@ public class MedicineDao {
             ResultSet res = con.createStatement().executeQuery(query);
             while(res.next()){
                 Medicine medicine = new Medicine();
-                medicine.setId(res.getInt("id"));
+                medicine.setId(res.getInt("medicineId"));
                 medicine.setName(res.getString("name"));
                 medicine.setFill(res.getString("fill"));
                 medicine.setUnit(res.getString("unit"));
@@ -57,7 +57,7 @@ public class MedicineDao {
 
     public static ArrayList<Medicine> findMedicine(String keyword, int limit){
         ArrayList<Medicine> medicineList = new ArrayList();
-        String query = "select distinct * from medicine where id=? or name like(?)  or fill like(?) or unit like(?) or stock=?" +
+        String query = "select distinct * from medicine where medicineId=? or name like(?)  or fill like(?) or unit like(?) or stock=?" +
                 "or expired=? or buyPrice=? or sellPrice=? limit "+limit;
         Connection con = DbConnect.getConnection();
         try {
@@ -74,7 +74,7 @@ public class MedicineDao {
             ResultSet res = ps.executeQuery();
             while(res.next()){
                 Medicine medicine = new Medicine();
-                medicine.setId(res.getInt("id"));
+                medicine.setId(res.getInt("medicineId"));
                 medicine.setName(res.getString("name"));
                 medicine.setFill(res.getString("fill"));
                 medicine.setUnit(res.getString("unit"));

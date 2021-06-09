@@ -41,7 +41,7 @@ public class VeterinarianDao {
     public static boolean updateVeterinarian(Veterinarian vet){
         boolean status = false;
         String query = "update veterinarian set firstName=? , lastName=? , title=? , specialist=? , dob=? , gender=?," +
-                "phoneNumber=?,address=? where id=?";
+                "phoneNumber=?,address=? where veterinarianId=?";
         Connection con = DbConnect.getConnection();
         try {
             PreparedStatement ps = con.prepareStatement(query);
@@ -63,7 +63,7 @@ public class VeterinarianDao {
 
     public static boolean deleteVeterinarian(int id){
         boolean status = false;
-        String query = "delete from veterinarian where id=?";
+        String query = "delete from veterinarian where veterinarianId=?";
         Connection con = DbConnect.getConnection();
         try {
             PreparedStatement ps = con.prepareStatement(query);
@@ -78,7 +78,7 @@ public class VeterinarianDao {
 
 
     public static void insertPhoto(int id, String photoName){
-        String query = "update veterinarian set photo=? where id=?";
+        String query = "update veterinarian set photo=? where veterinarianId=?";
         Connection con = DbConnect.getConnection();
         try {
             PreparedStatement ps = con.prepareStatement(query);
@@ -92,7 +92,7 @@ public class VeterinarianDao {
 
     public static Veterinarian getVeterinarian(int id){
         Veterinarian vet = null;
-        String query = "select * from veterinarian where id=? ";
+        String query = "select * from veterinarian where veterinarianId=? ";
         Connection con = DbConnect.getConnection();
         try {
             PreparedStatement ps = con.prepareStatement(query);
@@ -100,7 +100,7 @@ public class VeterinarianDao {
             ResultSet res = ps.executeQuery();
             if(res.next()){
                 vet = new Veterinarian();
-                vet.setId(res.getInt("id"));
+                vet.setId(res.getInt("veterinarianId"));
                 vet.setFirstName(res.getString("firstName"));
                 vet.setLastName(res.getString("lastName"));
                 vet.setTitle(res.getString("title"));
@@ -117,16 +117,15 @@ public class VeterinarianDao {
         return vet;
     }
 
-    public static ArrayList<Veterinarian> getAllPet(){
+    public static ArrayList<Veterinarian> getAllVet(){
         String query = "select * from veterinarian";
         ArrayList<Veterinarian> vetsList = new ArrayList();
         Connection con = DbConnect.getConnection();
         try {
             ResultSet res = con.createStatement().executeQuery(query);
             while(res.next()){
-                System.out.println("Result Not Empty");
                 Veterinarian veterinarian = new Veterinarian();
-                veterinarian.setId(res.getInt("id"));
+                veterinarian.setId(res.getInt("veterinarianId"));
                 veterinarian.setFirstName(res.getString("firstName"));
                 veterinarian.setLastName(res.getString("lastName"));
                 veterinarian.setTitle(res.getString("title"));

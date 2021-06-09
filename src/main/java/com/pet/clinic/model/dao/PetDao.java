@@ -14,7 +14,7 @@ public class PetDao {
     public static int insertPet(Pet pet){
         boolean isOk = false;
         int id = 0;
-        String query = "insert into pet(ownerId,name,dob,gender,kind,race,color,timestamp) values(?,?,?,?,?,?,?,?)";
+        String query = "insert into pet(petOwnerId,name,dob,gender,kind,race,color,timestamp) values(?,?,?,?,?,?,?,?)";
         String query2 = "select LAST_INSERT_ID()";
         Connection con = DbConnect.getConnection();
         try {
@@ -43,7 +43,7 @@ public class PetDao {
 
     public static  boolean updatePet(Pet pet){
         boolean status = false;
-        String query = "update pet set name=?,dob=?,gender=?,kind=?,race=?,color=? where id=?";
+        String query = "update pet set name=?,dob=?,gender=?,kind=?,race=?,color=? where petId=?";
         Connection con = DbConnect.getConnection();
         try {
             PreparedStatement ps = con.prepareStatement(query);
@@ -63,7 +63,7 @@ public class PetDao {
 
     public static  boolean deletePet(int id){
         boolean status = false;
-        String query = "delete from pet where id=?";
+        String query = "delete from pet where petId=?";
         Connection con = DbConnect.getConnection();
         try {
             PreparedStatement ps = con.prepareStatement(query);
@@ -76,7 +76,7 @@ public class PetDao {
     }
 
     public static void insertPetPhoto(int id, String photoName){
-        String query = "update pet set photo=? where id=?";
+        String query = "update pet set photo=? where petId=?";
         Connection con = DbConnect.getConnection();
         try {
             PreparedStatement ps = con.prepareStatement(query);
@@ -91,7 +91,7 @@ public class PetDao {
 
 
     public static Pet getPet(int id){
-        String query = "select * from pet where id=?";
+        String query = "select * from pet where petId=?";
         Pet pet = null;
         Connection con = DbConnect.getConnection();
         try {
@@ -101,8 +101,8 @@ public class PetDao {
             if(res != null){
                 res.next();
                 pet = new Pet();
-                pet.setId(res.getInt("id"));
-                pet.setOwnerId(res.getInt("ownerId"));
+                pet.setId(res.getInt("petId"));
+                pet.setOwnerId(res.getInt("petOwnerId"));
                 pet.setName(res.getString("name"));
                 pet.setDob(res.getDate("dob").toLocalDate());
                 pet.setGender(res.getString("gender"));
@@ -127,8 +127,8 @@ public class PetDao {
            while(res.next()){
                System.out.println("Result Not Empty");
                Pet pet = new Pet();
-               pet.setId(res.getInt("id"));
-               pet.setOwnerId(res.getInt("ownerId"));
+               pet.setId(res.getInt("petId"));
+               pet.setOwnerId(res.getInt("petOwnerId"));
                pet.setName(res.getString("name"));
                pet.setDob(res.getDate("dob").toLocalDate());
                pet.setGender(res.getString("gender"));
