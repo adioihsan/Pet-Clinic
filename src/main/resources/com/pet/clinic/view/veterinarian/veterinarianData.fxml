@@ -17,7 +17,6 @@
 <?import javafx.scene.text.Font?>
 <?import tornadofx.control.DateTimePicker?>
 
-
 <VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.veterinarian.VeterinarianDataController">
    <children>
       <HBox fx:id="boxHeader" alignment="BOTTOM_LEFT" maxHeight="-Infinity" prefHeight="100.0" prefWidth="1000.0" stylesheets="@../../css/boxHeaderDataMaster.css" VBox.vgrow="ALWAYS">
@@ -68,7 +67,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <ImageView fx:id="imgPhoto" fitHeight="217.0" fitWidth="228.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imgPhoto" fitHeight="157.0" fitWidth="228.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fx:id="imgAddPhoto" fitHeight="122.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
                            <image>
                               <Image url="@../../images/pickpicture.png" />

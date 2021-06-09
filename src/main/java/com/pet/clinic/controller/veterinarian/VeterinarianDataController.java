@@ -255,7 +255,7 @@ public class VeterinarianDataController {
     }
 
     private void loadTableData(){
-        ArrayList<Veterinarian> vetsFromDb = VeterinarianDao.getAllPet();
+        ArrayList<Veterinarian> vetsFromDb = VeterinarianDao.getAllVet();
         ObservableList<Vets> vetsList = FXCollections.observableArrayList();
         Iterator<Veterinarian> itr = vetsFromDb.iterator();
         while(itr.hasNext()){
@@ -308,7 +308,9 @@ public class VeterinarianDataController {
     private void setPhoto(String photoName){
         File photo = new File("files/photos/veterinarian/"+photoName);
         if(photo != null){
+            imgAddPhoto.setOpacity(0);
             imgPhoto.setImage(new Image(photo.toURI().toString()));
+            imgPhoto.setOpacity(1);
         }
     }
 
