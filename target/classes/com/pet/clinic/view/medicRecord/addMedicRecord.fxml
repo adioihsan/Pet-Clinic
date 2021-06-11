@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.medicRecord.AddMedicRecordController">
+   <children>
+      <HBox fx:id="boxHeader" alignment="BOTTOM_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="1000.0" stylesheets="@../../css/boxHeaderMedicRecord.css">
+         <children>
+            <Label alignment="BOTTOM_LEFT" text="Tambah Data Rekam Medis" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <HBox.margin>
+                  <Insets bottom="25.0" left="25.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+         <VBox.margin>
+            <Insets bottom="15.0" />
+         </VBox.margin>
+      </HBox>
+      <VBox alignment="CENTER" prefHeight="59.0" prefWidth="1000.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="56.0" prefWidth="306.0" VBox.vgrow="NEVER">
+               <children>
+                  <TextField fx:id="tfKeyword" maxWidth="1.7976931348623157E308" prefHeight="36.0" prefWidth="310.0" promptText="ID Peliharaan" HBox.hgrow="NEVER">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <JFXButton fx:id="btnSearch" alignment="CENTER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="36.0" prefWidth="55.0" text=" " textAlignment="CENTER">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/search.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <Label fx:id="lblSearchStatus" prefHeight="16.0" prefWidth="364.0" text="Label" textFill="#c91b1b" visible="false" />
+         </children>
+      </VBox>
+      <HBox VBox.vgrow="ALWAYS">
+         <children>
+            <HBox prefHeight="595.0" prefWidth="572.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <VBox prefHeight="595.0" prefWidth="651.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Pane prefHeight="32.0" prefWidth="509.0" style="-fx-background-color: #439889;">
+                           <children>
+                              <Label layoutX="8.0" layoutY="6.0" text="Rekam Medis" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Pane>
+                        <JFXTreeTableView fx:id="tvMedicRecord" prefHeight="276.0" prefWidth="509.0" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets bottom="30.0" />
+                           </VBox.margin>
+                        </JFXTreeTableView>
+                        <GridPane prefHeight="229.0" prefWidth="509.0" VBox.vgrow="NEVER">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <VBox GridPane.columnIndex="1">
+                                 <children>
+                                    <Pane minHeight="-Infinity" prefHeight="32.0" style="-fx-background-color: #439889;">
+                                       <children>
+                                          <Label layoutX="8.0" layoutY="7.0" prefHeight="21.0" prefWidth="129.0" text="Resep Obat" textFill="WHITE">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </Pane>
+                                    <JFXTreeTableView fx:id="tvPrescription" prefHeight="201.0" prefWidth="255.0">
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </JFXTreeTableView>
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets left="15.0" />
+                                 </GridPane.margin>
+                              </VBox>
+                              <VBox>
+                                 <children>
+                                    <Pane minHeight="-Infinity" prefHeight="32.0" style="-fx-background-color: #439889;">
+                                       <children>
+                                          <Label layoutX="8.0" layoutY="7.0" prefHeight="21.0" prefWidth="129.0" text="Tindakan" textFill="WHITE">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </Pane>
+                                    <JFXListView fx:id="listActions">
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </JFXListView>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets right="30.0" />
+               </padding>
+            </HBox>
+            <VBox alignment="TOP_CENTER" prefHeight="595.0" prefWidth="434.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Pane prefHeight="32.0" prefWidth="401.0" style="-fx-background-color: #439889;">
+                     <children>
+                        <Label layoutX="8.0" layoutY="6.0" text="Informasi Peliharaan" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Pane>
+                  <HBox prefHeight="146.0" prefWidth="401.0" VBox.vgrow="NEVER">
+                     <children>
+                        <GridPane fx:id="panePetPhoto" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="166.0" prefWidth="162.0" style="-fx-border-color: gray; -fx-border-style: dotted;">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <ImageView fx:id="imgPet" fitHeight="165.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </ImageView>
+                           </children>
+                        </GridPane>
+                        <VBox prefHeight="156.0" prefWidth="115.0">
+                           <children>
+                              <Label text="ID " textFill="#003d32">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="10.0" text="Nama" textFill="#003d32">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="26.0" text="Tanggal Lahir" textFill="#003d32">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="42.0" text="Jenis" textFill="#003d32">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="58.0" text="Jenis Kelamin" textFill="#003d32">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="74.0" text="Ras" textFill="#003d32">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="90.0" text="Warna" textFill="#003d32">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox prefHeight="180.0" prefWidth="141.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label fx:id="lblPetId" text="ID ">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label fx:id="lblPetName" layoutX="10.0" layoutY="10.0" text="Nama">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label fx:id="lblPetDob" layoutX="10.0" layoutY="26.0" text="Tanggal Lahir">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label fx:id="lblPetKind" layoutX="10.0" layoutY="42.0" text="Jenis">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label fx:id="lblPetGender" layoutX="10.0" layoutY="58.0" text="Jenis Kelamin">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label fx:id="lblPetRace" layoutX="10.0" layoutY="74.0" text="Ras">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label fx:id="lblPetColor" layoutX="10.0" layoutY="90.0" text="Warna">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </HBox>
+                  <Pane prefHeight="32.0" prefWidth="455.0" style="-fx-background-color: #439889;">
+                     <children>
+                        <Label layoutX="8.0" layoutY="5.0" text="Informasi Pemilik" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </Pane>
+                  <HBox prefHeight="160.0" prefWidth="436.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <GridPane fx:id="panePetPhoto1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="166.0" prefWidth="162.0" style="-fx-border-color: gray; -fx-border-style: dotted;">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <ImageView fx:id="imgOwner" fitHeight="153.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </ImageView>
+                           </children>
+                        </GridPane>
+                        <VBox prefHeight="150.0" prefWidth="126.0">
+                           <children>
+                              <Label text="ID " textFill="#003d32">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="10.0" text="Nama" textFill="#003d32">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="160.0" text="Jenis Kelamin" textFill="#003d32">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="105.0" text="Tanggal Lahir" textFill="#003d32">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="26.0" text="No.Telp" textFill="#003d32">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="42.0" text="Alamat" textFill="#003d32">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox layoutX="216.0" layoutY="10.0" prefHeight="150.0" prefWidth="142.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label fx:id="lblOwnerId" prefHeight="15.0" prefWidth="152.0" text="ID ">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label fx:id="lblOwnerName" layoutX="10.0" layoutY="10.0" prefHeight="15.0" prefWidth="138.0" text="Nama">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label fx:id="lblOwnerGender" layoutX="25.0" layoutY="160.0" prefHeight="15.0" prefWidth="135.0" text="Jenis Kelamin">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label fx:id="lblOwnerDob" layoutX="10.0" layoutY="26.0" prefHeight="15.0" prefWidth="142.0" text="Tanggal Lahir">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label fx:id="lblOwnerPhone" layoutX="25.0" layoutY="105.0" prefHeight="15.0" prefWidth="142.0" text="Nomer Telpon">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Text fx:id="txtAddress" fill="#000000c2" strokeType="OUTSIDE" strokeWidth="0.0" text="Alamat" wrappingWidth="125.64453125" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" />
+         </padding>
+      </HBox>
+   </children>
+</VBox>
