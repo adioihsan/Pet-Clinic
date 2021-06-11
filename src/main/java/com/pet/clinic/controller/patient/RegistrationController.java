@@ -15,10 +15,14 @@ import java.nio.file.StandardCopyOption;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import com.pet.clinic.helper.Message;
 import com.pet.clinic.model.Pet;
+import com.pet.clinic.model.PetKind;
 import com.pet.clinic.model.dao.PetDao;
 import com.pet.clinic.model.PetOwner;
 import com.pet.clinic.model.dao.PetOwnerDao;
@@ -29,6 +33,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -79,7 +84,7 @@ public class RegistrationController {
     private TextField tfOwnerPhone;
 
     @FXML
-    private JFXTextArea taOwnerAddress;
+    private TextArea taOwnerAddress;
 
     @FXML
     private GridPane paneOwnerPhoto;
@@ -131,8 +136,15 @@ public class RegistrationController {
 
     @FXML
     private JFXButton btnSearch;
+
     @FXML
     private Label lblSearchStatus;
+
+    @FXML
+    private Label lblOwnerPhotoEmpty;
+
+    @FXML
+    private Label lblPetPhotoEmpty;
 
     //
     private File petPhoto;
@@ -182,9 +194,8 @@ public class RegistrationController {
         comPetGender.getItems().add("Betina");
 
         // set pet kind
-        comPetKind.getItems().add("Kucing");
-        comPetKind.getItems().add("Anjing");
-        comPetKind.getItems().add("Hamster");
+        setPetKinds();
+
 
         //set dob
         dpOwnerDOB.setOnShowing(new EventHandler<Event>() {
@@ -194,6 +205,15 @@ public class RegistrationController {
                 dpOwnerDOB.setValue(LocalDate.of(2000,01,01));
             }
         });
+
+        dpPetDOB.setOnShowing(new EventHandler<Event>() {
+            @Override
+            public void handle(Event event) {
+                if(dpPetDOB.getValue() == null)
+                    dpPetDOB.setValue(LocalDate.of(2018,01,01));
+            }
+        });
+
 
         // photo chooser
         FileChooser choosePhoto = new FileChooser();
@@ -208,6 +228,7 @@ public class RegistrationController {
                     imgOwner.setImage(new Image(ownerPhoto.toURI().toString()));
                     imgAddOwnerPhoto.setOpacity(0);
                     btnOwnerPhoto.setText("Ganti Photo");
+                    lblOwnerPhotoEmpty.setVisible(false);
                 }
             }
         });
@@ -219,7 +240,8 @@ public class RegistrationController {
                 if(petPhoto != null) {
                     imgPet.setImage(new Image(petPhoto.toURI().toString()));
                     imgAddPetPhoto.setOpacity(0);
-                    btnOwnerPhoto.setText("Ganti Photo");
+                    btnPetPhoto.setText("Ganti Photo");
+                    lblPetPhotoEmpty.setVisible(false);
                 }
             }
         });
@@ -272,22 +294,32 @@ public class RegistrationController {
         });
 
 
-        btnSave.setOnAction(e->{
-
-           boolean status = savePatient();
-            if(status){
-                Alert success = new Alert(Alert.AlertType.INFORMATION,"Registrasi Berhasil");
-                success.show();
-            }
-            else{
-                Alert failed = new Alert(Alert.AlertType.ERROR,"Terjadi Kesalahan. Registrasi Gagal");
-                failed.show();
+        btnSave.setOnAction(e-> {
+            if (isFormNotNull()){
+                boolean status = savePatient();
+                if (status) {
+                    clearPetForm();
+                    clearOwnerForm();
+                    Message.showSuccess(" Registrasi Berhasil.");
+                }
+                else {
+                    Message.showFailed("Terjadi Kesalahan ! . Registrasi Gagal.");
+                }
             }
         });
 
-
-
+        //END OF INITIALIZE
     }
+
+    //set Pet kinds
+    private void setPetKinds(){
+        ArrayList<PetKind> petKinds = PetDao.getPetKind();
+        Iterator<PetKind> itr = petKinds.iterator();
+        while (itr.hasNext()){
+            comPetKind.getItems().add(itr.next().getName());
+        }
+    }
+
 
     // Turn on/off form based on registration status
     private void setEditableForm(boolean isEditable , double opacity){
@@ -322,7 +354,18 @@ public class RegistrationController {
         dpOwnerDOB.setValue(null);
         comOwnerGender.setValue(null);
         setOwnerPhoto(null);
+    };
+
+    private void clearPetForm(){
+        tfPetColor.clear();
+        tfPetRace.clear();
+        tfPetName.clear();
+        dpPetDOB.setValue(null);
+        comPetKind.setValue(null);
+        comPetGender.setValue(null);
+        imgPet.setImage(null);
     }
+
 
     //Save patient
     private boolean savePatient(){
@@ -365,7 +408,7 @@ public class RegistrationController {
         petOwner.setLastName(tfOwnerLastName.getText());
         petOwner.setDob(dpOwnerDOB.getValue());
         petOwner.setGender(comOwnerGender.getValue());
-        petOwner.setPhoneNumber(Integer.valueOf(tfOwnerPhone.getText()));
+        petOwner.setPhoneNumber(Double.valueOf(tfOwnerPhone.getText()));
         petOwner.setAddress(taOwnerAddress.getText());
         petOwner.setTimestamp(timestamp);
         id = PetOwnerDao.insertPetOwner(petOwner);
@@ -428,4 +471,88 @@ public class RegistrationController {
             imgOwner.setImage(new Image(photo.toURI().toString()));
         }
     }
+
+    // Check if columns null
+
+    private boolean isFormNotNull(){
+        boolean status = true;
+        // owner form
+        if(tfOwnerFirstName.getText().equalsIgnoreCase("")){
+            tfOwnerFirstName.setPromptText(("Nama depan tidak boleh kosong ! "));
+            tfOwnerFirstName.setStyle("-fx-prompt-text-fill: rgba(240,10,10,0.7);");
+            status = false;
+        }
+        if(tfOwnerLastName.getText().equalsIgnoreCase("")){
+            tfOwnerLastName.setPromptText(("Nama Belakang tidak boleh kosong ! "));
+            tfOwnerLastName.setStyle("-fx-prompt-text-fill: rgba(240,10,10,0.7);");
+            status = false;
+        }
+        if(dpOwnerDOB.getValue() == null){
+            dpOwnerDOB.setPromptText(("Tanggal lahir tidak boleh kosong ! "));
+            dpOwnerDOB.setStyle("-fx-prompt-text-fill: rgba(240,10,10,0.7);-fx-font-size:16px");
+            status = false;
+        }
+        if(comOwnerGender.getValue() == null){
+            comOwnerGender.setPromptText(("Jenis Kelamin tidak boleh kosong ! "));
+            comOwnerGender.setStyle("-fx-prompt-text-fill: rgba(240,10,10,0.7);-fx-font-size:16px;");
+            status = false;
+        }
+        if(tfOwnerPhone.getText().equalsIgnoreCase("")){
+            tfOwnerPhone.setPromptText(("Nomer telpon tidak boleh kosong ! "));
+            tfOwnerPhone.setStyle("-fx-prompt-text-fill: rgba(240,10,10,0.7);");
+            status = false;
+        }
+        if(taOwnerAddress.getText().equalsIgnoreCase("")){
+            taOwnerAddress.setPromptText(("Alamat tidak boleh kosong ! "));
+            taOwnerAddress.setStyle("-fx-prompt-text-fill: rgba(240,10,10,0.7);");
+            status = false;
+        }
+        if(ownerPhoto == null){
+            lblOwnerPhotoEmpty.setVisible(true);
+            status = false;
+            if(!tfOwnerId.getText().equalsIgnoreCase("")){
+                lblOwnerPhotoEmpty.setVisible(false);
+                status = true;
+            }
+        }
+
+        //pet form
+        if(tfPetName.getText().equalsIgnoreCase("")){
+            tfPetName.setPromptText(("Nama Peliharaan tidak boleh kosong ! "));
+            tfPetName.setStyle("-fx-prompt-text-fill: rgba(240,10,10,0.7);");
+            status = false;
+        }
+        if(dpPetDOB.getValue() == null){
+            dpPetDOB.setPromptText(("Tanggal lahir tidak boleh kosong ! "));
+            dpPetDOB.setStyle("-fx-prompt-text-fill: rgba(240,10,10,0.7);-fx-font-size:16px");
+            status = false;
+        }
+        if(comPetKind.getValue() == null){
+            comPetKind.setPromptText(("Jenis Peliharaan tidak boleh kosong ! "));
+            comPetKind.setStyle("-fx-prompt-text-fill: rgba(240,10,10,0.7);-fx-font-size:16px;");
+            status = false;
+        }
+        if(comPetGender.getValue() == null){
+            comPetGender.setPromptText(("Jenis Kelamin tidak boleh kosong ! "));
+            comPetGender.setStyle("-fx-prompt-text-fill: rgba(240,10,10,0.7);-fx-font-size:16px;");
+            status = false;
+        }
+        if(tfPetRace.getText().equalsIgnoreCase("")){
+            tfPetRace.setPromptText(("Ras Peliharaan tidak boleh kosong! "));
+            tfPetRace.setStyle("-fx-prompt-text-fill: rgba(240,10,10,0.7);");
+            status = false;
+        }
+        if(tfPetColor.getText().equalsIgnoreCase("")){
+            tfPetColor.setPromptText(("Warna Bulu atau Kulit tidak boleh kosong! "));
+            tfPetColor.setStyle("-fx-prompt-text-fill: rgba(240,10,10,0.7);");
+            status = false;
+        }
+        if(petPhoto == null){
+            lblPetPhotoEmpty.setVisible(true);
+            status = false;
+        }
+
+        return status;
+    }
+
 }

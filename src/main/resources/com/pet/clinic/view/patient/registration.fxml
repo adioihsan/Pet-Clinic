@@ -3,9 +3,9 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXTextArea?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -14,11 +14,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import tornadofx.control.DateTimePicker?>
 
-<VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: #f7f7f7;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.patient.RegistrationController">
+<VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1000.0" style="-fx-background-color: #f7f7f7;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.patient.RegistrationController">
    <children>
       <HBox fx:id="boxHeader" alignment="BOTTOM_LEFT" maxHeight="-Infinity" prefHeight="100.0" prefWidth="1000.0" stylesheets="@../../css/boxHeaderRegistration.css" VBox.vgrow="NEVER">
          <children>
@@ -63,23 +64,27 @@
                         <Insets bottom="5.0" />
                      </VBox.margin>
                      <children>
-                        <TextField fx:id="tfOwnerId" editable="false" maxWidth="1.7976931348623157E308" prefHeight="36.0" prefWidth="247.0" promptText="ID Pemilik" HBox.hgrow="ALWAYS">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </TextField>
-                        <JFXButton fx:id="btnSearch" nodeOrientation="RIGHT_TO_LEFT" prefHeight="36.0" prefWidth="45.0" text=" " textAlignment="CENTER" HBox.hgrow="NEVER">
-                           <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                        <StackPane prefHeight="33.0" prefWidth="306.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <TextField fx:id="tfOwnerId" editable="false" maxWidth="1.7976931348623157E308" prefHeight="33.0" prefWidth="316.0" promptText="ID Pemilik">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="40.0" />
+                                 </padding>
+                              </TextField>
+                              <JFXButton fx:id="btnSearch" nodeOrientation="RIGHT_TO_LEFT" prefHeight="32.0" prefWidth="35.0" text=" " textAlignment="CENTER" StackPane.alignment="CENTER_LEFT" />
+                              <ImageView fitHeight="18.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER_LEFT">
                                  <image>
                                     <Image url="@../../images/search.png" />
                                  </image>
+                                 <StackPane.margin>
+                                    <Insets left="10.0" />
+                                 </StackPane.margin>
                               </ImageView>
-                           </graphic>
-                        </JFXButton>
+                           </children>
+                        </StackPane>
                      </children>
                   </HBox>
                   <Label fx:id="lblSearchStatus" text="Label" textFill="#c91b1b" visible="false">
@@ -139,23 +144,11 @@
                         <Insets bottom="30.0" />
                      </VBox.margin>
                   </TextField>
-                  <Label prefHeight="16.0" prefWidth="57.0" text="Alamat" textFill="#666363bb">
+                  <TextArea fx:id="taOwnerAddress" prefHeight="97.0" prefWidth="306.0" promptText="Alamat" stylesheets="@../../css/textArea.css">
                      <font>
                         <Font size="16.0" />
                      </font>
-                     <VBox.margin>
-                        <Insets left="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <JFXTextArea fx:id="taOwnerAddress" focusColor="#005b4f" maxHeight="-Infinity" prefHeight="57.0" prefWidth="306.0" text=" " unFocusColor="#4ebaaa" VBox.vgrow="ALWAYS">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </JFXTextArea>
-                  <HBox prefHeight="45.0" prefWidth="306.0" />
+                  </TextArea>
                </children>
                <padding>
                   <Insets bottom="15.0" left="30.0" right="30.0" top="30.0" />
@@ -176,12 +169,17 @@
                               <Image url="@../../images/pickpicture.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="imgOwner" fitHeight="217.0" fitWidth="227.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imgOwner" fitHeight="217.0" fitWidth="227.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                         <JFXButton fx:id="btnOwnerPhoto" alignment="BOTTOM_CENTER" prefHeight="230.0" prefWidth="230.0" text="Pilih Foto">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </JFXButton>
+                        <Label fx:id="lblOwnerPhotoEmpty" alignment="CENTER" mouseTransparent="true" prefHeight="16.0" prefWidth="238.0" style="-fx-background-color: rgba(255,255,255,0.5);" text="Foto Masih Kosong" textFill="#d33a2f" visible="false">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </Label>
                      </children>
                   </GridPane>
                </children>
@@ -270,7 +268,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <ImageView fx:id="imgPet" fitHeight="217.0" fitWidth="228.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imgPet" fitHeight="217.0" fitWidth="228.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                         <ImageView fx:id="imgAddPetPhoto" fitHeight="122.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
                            <image>
                               <Image url="@../../images/pickpicture.png" />
@@ -281,6 +279,11 @@
                               <Font size="16.0" />
                            </font>
                         </JFXButton>
+                        <Label fx:id="lblPetPhotoEmpty" alignment="CENTER" mouseTransparent="true" prefHeight="16.0" prefWidth="238.0" style="-fx-background-color: rgba(255,255,255,0.5);" text="Foto Masih Kosong" textFill="#d33a2f" visible="false">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </Label>
                      </children>
                   </GridPane>
                </children>
