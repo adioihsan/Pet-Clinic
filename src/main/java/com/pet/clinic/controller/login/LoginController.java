@@ -9,10 +9,12 @@ import java.util.ResourceBundle;
 
 import com.pet.clinic.App;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 public class LoginController {
 
@@ -36,10 +38,15 @@ public class LoginController {
 
     @FXML
     void initialize() {
-        btnLogin.setOnAction(event -> {
-            loginUser();
-        });
-
+       btnLogin.setOnMouseClicked(new EventHandler<MouseEvent>() {
+           @Override
+           public void handle(MouseEvent mouseEvent) {
+               loginUser();
+           }
+       });
+       tfPassword.setOnAction(event -> {
+           loginUser();
+       });
     }
     private void loginUser(){
         String username = tfUsername.getText().trim();

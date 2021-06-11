@@ -15,7 +15,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.login.LoginController">
    <center>
-      <VBox alignment="CENTER" style="-fx-background-color: #003d33;">
+      <VBox alignment="CENTER" style="-fx-background-color: #005b4f;">
          <children>
               <ImageView fitHeight="167.0" fitWidth="425.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
                   <image>
@@ -25,7 +25,7 @@
                   <Insets bottom="75.0" top="40.0" />
                </VBox.margin>
               </ImageView>
-            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="437.0" prefWidth="593.0" style="-fx-background-color: #fff; -fx-background-radius: 15px;" VBox.vgrow="NEVER">
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="437.0" prefWidth="593.0" style="-fx-background-color: #fff; -fx-background-radius: 15px;" VBox.vgrow="NEVER">
                <children>
                     <TextField fx:id="tfUsername" layoutX="82.0" layoutY="188.0" prefHeight="50.0" prefWidth="425.0" promptText="Username">
                         <padding>
