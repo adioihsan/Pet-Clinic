@@ -49,6 +49,9 @@ public class PatientController {
     private JFXButton btnPet;
 
     @FXML
+    private JFXButton btnPetOwner;
+
+    @FXML
     void initialize() throws IOException {
 
         //side Menu
@@ -113,6 +116,11 @@ public class PatientController {
             setActive("petData");
             setCenterPane("petData");
         });
+        btnPetOwner.setOnAction(event ->{
+            removeActive();
+            setActive("ownerData");
+            setCenterPane("ownerData");
+        });
 
     }
     private void setCenterPane(String paneName){
@@ -128,6 +136,7 @@ public class PatientController {
     public void removeActive(){
         btnRegister.setOpacity(0);
         btnPet.setOpacity(0);
+        btnPetOwner.setOpacity(0);
     }
     public void setActive(String btnActive){
         switch (btnActive){
@@ -136,6 +145,9 @@ public class PatientController {
                 break;
             case "petData":
                 btnPet.setOpacity(0.5);
+                break;
+            case "ownerData":
+                btnPetOwner.setOpacity(0.5);
                 break;
             default:
                 System.out.println("Cant Find Button");

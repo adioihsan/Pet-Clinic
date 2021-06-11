@@ -15,7 +15,9 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import com.pet.clinic.helper.Message;
 import com.pet.clinic.model.Pet;
+import com.pet.clinic.model.PetKind;
 import com.pet.clinic.model.dao.PetDao;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -26,6 +28,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -95,6 +98,18 @@ public class PetDataController {
     @FXML
     private HBox boxBtns;
 
+    @FXML
+    private Label lblPetPhotoEmpty;
+
+    @FXML
+    private TextField tfLimit;
+
+    @FXML
+    private JFXButton btnAddLimit;
+
+    @FXML
+    private TextField tfFind;
+
     private File petPhoto;
 
     @FXML
@@ -159,7 +174,7 @@ public class PetDataController {
         tableView.getColumns().setAll(idCol,ownerIdCol,nameCol,dobCol,genderCol,kindCol,raceCol,colorCol,timestampCol);
 
         // Load Table data
-        loadTableData();
+        loadTableData(100);
 
         //Set Table Rules;
         tableView.setShowRoot(false);
@@ -171,6 +186,8 @@ public class PetDataController {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(tableView.getSelectionModel().getSelectedItem() != null){
+                    setEditableForm(false,0.5);
+                    boxBtns.getChildren().setAll(btnEdit,btnDelete);
                     Pets pet = tableView.getSelectionModel().getSelectedItem().getValue();
                     int id = Integer.valueOf(pet.id.getValue().toString());
                    getPetDetail(id);
@@ -183,9 +200,7 @@ public class PetDataController {
         comPetGender.getItems().add("Betina");
 
         // set pet kind
-        comPetKind.getItems().add("Kucing");
-        comPetKind.getItems().add("Anjing");
-        comPetKind.getItems().add("Hamster");
+        setPetKinds();
 
         //photo chooser
         FileChooser choosePhoto = new FileChooser();
@@ -229,25 +244,85 @@ public class PetDataController {
         btnSave.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                boxBtns.getChildren().setAll(btnEdit,btnDelete);
-                setEditableForm(false , 0.5);
-                savePet();
-                Alert success = new Alert(Alert.AlertType.INFORMATION,"Data Berhasil di Ubah");
-                loadTableData();
+                if(isFormNotNull()) {
+                    boxBtns.getChildren().setAll(btnEdit, btnDelete);
+                    setEditableForm(false, 0.5);
+                    if(savePet()){
+                        Message.showSuccess();
+                        loadTableData(Integer.parseInt(tfLimit.getText()));
+                    }
+                    else{
+                        Message.showFailed();
+                    }
+                }
             }
         });
         btnDelete.setOnAction(e->{
-           deletePet(Integer.valueOf(lblId.getText()));
-                Alert success = new Alert(Alert.AlertType.INFORMATION,"Data Berhasil di Hapus");
-                success.show();
-           loadTableData();
+           if(deletePet(Integer.valueOf(lblId.getText()))) {
+               Message.showSuccess("Data Peliharaan Berhasil di Hapus.");
+               loadTableData(Integer.parseInt(tfLimit.getText()));
+               clearPetForm();
+           }
+           else{
+               Message.showFailed("Terjadi Kesalahan ! . Data Peliharaan Gagal di Hapus.");
+           }
         });
 
+        // find data on database
+        tfFind.setOnKeyTyped(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                int limit = Integer.parseInt(tfLimit.getText());
+                loadTableData(tfFind.getText() ,limit);
+                if(tfFind.getText().equalsIgnoreCase(""))
+                    loadTableData(limit);
+            }
+        });
+        tfLimit.setOnKeyTyped(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if(tfLimit.getText().equalsIgnoreCase(""))
+                    tfLimit.setText(String.valueOf(1));
+                loadTableData(Integer.parseInt(tfLimit.getText()));
+            }
+        });
+        btnAddLimit.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                tfLimit.setText(String.valueOf(Integer.parseInt(tfLimit.getText())+1));
+                loadTableData(Integer.parseInt(tfLimit.getText()));
+            }
+        });
 
+        // END OF INITIALIZE
     }
 
-    private void loadTableData(){
-        ArrayList<Pet> petsFromDb = PetDao.getAllPet();
+    private void setPetKinds(){
+        ArrayList<PetKind> petKinds = PetDao.getPetKind();
+        Iterator<PetKind> itr = petKinds.iterator();
+        while (itr.hasNext()){
+            comPetKind.getItems().add(itr.next().getName());
+        }
+    }
+
+    private void loadTableData(int limit){
+        ArrayList<Pet> petsFromDb = PetDao.getAllPet(limit);
+        ObservableList<Pets> petsList = FXCollections.observableArrayList();
+        Iterator<Pet> itr = petsFromDb.iterator();
+        while(itr.hasNext()){
+            Pet pet = itr.next();
+            petsList.add(new Pets(
+                    String.valueOf(pet.getId()),String.valueOf(pet.getOwnerId()),pet.getName(),
+                    String.valueOf(pet.getDob()),pet.getGender(),pet.getKind(),
+                    pet.getRace(),pet.getColor(), String.valueOf(pet.getTimestamp())
+            ));
+        }
+        TreeItem<Pets> root = new RecursiveTreeItem<Pets>(petsList, RecursiveTreeObject::getChildren);
+        tableView.setRoot(root);
+    }
+
+    private void loadTableData(String keyword,int limit){
+        ArrayList<Pet> petsFromDb = PetDao.findPets(keyword,limit);
         ObservableList<Pets> petsList = FXCollections.observableArrayList();
         Iterator<Pet> itr = petsFromDb.iterator();
         while(itr.hasNext()){
@@ -276,6 +351,17 @@ public class PetDataController {
         dpPetDOB.setOpacity(opacity);
     }
 
+    private void clearPetForm(){
+        tfPetColor.clear();
+        tfPetRace.clear();
+        tfPetName.clear();
+        dpPetDOB.setValue(null);
+        comPetKind.setValue(null);
+        comPetGender.setValue(null);
+        imgPet.setImage(null);
+        lblId.setText("");
+        lblOwnerId.setText("");
+    }
 
     private void getPetDetail(int id){
         Pet pet = PetDao.getPet(id);
@@ -290,11 +376,13 @@ public class PetDataController {
         setPetPhoto(pet.getPhoto());
     }
 
-    private void deletePet(int id){
+    private boolean deletePet(int id){
         Pet pet = PetDao.getPet(id);
-        PetDao.deletePet(pet.getId());
-        deleteLocalPetPhoto(pet.getPhoto());
-
+        if(PetDao.deletePet(pet.getId())){
+            deleteLocalPetPhoto(pet.getPhoto());
+            return true;
+        }
+        return false;
     }
 
     private void setPetPhoto(String photoName){
@@ -318,11 +406,11 @@ public class PetDataController {
         pet.setColor(tfPetColor.getText());
         status = PetDao.updatePet(pet);
         if(petPhoto != null)
-        saveLocalPetPhoto(pet.getId(),pet.getName());
+        PetDao.insertPetPhoto(pet.getId(),saveLocalPetPhoto(pet.getId(),pet.getName()));
         return status;
     };
 
-    private void saveLocalPetPhoto(int petId, String name){
+    private String saveLocalPetPhoto(int petId, String name){
         String extension = getFileExtension(petPhoto.getName()).get();
         String fileName = String.valueOf(petId)+name+"."+extension;
         Path copied = Paths.get("files/photos/pet/"+fileName);
@@ -332,6 +420,7 @@ public class PetDataController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return fileName;
     }
 
     private void deleteLocalPetPhoto(String photoName){
@@ -349,6 +438,48 @@ public class PetDataController {
         return Optional.ofNullable(filename)
                 .filter(f -> f.contains("."))
                 .map(f -> f.substring(filename.lastIndexOf(".") + 1));
+    }
+
+    private boolean isFormNotNull(){
+        boolean status = true;
+
+        //pet form
+        if(tfPetName.getText().equalsIgnoreCase("")){
+            tfPetName.setPromptText(("Nama Peliharaan tidak boleh kosong ! "));
+            tfPetName.setStyle("-fx-prompt-text-fill: rgba(240,10,10,0.7);");
+            status = false;
+        }
+        if(dpPetDOB.getValue() == null){
+            dpPetDOB.setPromptText(("Tanggal lahir tidak boleh kosong ! "));
+            dpPetDOB.setStyle("-fx-prompt-text-fill: rgba(240,10,10,0.7);-fx-font-size:16px");
+            status = false;
+        }
+        if(comPetKind.getValue() == null){
+            comPetKind.setPromptText(("Jenis Peliharaan tidak boleh kosong ! "));
+            comPetKind.setStyle("-fx-prompt-text-fill: rgba(240,10,10,0.7);-fx-font-size:16px;");
+            status = false;
+        }
+        if(comPetGender.getValue() == null){
+            comPetGender.setPromptText(("Jenis Kelamin tidak boleh kosong ! "));
+            comPetGender.setStyle("-fx-prompt-text-fill: rgba(240,10,10,0.7);-fx-font-size:16px;");
+            status = false;
+        }
+        if(tfPetRace.getText().equalsIgnoreCase("")){
+            tfPetRace.setPromptText(("Ras Peliharaan tidak boleh kosong! "));
+            tfPetRace.setStyle("-fx-prompt-text-fill: rgba(240,10,10,0.7);");
+            status = false;
+        }
+        if(tfPetColor.getText().equalsIgnoreCase("")){
+            tfPetColor.setPromptText(("Warna Bulu atau Kulit tidak boleh kosong! "));
+            tfPetColor.setStyle("-fx-prompt-text-fill: rgba(240,10,10,0.7);");
+            status = false;
+        }
+/*        if(petPhoto == null){
+            lblPetPhotoEmpty.setVisible(true);
+            status = false;
+        }*/
+
+        return status;
     }
 
 }

@@ -2,6 +2,7 @@ package com.pet.clinic.model.dao;
 
 import com.pet.clinic.database.DbConnect;
 import com.pet.clinic.model.Pet;
+import com.pet.clinic.model.PetKind;
 import javafx.collections.FXCollections;
 
 import java.sql.*;
@@ -98,8 +99,7 @@ public class PetDao {
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1,id);
             ResultSet res = ps.executeQuery();
-            if(res != null){
-                res.next();
+            if(res.next()){
                 pet = new Pet();
                 pet.setId(res.getInt("petId"));
                 pet.setOwnerId(res.getInt("petOwnerId"));
@@ -118,14 +118,13 @@ public class PetDao {
         return pet;
     }
 
-    public static ArrayList<Pet> getAllPet(){
-        String query = "select * from pet";
+    public static ArrayList<Pet> getAllPet(int limit){
+        String query = "select * from pet limit "+limit;
         ArrayList<Pet> petsList = new ArrayList();
         Connection con = DbConnect.getConnection();
         try {
            ResultSet res = con.createStatement().executeQuery(query);
            while(res.next()){
-               System.out.println("Result Not Empty");
                Pet pet = new Pet();
                pet.setId(res.getInt("petId"));
                pet.setOwnerId(res.getInt("petOwnerId"));
@@ -143,4 +142,57 @@ public class PetDao {
         }
         return petsList;
     }
+
+    public static ArrayList<Pet> findPets(String keyword,int limit){
+        String query = "select * from pet where petId=? or petOwnerId=? or name like(?) or gender like(?)" +
+                " or kind like(?) or race like(?) or color like(?) limit "+limit;
+        ArrayList<Pet> petsList = new ArrayList();
+        Connection con = DbConnect.getConnection();
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,keyword);
+            ps.setString(2,keyword);
+            ps.setString(3,"%"+keyword+"%");
+            ps.setString(4,"%"+keyword+"%");
+            ps.setString(5,"%"+keyword+"%");
+            ps.setString(6,"%"+keyword+"%");
+            ps.setString(7,"%"+keyword+"%");
+            ResultSet res = ps.executeQuery();
+            while(res.next()){
+                Pet pet = new Pet();
+                pet.setId(res.getInt("petId"));
+                pet.setOwnerId(res.getInt("petOwnerId"));
+                pet.setName(res.getString("name"));
+                pet.setDob(res.getDate("dob").toLocalDate());
+                pet.setGender(res.getString("gender"));
+                pet.setKind(res.getString("kind"));
+                pet.setRace(res.getString("race"));
+                pet.setColor(res.getString("color"));
+                pet.setTimestamp(res.getTimestamp("timestamp"));
+                petsList.add(pet);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return petsList;
+    }
+
+
+
+    public static ArrayList<PetKind>  getPetKind(){
+        ArrayList<PetKind> petkinds = new ArrayList();
+        try {
+            ResultSet res = DbConnect.getConnection().createStatement().executeQuery("select * from petKind");
+            while(res.next()){
+                PetKind petKind = new PetKind();
+                petKind.setPetKindId(res.getInt("petKindId"));
+                petKind.setName(res.getString("name"));
+                petkinds.add(petKind);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return  petkinds;
+    }
+
 }
