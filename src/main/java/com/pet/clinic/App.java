@@ -1,10 +1,12 @@
 package com.pet.clinic;
 
+import com.jfoenix.controls.JFXDecorator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -14,18 +16,23 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
-
+    private static JFXDecorator decorator;
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("login/login"), 1280, 800);
+        decorator = new JFXDecorator(stage,loadFXML("login/login"));
+        String uri = getClass().getResource("css/windowDecorator.css").toExternalForm();
+        scene = new Scene(decorator, 1280, 800);
+        scene.getStylesheets().add(uri);
         stage.setScene(scene);
         stage.setTitle("Pet Clinic");
         stage.setMaximized(true);
         stage.show();
+
     }
 
     public static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
+        //scene.setRoot(loadFXML(fxml));
+        decorator.setContent(loadFXML(fxml));
     }
 
     private static Parent loadFXML(String fxml) throws IOException {

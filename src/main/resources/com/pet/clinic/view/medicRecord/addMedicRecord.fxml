@@ -17,13 +17,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.medicRecord.ViewMedicRecordController">
+<VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.medicRecord.AddMedicRecordController">
    <children>
       <HBox fx:id="boxHeader" alignment="BOTTOM_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="100.0" prefWidth="1000.0" stylesheets="@../../css/boxHeaderMedicRecord.css">
          <children>
-            <Label alignment="BOTTOM_LEFT" text="Rekam Medis" textFill="WHITE">
+            <Label alignment="BOTTOM_LEFT" text="Tambah Data Rekam Medis" textFill="WHITE">
                <font>
-                  <Font size="28.0" />
+                  <Font size="24.0" />
                </font>
                <HBox.margin>
                   <Insets bottom="25.0" left="25.0" />
@@ -81,13 +81,13 @@
                            </VBox.margin>
                         </JFXTreeTableView>
                         <GridPane prefHeight="229.0" prefWidth="509.0" VBox.vgrow="NEVER">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
                            <children>
                               <VBox GridPane.columnIndex="1">
                                  <children>

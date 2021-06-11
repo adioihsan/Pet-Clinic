@@ -43,6 +43,9 @@ public class MedicRecordController {
     private JFXButton btnViewMedicRecord;
 
     @FXML
+    private JFXButton btnAddMedicRecord;
+
+    @FXML
     void initialize() throws IOException {
 
         //side Menu
@@ -93,9 +96,22 @@ public class MedicRecordController {
 
         //main menu
         btnViewMedicRecord.setOnAction(e->{
+            removeActive();
+            setActive("viewMedicRecord");
             setCenterPane("viewMedicRecord");
         });
 
+        btnAddMedicRecord.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                removeActive();
+                setActive("addMedicRecord");
+                setCenterPane("addMedicRecord");
+            }
+        });
+
+        //set first medicRecord page
+        setCenterPane("viewMedicRecord");
     }
 
     private void setCenterPane(String paneName){
@@ -106,6 +122,24 @@ public class MedicRecordController {
             mainPane.setCenter(thePane);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void removeActive(){
+        btnViewMedicRecord.setOpacity(0);
+        btnAddMedicRecord.setOpacity(0);
+    }
+    public void setActive(String btnActive){
+        switch (btnActive){
+            case "viewMedicRecord":
+                btnViewMedicRecord.setOpacity(0.5);
+                break;
+            case "addMedicRecord":
+                btnAddMedicRecord.setOpacity(0.5);
+                break;
+            default:
+                System.out.println("Cant Find Button");
+                break;
         }
     }
 }
