@@ -2,10 +2,10 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -17,8 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import tornadofx.control.DateTimePicker?>
 
-
-<VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.patient.ownerDataController">
+<VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.patient.ownerDataController">
    <children>
       <HBox fx:id="boxHeader" alignment="BOTTOM_LEFT" maxHeight="-Infinity" prefHeight="100.0" prefWidth="1000.0" stylesheets="@../../css/boxHeaderDataMaster.css" VBox.vgrow="ALWAYS">
          <children>
@@ -43,6 +42,37 @@
          <children>
             <VBox GridPane.columnIndex="1">
                <children>
+                  <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="63.0" prefWidth="1000.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="374.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label alignment="BOTTOM_CENTER" prefHeight="26.0" prefWidth="99.0" text="Jumlah Data" textFill="#666363bb">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <TextField fx:id="tfLimit" alignment="CENTER" prefHeight="24.0" prefWidth="57.0" stylesheets="@../../css/textField2.css" text="100">
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <JFXButton fx:id="btnAddLimit" prefHeight="20.0" prefWidth="36.0" stylesheets="@../../css/buttonAddSmall.css" text="+" textFill="#233690">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                        <TextField fx:id="tfFind" prefHeight="24.0" prefWidth="287.0" promptText="Cari">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </HBox>
                   <JFXTreeTableView fx:id="tableView" nodeOrientation="LEFT_TO_RIGHT" prefHeight="591.0" prefWidth="682.0" VBox.vgrow="ALWAYS" />
                </children>
                <GridPane.margin>
@@ -68,8 +98,8 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <ImageView fx:id="imgPhoto" fitHeight="217.0" fitWidth="228.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fx:id="imgAddPhoto" fitHeight="122.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
+                        <ImageView fx:id="imgPhoto" fitHeight="179.0" fitWidth="228.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <ImageView fx:id="imgAddPhoto" fitHeight="122.0" fitWidth="125.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
                            <image>
                               <Image url="@../../images/pickpicture.png" />
                            </image>
@@ -121,23 +151,15 @@
                         <Insets bottom="15.0" />
                      </VBox.margin>
                   </TextField>
-                  <Label prefHeight="16.0" prefWidth="57.0" text="Alamat" textFill="#666363bb">
+                  <TextArea fx:id="taAddress" prefHeight="97.0" prefWidth="306.0" promptText="Alamat" stylesheets="@../../css/textArea.css">
                      <font>
                         <Font size="16.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="15.0" />
+                        <Insets bottom="20.0" />
                      </VBox.margin>
-                  </Label>
-                  <JFXTextArea fx:id="taAddress" focusColor="#005b4f" prefHeight="89.0" prefWidth="672.0" text=" " unFocusColor="#4ebaaa">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="15.0" />
-                     </VBox.margin>
-                  </JFXTextArea>
-                  <HBox fx:id="boxBtns" alignment="BOTTOM_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                  </TextArea>
+                  <HBox fx:id="boxBtns" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="86.0" prefWidth="250.0">
                      <children>
                         <JFXButton fx:id="btnSave" layoutX="10.0" layoutY="26.0" stylesheets="@../../css/buttonSave.css" text="Simpan">
                            <HBox.margin>
@@ -151,6 +173,12 @@
                         </JFXButton>
                         <JFXButton fx:id="btnDelete" stylesheets="@../../css/buttonDelete.css" text="Hapus" />
                      </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
                   </HBox>
                </children>
                <GridPane.margin>
