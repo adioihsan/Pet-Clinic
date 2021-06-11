@@ -144,7 +144,7 @@ public class VeterinarianDataController {
             if(genderCol.validateValue(param)) return param.getValue().getValue().gender;
             else return genderCol.getComputedValue(param);
         });
-        JFXTreeTableColumn<Vets, String> phoneNumberCol = new JFXTreeTableColumn<>("Warna");
+        JFXTreeTableColumn<Vets, String> phoneNumberCol = new JFXTreeTableColumn<>("Nomer Telpon");
         phoneNumberCol.setPrefWidth(100);
         phoneNumberCol.setCellValueFactory((TreeTableColumn.CellDataFeatures<Vets, String> param) ->{
             if(phoneNumberCol.validateValue(param)) return param.getValue().getValue().phoneNumber;
