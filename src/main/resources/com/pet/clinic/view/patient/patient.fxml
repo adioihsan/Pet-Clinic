@@ -120,14 +120,14 @@
                         <Insets top="25.0" />
                      </VBox.margin>
                   </Pane>
-                  <Pane layoutX="90.0" layoutY="271.0" prefHeight="36.0" prefWidth="199.0">
+                  <Pane layoutX="90.0" layoutY="271.0" prefHeight="36.0" prefWidth="199.0" visible="false">
                      <children>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" mouseTransparent="true" opacity="0.85" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="24.0" fitWidth="24.0" mouseTransparent="true" opacity="0.85" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
                               <Image url="@../../images/kartu.png" />
                            </image>
                         </ImageView>
-                        <Label mouseTransparent="true" opacity="0.85" prefHeight="24.0" prefWidth="193.0" text="Kartu" textFill="WHITE">
+                        <Label mouseTransparent="true" opacity="0.85" prefHeight="24.0" prefWidth="193.0" text="Kartu" textFill="WHITE" visible="false">
                            <padding>
                               <Insets left="32.0" />
                            </padding>

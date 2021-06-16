@@ -15,9 +15,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.veterinarian.VeterinarianController">
+<BorderPane fx:id="mainPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.veterinarian.VeterinarianController">
    <left>
-      <StackPane pickOnBounds="false" prefHeight="800.0" prefWidth="260.0" BorderPane.alignment="CENTER">
+      <StackPane pickOnBounds="false" prefHeight="768.0" prefWidth="260.0" BorderPane.alignment="CENTER">
          <children>
             <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="175.0" layoutX="650.0" layoutY="410.0" maxWidth="0.0" resizeContent="true" style="-fx-background-color: rgba(0,0,0,0.5);" viewOrder="-1.0" StackPane.alignment="TOP_LEFT" />
             <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="800.0" prefWidth="280.0" style="-fx-background-color: #00695c;" StackPane.alignment="TOP_LEFT">
@@ -72,7 +72,7 @@
                   </Pane>
                   <Pane layoutX="90.0" layoutY="149.0" prefHeight="36.0" prefWidth="199.0">
                      <children>
-                        <JFXButton fx:id="btnDoctor" layoutX="-11.0" layoutY="-4.0" opacity="0.52" prefHeight="43.0" prefWidth="163.0" style="-fx-background-color: #000; -fx-background-radius: 15px;" text=" ">
+                        <JFXButton fx:id="btnDoctor" layoutX="-11.0" layoutY="-4.0" opacity="0.0" prefHeight="43.0" prefWidth="163.0" style="-fx-background-color: #000; -fx-background-radius: 15px;" text=" ">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>

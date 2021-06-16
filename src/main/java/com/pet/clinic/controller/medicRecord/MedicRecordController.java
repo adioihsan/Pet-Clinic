@@ -12,6 +12,7 @@ import com.jfoenix.controls.events.JFXDrawerEvent;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import com.pet.clinic.App;
 import com.pet.clinic.controller.navigation.LeftMenuController;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,6 +45,9 @@ public class MedicRecordController {
 
     @FXML
     private JFXButton btnAddMedicRecord;
+
+    @FXML
+    private JFXButton btnEditMedicRecord;
 
     @FXML
     void initialize() throws IOException {
@@ -109,6 +113,14 @@ public class MedicRecordController {
                 setCenterPane("addMedicRecord");
             }
         });
+        btnEditMedicRecord.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                removeActive();
+                setActive("editMedicRecord");
+                setCenterPane("editMedicRecord");
+            }
+        });
 
         //set first medicRecord page
         setCenterPane("viewMedicRecord");
@@ -128,6 +140,7 @@ public class MedicRecordController {
     public void removeActive(){
         btnViewMedicRecord.setOpacity(0);
         btnAddMedicRecord.setOpacity(0);
+        btnEditMedicRecord.setOpacity(0);
     }
     public void setActive(String btnActive){
         switch (btnActive){
@@ -137,9 +150,13 @@ public class MedicRecordController {
             case "addMedicRecord":
                 btnAddMedicRecord.setOpacity(0.5);
                 break;
+            case "editMedicRecord" :
+                btnEditMedicRecord.setOpacity(0.5);
+                break;
             default:
                 System.out.println("Cant Find Button");
                 break;
         }
     }
+
 }

@@ -14,7 +14,8 @@ import java.io.IOException;
  * JavaFX App
  */
 public class App extends Application {
-
+    public static int userId;
+    public static String userName;
     private static Scene scene;
     private static JFXDecorator decorator;
     @Override
@@ -25,7 +26,7 @@ public class App extends Application {
         scene.getStylesheets().add(uri);
         stage.setScene(scene);
         stage.setTitle("Pet Clinic");
-        stage.setMaximized(true);
+        stage.setMaximized(false);
         stage.show();
 
     }
@@ -35,7 +36,7 @@ public class App extends Application {
         decorator.setContent(loadFXML(fxml));
     }
 
-    private static Parent loadFXML(String fxml) throws IOException {
+    public static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("view/"+ fxml + ".fxml"));
         return fxmlLoader.load();
     }

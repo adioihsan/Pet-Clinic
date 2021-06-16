@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import tornadofx.control.DateTimePicker?>
 
-<VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.veterinarian.VeterinarianDataController">
+<VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.veterinarian.VeterinarianDataController">
    <children>
       <HBox fx:id="boxHeader" alignment="BOTTOM_LEFT" maxHeight="-Infinity" prefHeight="100.0" prefWidth="1000.0" stylesheets="@../../css/boxHeaderDataMaster.css" VBox.vgrow="ALWAYS">
          <children>
@@ -48,7 +48,7 @@
                   <Insets left="15.0" />
                </GridPane.margin>
             </VBox>
-            <VBox alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="591.0" prefWidth="265.0">
+            <VBox alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="582.0" prefWidth="250.0">
                <children>
                   <HBox>
                      <children>
@@ -67,7 +67,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <ImageView fx:id="imgPhoto" fitHeight="157.0" fitWidth="228.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imgPhoto" fitHeight="118.0" fitWidth="229.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                         <ImageView fx:id="imgAddPhoto" fitHeight="122.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
                            <image>
                               <Image url="@../../images/pickpicture.png" />
@@ -141,10 +141,10 @@
                         <Font size="16.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="15.0" />
+                        <Insets bottom="5.0" />
                      </VBox.margin>
                   </Label>
-                  <JFXTextArea fx:id="taAddress" focusColor="#005b4f" prefHeight="89.0" prefWidth="672.0" text=" " unFocusColor="#4ebaaa">
+                  <JFXTextArea fx:id="taAddress" focusColor="#005b4f" prefHeight="27.0" prefWidth="250.0" text=" " unFocusColor="#4ebaaa">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -152,7 +152,7 @@
                         <Insets bottom="15.0" />
                      </VBox.margin>
                   </JFXTextArea>
-                  <HBox fx:id="boxBtns" alignment="BOTTOM_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                  <HBox fx:id="boxBtns" alignment="BOTTOM_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="145.0" prefWidth="250.0" VBox.vgrow="ALWAYS">
                      <children>
                         <JFXButton fx:id="btnSave" layoutX="10.0" layoutY="26.0" stylesheets="@../../css/buttonSave.css" text="Simpan">
                            <HBox.margin>

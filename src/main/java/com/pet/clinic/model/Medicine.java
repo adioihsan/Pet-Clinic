@@ -96,4 +96,9 @@ public class Medicine {
     public void setOut(int out) {
         this.out = out;
     }
+
+    @Override
+    public String toString(){
+        return "("+String.valueOf(this.getId())+") "+this.getName()+" | "+this.getFill();
+    }
 }

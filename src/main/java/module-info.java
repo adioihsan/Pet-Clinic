@@ -27,5 +27,11 @@ module com.pet.clinic {
     opens com.pet.clinic.controller.medicine to javafx.fxml;
     exports com.pet.clinic.controller.guestBook;
     opens com.pet.clinic.controller.guestBook to javafx.fxml;
+    exports com.pet.clinic.model;
+    opens com.pet.clinic.model to javafx.fxml;
+    exports com.pet.clinic.helper;
+    opens com.pet.clinic.helper to javafx.fxml;
+    exports com.pet.clinic.controller.payment;
+    opens com.pet.clinic.controller.payment to javafx.fxml;
 
 }

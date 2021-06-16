@@ -8,6 +8,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.pet.clinic.App;
+import com.pet.clinic.model.User;
+import com.pet.clinic.model.dao.UserDao;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -54,7 +56,9 @@ public class LoginController {
         if(!username.equals("") || !password.equals("")){
             if(ValidateUser.isValid(username,password)){
                 try {
-
+                    User user = UserDao.getUser(username);
+                    App.userId = user.getId();
+                    App.userName = user.getUsername();
                     App.setRoot("dashboard/dashboard");
                 } catch (IOException e) {
                     e.printStackTrace();

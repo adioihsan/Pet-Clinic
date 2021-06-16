@@ -84,12 +84,13 @@
       </Pane>
       <Pane layoutX="10.0" layoutY="227.0" pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
          <children>
-            <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="19.0" layoutY="11.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
+            <JFXButton fx:id="btnPayment" layoutX="8.0" layoutY="-1.0" opacity="0.0" prefHeight="51.0" prefWidth="194.0" style="-fx-background-color: #000; -fx-background-radius: 10px;" text=" " />
+            <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="19.0" layoutY="11.0" mouseTransparent="true" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/Pembayaran.png" />
                </image>
             </ImageView>
-            <Label layoutX="59.0" layoutY="16.0" opacity="0.8" prefHeight="20.0" prefWidth="157.0" text="Pembayaran" textFill="WHITE">
+            <Label layoutX="59.0" layoutY="16.0" mouseTransparent="true" opacity="0.8" prefHeight="20.0" prefWidth="157.0" text="Pembayaran" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>

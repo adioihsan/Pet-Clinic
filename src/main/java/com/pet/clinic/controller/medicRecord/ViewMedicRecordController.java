@@ -9,14 +9,8 @@ import java.util.Iterator;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import com.pet.clinic.model.MedicRecord;
-import com.pet.clinic.model.Pet;
-import com.pet.clinic.model.PetOwner;
-import com.pet.clinic.model.Prescription;
-import com.pet.clinic.model.dao.MedicRecordDao;
-import com.pet.clinic.model.dao.PetDao;
-import com.pet.clinic.model.dao.PetOwnerDao;
-import com.pet.clinic.model.dao.PrescriptionDao;
+import com.pet.clinic.model.*;
+import com.pet.clinic.model.dao.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
@@ -25,17 +19,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
-import javafx.util.Callback;
 
 public class ViewMedicRecordController {
     @FXML
@@ -48,10 +39,7 @@ public class ViewMedicRecordController {
     private HBox boxHeader;
 
     @FXML
-    private TextField tfKeyword;
-
-    @FXML
-    private JFXButton btnSearch;
+    private TextField tfPetId;
 
     @FXML
     private Label lblSearchStatus;
@@ -87,6 +75,9 @@ public class ViewMedicRecordController {
     private Label lblPetColor;
 
     @FXML
+    private Label lblPetWeight;
+
+    @FXML
     private Label lblOwnerId;
 
     @FXML
@@ -100,21 +91,33 @@ public class ViewMedicRecordController {
 
     @FXML
     private Label lblOwnerPhone;
-/*
-    @FXML
-    private Label lblOwnerAddress;*/
 
     @FXML
     private JFXTreeTableView<MedicRecords> tvMedicRecord;
 
     @FXML
-    private JFXTreeTableView<Prescriptions> tvPrescription;
+    private JFXListView<ActionsData> listActionData;
 
     @FXML
-    private JFXListView<String> listActions;
+    private JFXListView<Prescription> listPrescription;
 
     @FXML
     private Text txtAddress;
+
+    @FXML
+    private TextArea taAnamnesis;
+
+    @FXML
+    private TextArea taDiagnosis;
+
+    @FXML
+    private Label lblVeterinarianId;
+
+    @FXML
+    private Label lblVeterinarianName;
+
+    private final ObservableList<Prescription> selectedMedicine = FXCollections.observableArrayList();
+    private final ObservableList<ActionsData> selectedActions = FXCollections.observableArrayList();
 
     @FXML
     void initialize() {
@@ -133,114 +136,63 @@ public class ViewMedicRecordController {
             if (recordDateCol.validateValue(param)) return param.getValue().getValue().recordDate;
             else return recordDateCol.getComputedValue(param);
         });
-        JFXTreeTableColumn<MedicRecords, String> anamnesisCol = new JFXTreeTableColumn<>("Anamnesis");
-        anamnesisCol.setPrefWidth(150);
-        anamnesisCol.setCellValueFactory((TreeTableColumn.CellDataFeatures<MedicRecords, String> param) -> {
-            if (anamnesisCol.validateValue(param)) return param.getValue().getValue().anamnesis;
-            else return anamnesisCol.getComputedValue(param);
-        });
-        JFXTreeTableColumn<MedicRecords, String> diagnosisCol = new JFXTreeTableColumn<>("Diagnosis");
-        diagnosisCol.setPrefWidth(150);
-        diagnosisCol.setCellValueFactory((TreeTableColumn.CellDataFeatures<MedicRecords, String> param) -> {
-            if (diagnosisCol.validateValue(param)) return param.getValue().getValue().diagnosis;
-            else return diagnosisCol.getComputedValue(param);
-        });
-        JFXTreeTableColumn<MedicRecords, String> veterinarianCol = new JFXTreeTableColumn<>("Dokter");
-        veterinarianCol.setPrefWidth(140);
-        veterinarianCol.setCellValueFactory((TreeTableColumn.CellDataFeatures<MedicRecords, String> param) -> {
-            if (veterinarianCol.validateValue(param)) return param.getValue().getValue().veterinarian;
-            else return veterinarianCol.getComputedValue(param);
-        });
-/*        JFXTreeTableColumn<MedicRecords, TreeItem> actionsCol = new JFXTreeTableColumn<>("Tindakan");
-        veterinarianCol.setPrefWidth(120);
-        veterinarianCol.setCellValueFactory((TreeTableColumn.CellDataFeatures<MedicRecords, TreeItem> param) ->{
-            if(actionsCol.validateValue(param)) return param.getValue().getValue().actions.getValue();
+        JFXTreeTableColumn<MedicRecords, String> petWeightCol = new JFXTreeTableColumn<>("Berat Badan");
+        petWeightCol.setPrefWidth(120);
+        petWeightCol.setCellValueFactory((TreeTableColumn.CellDataFeatures<MedicRecords,String> param) ->{
+            if(petWeightCol.validateValue(param)) return param.getValue().getValue().petWeight;
             else return null;
-        });*/
+        });
 
         //Add Column To Table
-        tvMedicRecord.getColumns().setAll(medicRecordId, recordDateCol, anamnesisCol, diagnosisCol, veterinarianCol);
-
+        tvMedicRecord.getColumns().setAll(medicRecordId, recordDateCol,petWeightCol);
         // set medic record table rules
         tvMedicRecord.setShowRoot(false);
         tvMedicRecord.setEditable(false);
 
         //button Rules
-        tfKeyword.textProperty().addListener(new ChangeListener<String>() {
+        tfPetId.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
                 if (!newValue.matches("\\d*")) {
-                    tfKeyword.setText(newValue.replaceAll("[^\\d]", ""));
+                    tfPetId.setText(newValue.replaceAll("[^\\d]", ""));
                 }
             }
         });
 
         // find medicRecord
-        btnSearch.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        tfPetId.setOnKeyTyped(new EventHandler<KeyEvent>() {
             @Override
-            public void handle(MouseEvent mouseEvent) {
+            public void handle(KeyEvent keyEvent) {
                 findPet();
             }
         });
-        tfKeyword.setOnAction(event -> {
-            findPet();
-        });
-        tfKeyword.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        tfPetId.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 clearAllData();
             }
         });
-
-
         // prescription table
-        // prepare columns
-        JFXTreeTableColumn<Prescriptions, String> medicineNameCol = new JFXTreeTableColumn<>("Nama Obat");
-        medicineNameCol.setPrefWidth(120);
-        medicineNameCol.setCellValueFactory((TreeTableColumn.CellDataFeatures<Prescriptions, String> param) ->{
-            if(medicineNameCol.validateValue(param)) return param.getValue().getValue().medicineName;
-            else return medicineNameCol.getComputedValue(param);
-        });
-        JFXTreeTableColumn<Prescriptions, String> descriptionCol = new JFXTreeTableColumn<>("Keterangan");
-        descriptionCol.setPrefWidth(200);
-        descriptionCol.setCellValueFactory((TreeTableColumn.CellDataFeatures<Prescriptions, String> param) ->{
-            if(descriptionCol.validateValue(param)) return param.getValue().getValue().description;
-            else return descriptionCol.getComputedValue(param);
-        });
-
-        // add columns to prescription table
-        tvPrescription.getColumns().addAll(medicineNameCol,descriptionCol);
-
-        //set prescription table rules
-        tvPrescription.setShowRoot(false);
-        tvPrescription.setEditable(false);
 
         // clicking on table to get prescription
         tvMedicRecord.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(tvMedicRecord.getSelectionModel().getSelectedItem() != null){
-                    MedicRecords medicRecord = tvMedicRecord.getSelectionModel().getSelectedItem().getValue();
-                    int medicRecordId = Integer.valueOf(medicRecord.medicRecordId.getValue().toString());
-                    loadPrescriptionTable(medicRecordId);
-                    setListActions(medicRecordId);
+                    MedicRecords medicRecords = tvMedicRecord.getSelectionModel().getSelectedItem().getValue();
+                    loadOtherMedicRecordData(medicRecords);
+                    int medicRecordId = Integer.parseInt(medicRecords.medicRecordId.getValue());
                 }
             }
         });
 
         // END OF INITIALIZE
     }
-/*
-    private boolean setMedicRecord(int petId){
-        boolean status = false;
-        setPet(petId)
-        return status;
-    }*/
 
     private void findPet(){
         int petId = 0;
-        if (!tfKeyword.getText().equalsIgnoreCase("")) {
-            petId = Integer.valueOf(tfKeyword.getText());
+        if (!tfPetId.getText().equalsIgnoreCase("")) {
+            petId = Integer.valueOf(tfPetId.getText());
             int ownerId = setPet(petId);
             if (ownerId != 0) {
                 boolean isOwner = setOwner(ownerId);
@@ -313,38 +265,47 @@ public class ViewMedicRecordController {
             while (itr.hasNext()) {
                 MedicRecord medicRecord = itr.next();
                 medicRecordsList.add(new MedicRecords(String.valueOf(medicRecord.getMedicRecordId()),
-                        medicRecord.getRecordDate().toString(), medicRecord.getAnamnesis(),
-                        medicRecord.getDiagnosis(),
-                        medicRecord.getVeterinarian()));
+                        medicRecord.getRecordDate().toString(),String.valueOf(medicRecord.getVeterinarianId()),
+                        medicRecord.getVeterinarianName(),String.valueOf(medicRecord.getPetWeight()),
+                        medicRecord.getAnamnesis(),medicRecord.getDiagnosis()));
             }
+
+             /*    private  MedicRecords(String medicRecordId,String recordDate,String veterinarianId,String veterinarianName
+                    , String petWeight, String anamnesis,String diagnosis) {*/
         }
         TreeItem<MedicRecords> root = new RecursiveTreeItem<MedicRecords>(medicRecordsList,
                 RecursiveTreeObject::getChildren);
         tvMedicRecord.setRoot(root);
     }
 
-    private void loadPrescriptionTable(int medicRecordId){
-        ArrayList<Prescription> prescriptionsFromDb = PrescriptionDao.getPrescription(medicRecordId);
-        ObservableList<Prescriptions> prescriptionsList = FXCollections.observableArrayList();
-        if(!prescriptionsFromDb.isEmpty()){
-            Iterator<Prescription> itr = prescriptionsFromDb.iterator();
-            while (itr.hasNext()){
-                Prescription prescription = itr.next();
-                prescriptionsList.add(new Prescriptions(prescription.getMedicineName(),prescription.getDescription()));
-            }
-        }
-        TreeItem<Prescriptions> root = new RecursiveTreeItem<Prescriptions>(prescriptionsList,
-                RecursiveTreeObject::getChildren);
-        tvPrescription.setRoot(root);
+    private void loadOtherMedicRecordData(MedicRecords medicRecords){
+        taAnamnesis.setText(medicRecords.anamnesis.getValue());
+        taDiagnosis.setText(medicRecords.diagnosis.getValue());
+        lblVeterinarianId.setText(medicRecords.veterinarianId.getValue());
+        lblVeterinarianName.setText(medicRecords.veterinarianName.getValue());
+        lblPetWeight.setText(medicRecords.petWeight.getValue());
+        setActionsDataList(Integer.parseInt(medicRecords.medicRecordId.getValue()));
+        setPrescriptionList(Integer.parseInt(medicRecords.medicRecordId.getValue()));
     }
 
-    private  void setListActions(int medicRecordId){
-        ArrayList<String> actions = MedicRecordDao.getActionsName(medicRecordId);
-        Iterator<String> itr = actions.iterator();
-        listActions.getItems().clear();
-        while (itr.hasNext()){
-            listActions.getItems().add(itr.next());
+    private void setPrescriptionList(int medicRecordId){
+        selectedMedicine.clear();
+        ArrayList<Prescription> prescriptionsFromDb = PrescriptionDao.getPrescription(medicRecordId);
+        Iterator<Prescription> itr = prescriptionsFromDb.iterator();
+        while(itr.hasNext()){
+            selectedMedicine.add(itr.next());
         }
+        listPrescription.setItems(selectedMedicine);
+    }
+
+    private void setActionsDataList(int medicRecordId){
+        selectedActions.clear();
+        ArrayList<ActionsData> actionsDataFromDb = ActionsDataDao.getActionsData(medicRecordId);
+        Iterator<ActionsData> itr = actionsDataFromDb.iterator();
+        while(itr.hasNext()){
+            selectedActions.add(itr.next());
+        }
+        listActionData.setItems(selectedActions);
     }
 
     private void clearAllData(){
@@ -369,39 +330,35 @@ public class ViewMedicRecordController {
 
         //clear medic record
         tvMedicRecord.setRoot(null);
-        tvPrescription.setRoot(null);
-        listActions.getItems().clear();
+        selectedMedicine.clear();
+        selectedActions.clear();
     }
     //END OF MAIN CLASS
-}
 
-class MedicRecords extends RecursiveTreeObject<MedicRecords> {
-    StringProperty petId;
-    StringProperty medicRecordId;
-    StringProperty recordDate;
-    StringProperty veterinarian;
-    StringProperty anamnesis;
-    StringProperty diagnosis;
+    // Additional classes
 
-    public MedicRecords(String medicRecordId,String recordDate, String anamnesis,
-                        String diagnosis, String veterinarian) {
-        this.medicRecordId = new SimpleStringProperty(medicRecordId);
-        this.recordDate = new SimpleStringProperty(recordDate);
-        this.anamnesis = new SimpleStringProperty(anamnesis);
-        this.diagnosis = new SimpleStringProperty(diagnosis);
-        this.veterinarian = new SimpleStringProperty(veterinarian);
+
+   public static class MedicRecords extends RecursiveTreeObject<MedicRecords> {
+        StringProperty medicRecordId;
+        StringProperty recordDate;
+        StringProperty veterinarianId;
+        StringProperty veterinarianName;
+        StringProperty anamnesis;
+        StringProperty diagnosis;
+        StringProperty petWeight;
+
+
+     public MedicRecords(String medicRecordId,String recordDate,String veterinarianId,String veterinarianName
+             , String petWeight, String anamnesis,String diagnosis) {
+            this.medicRecordId = new SimpleStringProperty(medicRecordId);
+            this.recordDate = new SimpleStringProperty(recordDate);
+            this.petWeight = new SimpleStringProperty(petWeight);
+            this.veterinarianId = new SimpleStringProperty(veterinarianId);
+            this.veterinarianName = new SimpleStringProperty(veterinarianName);
+            this.anamnesis = new SimpleStringProperty(anamnesis);
+            this.diagnosis = new SimpleStringProperty(diagnosis);
+        }
     }
+
 }
 
-class Prescriptions extends  RecursiveTreeObject<Prescriptions>{
-/*    StringProperty medicRecordId;
-    StringProperty medicineId;*/
-//    StringProperty veterinarianId;
-    StringProperty medicineName;
-    StringProperty description;
-
-    public Prescriptions(String medicineName, String description) {
-        this.medicineName = new SimpleStringProperty(medicineName);
-        this.description = new SimpleStringProperty(description);
-    }
-}

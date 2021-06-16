@@ -9,7 +9,7 @@ import java.util.Iterator;
 
 public class MedicineDao {
 
-    public static int saveMedicine(Medicine medicine){
+    public static int insertMedicine(Medicine medicine){
         int id =0;
         String query = "insert into medicine(name,fill,stock,unit,buyPrice,sellPrice,expired) values(?,?,?,?,?,?,?)";
         Connection con = DbConnect.getConnection();
@@ -28,6 +28,29 @@ public class MedicineDao {
         }
         return id;
     }
+    
+    public static Medicine getMedicine(int medicineId){
+        Medicine medicine = new Medicine();
+        String query ="select * from medicine where id="+medicineId;
+        try {
+            ResultSet res = DbConnect.getConnection().createStatement().executeQuery(query);
+            if(res.next()){
+                medicine.setId(res.getInt("medicineId"));
+                medicine.setName(res.getString("name"));
+                medicine.setStock(res.getInt("stock"));
+                medicine.setUnit(res.getString("unit"));
+                medicine.setIn(res.getInt("inStock"));
+                medicine.setOut(res.getInt("outStock"));
+                medicine.setBuyPrice(res.getInt("buyPrice"));
+                medicine.setSellPrice(res.getInt("sellPricce"));
+                medicine.setFill(res.getString("fill"));
+                medicine.setExpired(res.getDate("expired").toLocalDate());
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return medicine;
+    }
 
     public static ArrayList<Medicine> getAllMedicine(int limit){
         ArrayList<Medicine> medicineList = new ArrayList();
@@ -42,8 +65,8 @@ public class MedicineDao {
                 medicine.setFill(res.getString("fill"));
                 medicine.setUnit(res.getString("unit"));
                 medicine.setStock(res.getInt("stock"));
-                medicine.setIn(res.getInt("in"));
-                medicine.setOut(res.getInt("out"));
+                medicine.setIn(res.getInt("inStock"));
+                medicine.setOut(res.getInt("outStock"));
                 medicine.setExpired(res.getDate("expired").toLocalDate());
                 medicine.setBuyPrice(res.getDouble("buyPrice"));
                 medicine.setSellPrice(res.getDouble("sellPrice"));
@@ -79,8 +102,8 @@ public class MedicineDao {
                 medicine.setFill(res.getString("fill"));
                 medicine.setUnit(res.getString("unit"));
                 medicine.setStock(res.getInt("stock"));
-                medicine.setIn(res.getInt("in"));
-                medicine.setOut(res.getInt("out"));
+                medicine.setIn(res.getInt("inStock"));
+                medicine.setOut(res.getInt("outStock"));
                 medicine.setExpired(res.getDate("expired").toLocalDate());
                 medicine.setBuyPrice(res.getDouble("buyPrice"));
                 medicine.setSellPrice(res.getDouble("sellPrice"));

@@ -57,6 +57,10 @@ public class LeftMenuController {
     private JFXButton btnMedicRecord;
 
     @FXML
+    private JFXButton btnPayment;
+
+
+    @FXML
     private JFXButton btnVeterinarian;
 
     @FXML
@@ -92,6 +96,13 @@ public class LeftMenuController {
         btnMedicRecord.setOnAction(e ->{
             try {
                 App.setRoot("medicRecord/medicRecord");
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+        btnPayment.setOnAction(e->{
+            try {
+                App.setRoot("payment/payment");
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
@@ -134,6 +145,7 @@ public class LeftMenuController {
        btnVeterinarian.setOpacity(0);
        btnMedicine.setOpacity(0);
        btnGuestBook.setOpacity(0);
+       btnPayment.setOpacity(0);
     }
     public void setActive(String btnActive){
         switch (btnActive){
@@ -145,6 +157,9 @@ public class LeftMenuController {
                 break;
             case "medicRecord":
                 btnMedicRecord.setOpacity(0.5);
+                break;
+            case "payment":
+                btnPayment.setOpacity(0.5);
                 break;
             case "veterinarian":
                 btnVeterinarian.setOpacity(0.5);

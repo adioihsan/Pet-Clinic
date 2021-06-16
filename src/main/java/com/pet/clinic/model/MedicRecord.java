@@ -5,11 +5,13 @@ import java.time.LocalDate;
 public class MedicRecord {
     int medicRecordId;
     int petId;
+    int veterinarianId;
+    double petWeight;
     String anamnesis;
     String diagnosis;
     LocalDate recordDate;
-    String veterinarian;
-    String[] actions;
+    String veterinarianName;
+    String status;
 
     public int getMedicRecordId() {
         return medicRecordId;
@@ -51,19 +53,35 @@ public class MedicRecord {
         this.recordDate = recordDate;
     }
 
-    public String getVeterinarian() {
-        return veterinarian;
+    public int getVeterinarianId() {
+        return veterinarianId;
     }
 
-    public void setVeterinarian(String veterinarian) {
-        this.veterinarian = veterinarian;
+    public void setVeterinarianId(int veterinarianId) {
+        this.veterinarianId = veterinarianId;
     }
 
-    public String[] getActions() {
-        return actions;
+    public String getVeterinarianName() {
+        return veterinarianName;
     }
 
-    public void setActions(String[] actions) {
-        this.actions = actions;
+    public void setVeterinarianName(String veterinarianName) {
+        this.veterinarianName = veterinarianName;
+    }
+
+    public double getPetWeight() {
+        return petWeight;
+    }
+
+    public void setPetWeight(double petWeight) {
+        this.petWeight = petWeight;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

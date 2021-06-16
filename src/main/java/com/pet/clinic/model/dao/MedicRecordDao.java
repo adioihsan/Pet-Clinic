@@ -3,21 +3,60 @@ package com.pet.clinic.model.dao;
 import com.pet.clinic.database.DbConnect;
 import com.pet.clinic.model.MedicRecord;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
 
 public class MedicRecordDao {
 
+    public static int saveMedicRecord(MedicRecord medicRecord){
+        int id=0;
+        String query = "insert into medicRecord(petId,anamnesis,diagnosis,recordDate,veterinarianId,petWeight,status) values(?,?,?,?,?,?)";
+        Connection con = DbConnect.getConnection();
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,medicRecord.getPetId());
+            ps.setString(2,medicRecord.getAnamnesis());
+            ps.setString(3,medicRecord.getDiagnosis());
+            ps.setDate(4, Date.valueOf(medicRecord.getRecordDate()));
+            ps.setInt(5,medicRecord.getVeterinarianId());
+            ps.setDouble(6,medicRecord.getPetWeight());
+            ps.setString(7,"Belum Ada Tagihan");
+            if(ps.executeUpdate()>0){
+                ResultSet res = con.createStatement().executeQuery("select LAST_INSERT_ID()");
+                res.next();
+                id = res.getInt(1);
+            };
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return id;
+    }
+
+    public static boolean updateMedicRecord(MedicRecord medicRecord){
+        String query = "update medicRecord set anamnesis=?,diagnosis=?,recordDate=?,veterinarianId=?,petWeight=?" +
+                " where medicRecordId=?";
+        Connection con = DbConnect.getConnection();
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+
+            ps.setString(1,medicRecord.getAnamnesis());
+            ps.setString(2,medicRecord.getDiagnosis());
+            ps.setDate(3, Date.valueOf(medicRecord.getRecordDate()));
+            ps.setInt(4,medicRecord.getVeterinarianId());
+            ps.setDouble(5,medicRecord.getPetWeight());
+            ps.setInt(6,medicRecord.getMedicRecordId());
+            return ps.executeUpdate() > 0 ;
+         } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+
     public static ArrayList<MedicRecord> getMedicRecord(int petId){
         ArrayList<MedicRecord> medicRecords =  new ArrayList<>();
-        String query = "select medicRecordId,recordDate,anamnesis,diagnosis,concat(veterinarian.firstName,\" \",veterinarian." +
-                "lastName,\"(\",veterinarianId,\")\") as veterinarian " +
-                "from medicRecord join veterinarian using(veterinarianId) where petId =?";
+        String query = "select medicRecordId,recordDate,anamnesis,diagnosis,veterinarianId," +
+                "concat(veterinarian.firstname,\" \",veterinarian.lastName) as veterinarianName,petWeight,status " +
+                "from medicRecord join veterinarian using(veterinarianId) where petId=?";
         Connection con = DbConnect.getConnection();
         try {
             PreparedStatement ps = con.prepareStatement(query);
@@ -29,7 +68,10 @@ public class MedicRecordDao {
                 medicRecord.setRecordDate(res.getDate("recordDate").toLocalDate());
                 medicRecord.setAnamnesis(res.getString("anamnesis"));
                 medicRecord.setDiagnosis(res.getString("diagnosis"));
-                medicRecord.setVeterinarian(res.getString("veterinarian"));
+                medicRecord.setVeterinarianId(res.getInt("veterinarianId"));
+                medicRecord.setVeterinarianName(res.getString("veterinarianName"));
+                medicRecord.setPetWeight(res.getDouble("petWeight"));
+                medicRecord.setStatus(res.getString("status"));
                 // get actions
                 medicRecords.add(medicRecord);
             }

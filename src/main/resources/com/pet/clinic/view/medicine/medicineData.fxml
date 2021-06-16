@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import tornadofx.control.DateTimePicker?>
 
-<VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.medicine.MedicineDataController">
+<VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.medicine.MedicineDataController">
    <children>
       <HBox fx:id="boxHeader" alignment="BOTTOM_LEFT" maxHeight="-Infinity" prefHeight="100.0" prefWidth="1000.0" stylesheets="@../../css/boxHeaderMedicine.css">
          <children>

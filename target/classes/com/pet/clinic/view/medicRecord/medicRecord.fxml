@@ -97,6 +97,11 @@
                   </Pane>
                   <Pane layoutX="90.0" layoutY="210.0" prefHeight="36.0" prefWidth="199.0">
                      <children>
+                        <JFXButton fx:id="btnEditMedicRecord" layoutX="-14.0" layoutY="-9.0" opacity="0.0" prefHeight="43.0" prefWidth="173.0" style="-fx-background-color: #000; -fx-background-radius: 15px;">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
                         <ImageView fitHeight="24.0" fitWidth="24.0" mouseTransparent="true" opacity="0.85" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../images/btnEditMedicRecord.png" />

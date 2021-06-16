@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import tornadofx.control.DateTimePicker?>
 
-<VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.veterinarian.RegistrationController">
+<VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.veterinarian.RegistrationController">
    <children>
       <HBox fx:id="boxHeader" alignment="BOTTOM_LEFT" maxHeight="-Infinity" prefHeight="100.0" prefWidth="1000.0" stylesheets="@../../css/boxHeaderRegistration.css">
          <children>
@@ -37,8 +37,8 @@
             <ColumnConstraints halignment="RIGHT" hgrow="NEVER" maxWidth="685.0" minWidth="10.0" prefWidth="268.0" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints maxHeight="658.0" minHeight="10.0" prefHeight="597.0" valignment="CENTER" vgrow="ALWAYS" />
-            <RowConstraints maxHeight="640.0" minHeight="0.0" prefHeight="61.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="658.0" minHeight="10.0" prefHeight="561.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="640.0" minHeight="0.0" prefHeight="97.0" valignment="CENTER" vgrow="ALWAYS" />
          </rowConstraints>
          <children>
             <VBox fx:id="boxOwnerForm" prefHeight="640.0" prefWidth="385.0" style="-fx-background-color: #f7f7f7;" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
@@ -125,7 +125,7 @@
                   <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                </padding>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="626.0" prefWidth="262.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
+            <VBox alignment="CENTER" prefHeight="579.0" prefWidth="268.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
                <children>
                   <GridPane fx:id="paneOwnerPhoto" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="218.0" prefWidth="229.0" style="-fx-border-color: gray; -fx-border-style: dotted;">
                      <columnConstraints>

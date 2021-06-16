@@ -234,7 +234,7 @@ public class MedicineDataController {
         medicine.setExpired(dpExpired.getValue());
         medicine.setSellPrice(Double.parseDouble(tfSellPrice.getText()));
         medicine.setBuyPrice(Double.parseDouble(tfSellPrice.getText()));
-        return MedicineDao.saveMedicine(medicine);
+        return MedicineDao.insertMedicine(medicine);
     }
 
 

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.medicRecord.PrescriptionPopupController">
+   <children>
+      <HBox>
+         <children>
+            <VBox>
+               <children>
+                  <Label text="Nama Obat" textFill="#00000099">
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="148.0" text="Satuan" textFill="#00000099">
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="10.0" text="Stock" textFill="#00000099">
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbl1" text="Jumlah Obat" textFill="#00000099">
+                     <VBox.margin>
+                        <Insets bottom="25.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbl2" text="Keterangan" textFill="#00000099">
+                     <VBox.margin>
+                        <Insets bottom="25.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets right="30.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox>
+               <children>
+                  <Label fx:id="lblName" text="Nama Obat" textFill="#000000b2">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="lblUnit" text="Satuan" textFill="#000000b2">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="lblStock" text="Stock" textFill="#000000b2">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="tfAmount" prefHeight="24.0" prefWidth="262.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField fx:id="tfDescription" prefHeight="24.0" prefWidth="262.0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </TextField>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <JFXButton fx:id="btnOK" stylesheets="@../../css/buttonSave.css" text="OK">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="15.0" />
+         </VBox.margin>
+      </JFXButton>
+   </children>
+   <padding>
+      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+   </padding>
+</VBox>

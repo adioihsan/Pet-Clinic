@@ -195,4 +195,21 @@ public class PetDao {
         return  petkinds;
     }
 
+    public static double getPetWeight(int petId){
+        double petWeight = 0;
+        String query = "select petWeight from medicRecord where petId=? order by medicRecordId desc limit 1;";
+        try {
+            PreparedStatement ps = DbConnect.getConnection().prepareStatement(query);
+            ps.setInt(1,petId);
+            ResultSet res = ps.executeQuery();
+            if(res.next()){
+                petWeight = res.getDouble("petWeight");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return petWeight;
+    }
+
+
 }

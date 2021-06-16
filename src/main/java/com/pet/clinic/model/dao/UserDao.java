@@ -12,7 +12,7 @@ public class UserDao {
     private static User user;
 
     public User getUser(int id){
-        String query = "SELECT * from users where id=?";
+        String query = "SELECT * from users where userId=?";
         return user;
     }
     public static User getUser(String username){
@@ -25,7 +25,7 @@ public class UserDao {
         ResultSet res = ps.executeQuery();
         if(res.next()) {
             user = new User();
-            user.setId(res.getInt("id"));
+            user.setId(res.getInt("userId"));
             user.setType(res.getString("type"));
             user.setFirstName(res.getString("firstname"));
             user.setLastName(res.getString("lastname"));
@@ -51,10 +51,10 @@ public class UserDao {
 
     };
 
-    public  static void main(String[] args) throws SQLException, ClassNotFoundException {
+/*    public  static void main(String[] args) throws SQLException, ClassNotFoundException {
         User myuser = getUser("adsan");
         System.out.println(myuser.getUsername());
-    }
+    }*/
 
 
 }

@@ -48,7 +48,7 @@
                <children>
                   <Label prefHeight="28.0" prefWidth="152.0" text="Data Pemilik">
                      <font>
-                        <Font size="21.0" />
+                        <Font size="18.0" />
                      </font>
                      <VBox.margin>
                         <Insets bottom="15.0" />
@@ -188,7 +188,7 @@
                <children>
                   <Label prefHeight="30.0" prefWidth="204.0" text="Data Peliharaan">
                      <font>
-                        <Font size="21.0" />
+                        <Font size="18.0" />
                      </font>
                      <VBox.margin>
                         <Insets bottom="15.0" />
