@@ -182,7 +182,9 @@ public class VeterinarianDataController {
         //photo chooser
         FileChooser choosePhoto = new FileChooser();
         choosePhoto.setTitle("Piih Foto");
-        choosePhoto.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PNG","*.png"));
+        choosePhoto.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PNG","*.png") ,
+                new FileChooser.ExtensionFilter("JPG","*.JPG"),
+                new FileChooser.ExtensionFilter("JPEG","*.JPEG"));
 
         btnPhoto.setOpacity(0);
         imgPhoto.setOpacity(0);

@@ -2,15 +2,18 @@ package com.pet.clinic.controller.login;
 
 
 import com.jfoenix.controls.JFXButton;
-import com.pet.clinic.controller.login.ValidateUser;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.pet.clinic.App;
+import com.pet.clinic.database.Config;
+import com.pet.clinic.database.ConfigController;
+import com.pet.clinic.database.DbConnect;
+import com.pet.clinic.helper.Popup;
 import com.pet.clinic.model.User;
 import com.pet.clinic.model.dao.UserDao;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -39,16 +42,30 @@ public class LoginController {
     private Label lblMessage;
 
     @FXML
+    private JFXButton btnSetting;
+
+    @FXML
     void initialize() {
+        Config.loadFirstConnection();
        btnLogin.setOnMouseClicked(new EventHandler<MouseEvent>() {
            @Override
            public void handle(MouseEvent mouseEvent) {
-               loginUser();
+               if(DbConnect.isConnected()) {
+                   loginUser();
+               }
            }
        });
        tfPassword.setOnAction(event -> {
-           loginUser();
+           if(DbConnect.isConnected())
+               loginUser();
        });
+       btnSetting.setOnMouseClicked(new EventHandler<MouseEvent>() {
+           @Override
+           public void handle(MouseEvent event) {
+               loadSetting();
+           }
+       });
+
     }
     private void loginUser(){
         String username = tfUsername.getText().trim();
@@ -57,8 +74,6 @@ public class LoginController {
             if(ValidateUser.isValid(username,password)){
                 try {
                     User user = UserDao.getUser(username);
-                    App.userId = user.getId();
-                    App.userName = user.getUsername();
                     App.setRoot("dashboard/dashboard");
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -72,6 +87,9 @@ public class LoginController {
             lblMessage.setText("Username or Password cant be empty !");
         }
     }
-
+    private void loadSetting(){
+        Popup popup = new Popup();
+        ConfigController dbc = (ConfigController) popup.load(btnSetting.getScene().getWindow(),"login/databaseConfig");
+    }
 }
 

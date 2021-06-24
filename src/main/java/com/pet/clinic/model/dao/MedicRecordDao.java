@@ -10,7 +10,7 @@ public class MedicRecordDao {
 
     public static int saveMedicRecord(MedicRecord medicRecord){
         int id=0;
-        String query = "insert into medicRecord(petId,anamnesis,diagnosis,recordDate,veterinarianId,petWeight,status) values(?,?,?,?,?,?)";
+        String query = "insert into medicRecord(petId,anamnesis,diagnosis,recordDate,veterinarianId,petWeight,status) values(?,?,?,?,?,?,?)";
         Connection con = DbConnect.getConnection();
         try {
             PreparedStatement ps = con.prepareStatement(query);
@@ -20,7 +20,7 @@ public class MedicRecordDao {
             ps.setDate(4, Date.valueOf(medicRecord.getRecordDate()));
             ps.setInt(5,medicRecord.getVeterinarianId());
             ps.setDouble(6,medicRecord.getPetWeight());
-            ps.setString(7,"Belum Ada Tagihan");
+            ps.setString(7,"Belum Ada Pembayaran");
             if(ps.executeUpdate()>0){
                 ResultSet res = con.createStatement().executeQuery("select LAST_INSERT_ID()");
                 res.next();

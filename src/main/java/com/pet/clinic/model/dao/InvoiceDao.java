@@ -11,6 +11,7 @@ public class InvoiceDao {
         int id =0;
         String query= "insert into invoice(petId,medicRecordId,totalAmount,createDate,userId)" +
                 " values(?,?,?,?,?)";
+        String query2 = "update medicRecord set status=? where medicRecordId=?";
         Connection con = DbConnect.getConnection();
         try {
             PreparedStatement ps = con.prepareStatement(query);
@@ -23,6 +24,11 @@ public class InvoiceDao {
                 ResultSet res = con.createStatement().executeQuery("select LAST_INSERT_ID()");
                 res.next();
                 id = res.getInt(1);
+                //
+                PreparedStatement ps2 = DbConnect.getConnection().prepareStatement(query2);
+                ps2.setString(1,"Sudah Bayar");
+                ps2.setInt(2, invoice.getMedicRecordId());
+                ps2.executeUpdate();
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

@@ -22,11 +22,37 @@ public class MedicineDao {
             ps.setDouble(5,medicine.getBuyPrice());
             ps.setDouble(6,medicine.getSellPrice());
             ps.setDate(7, Date.valueOf(medicine.getExpired()));
-            id = ps.executeUpdate();
+            if(ps.executeUpdate()>0){
+                ResultSet res = con.createStatement().executeQuery("select LAST_INSERT_ID()");
+                res.next();
+                id = res.getInt(1);
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return id;
+    }
+
+    public static boolean updateMedicine(Medicine medicine){
+        String query = "update medicine set name=?,fill=?,stock=?,unit=?,buyPrice=?,sellPrice=?,expired=?,inStock=? where " +
+                "medicineId=?";
+        Connection con = DbConnect.getConnection();
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,medicine.getName());
+            ps.setString(2,medicine.getFill());
+            ps.setInt(3,medicine.getStock());
+            ps.setString(4,medicine.getUnit());
+            ps.setDouble(5,medicine.getBuyPrice());
+            ps.setDouble(6,medicine.getSellPrice());
+            ps.setDate(7, Date.valueOf(medicine.getExpired()));
+            ps.setInt(8,medicine.getIn());
+            ps.setInt(9,medicine.getId());
+            return ps.executeUpdate() > 0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
     }
     
     public static Medicine getMedicine(int medicineId){

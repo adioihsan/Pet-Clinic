@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_RIGHT" pickOnBounds="false" prefHeight="800.0" prefWidth="270.0" style="-fx-background-color: #005b4f;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.navigation.LeftMenuController">
+<VBox fx:id="pnMainPane" alignment="TOP_RIGHT" pickOnBounds="false" prefHeight="800.0" prefWidth="270.0" style="-fx-background-color: #005b4f;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.navigation.LeftMenuController">
    <children>
       <AnchorPane pickOnBounds="false" prefHeight="106.0" prefWidth="314.0">
          <children>
@@ -28,7 +28,7 @@
             <JFXHamburger fx:id="hmbMenu" layoutX="205.0" layoutY="29.0" prefHeight="56.0" prefWidth="63.0" stylesheets="@../../css/hamburger-menu.css" />
          </children>
       </AnchorPane>
-      <Pane layoutX="10.0" layoutY="127.0" pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
+      <Pane fx:id="pnDashboard" layoutX="10.0" layoutY="127.0" pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
          <children>
             <JFXButton fx:id="btnDashboard" layoutX="8.0" opacity="0.5" prefHeight="51.0" prefWidth="194.0" style="-fx-background-color: #000; -fx-background-radius: 10px;" text=" " />
             <ImageView fitHeight="30.0" fitWidth="28.0" layoutX="20.0" layoutY="11.0" mouseTransparent="true" opacity="0.8" pickOnBounds="true" preserveRatio="true">
@@ -46,7 +46,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
-      <Pane pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
+      <Pane fx:id="pnPatient" pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
          <children>
             <JFXButton fx:id="btnPatient" layoutX="9.0" opacity="0.0" prefHeight="51.0" prefWidth="194.0" style="-fx-background-color: #000; -fx-background-radius: 10px;" text=" " />
             <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="11.0" layoutY="11.0" mouseTransparent="true" opacity="0.8" pickOnBounds="true" preserveRatio="true">
@@ -64,7 +64,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
-      <Pane layoutX="10.0" layoutY="177.0" pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
+      <Pane fx:id="pnMedicRecord" layoutX="10.0" layoutY="177.0" pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
          <children>
             <JFXButton fx:id="btnMedicRecord" layoutX="8.0" opacity="0.0" prefHeight="51.0" prefWidth="194.0" style="-fx-background-color: #000; -fx-background-radius: 10px;" text=" " />
             <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="19.0" layoutY="11.0" mouseTransparent="true" opacity="0.8" pickOnBounds="true" preserveRatio="true">
@@ -82,7 +82,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
-      <Pane layoutX="10.0" layoutY="227.0" pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
+      <Pane fx:id="pnPayment" layoutX="10.0" layoutY="227.0" pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
          <children>
             <JFXButton fx:id="btnPayment" layoutX="8.0" layoutY="-1.0" opacity="0.0" prefHeight="51.0" prefWidth="194.0" style="-fx-background-color: #000; -fx-background-radius: 10px;" text=" " />
             <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="19.0" layoutY="11.0" mouseTransparent="true" opacity="0.8" pickOnBounds="true" preserveRatio="true">
@@ -100,14 +100,15 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
-      <Pane layoutX="10.0" layoutY="277.0" pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
+      <Pane fx:id="pnReport" layoutX="10.0" layoutY="277.0" pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
          <children>
-            <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="17.0" layoutY="11.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
+            <JFXButton fx:id="btnReport" layoutX="7.0" layoutY="2.0" opacity="0.0" prefHeight="48.0" prefWidth="194.0" style="-fx-background-color: #000; -fx-background-radius: 10px;" text=" " />
+            <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="17.0" layoutY="11.0" mouseTransparent="true" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/Laporan.png" />
                </image>
             </ImageView>
-            <Label layoutX="59.0" layoutY="16.0" opacity="0.8" prefHeight="20.0" prefWidth="157.0" text="Laporan" textFill="WHITE">
+            <Label layoutX="60.0" layoutY="16.0" mouseTransparent="true" opacity="0.8" prefHeight="20.0" prefWidth="157.0" text="Laporan" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
@@ -117,7 +118,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
-      <Pane layoutX="10.0" layoutY="327.0" pickOnBounds="false" prefHeight="50.0" prefWidth="226.0">
+      <Pane fx:id="pnGuestBook" layoutX="10.0" layoutY="327.0" pickOnBounds="false" prefHeight="50.0" prefWidth="226.0">
          <children>
             <JFXButton fx:id="btnGuestBook" layoutX="9.0" layoutY="-1.0" opacity="0.0" prefHeight="51.0" prefWidth="194.0" style="-fx-background-color: #000; -fx-background-radius: 10px;" text=" " />
             <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="16.0" layoutY="11.0" mouseTransparent="true" opacity="0.8" pickOnBounds="true" preserveRatio="true">
@@ -135,7 +136,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
-      <Pane layoutX="10.0" layoutY="377.0" pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
+      <Pane fx:id="pnMedicine" layoutX="10.0" layoutY="377.0" pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
          <children>
             <JFXButton fx:id="btnMedicine" layoutX="4.0" layoutY="2.0" opacity="0.0" prefHeight="51.0" prefWidth="194.0" style="-fx-background-color: #000; -fx-background-radius: 10px;" text=" " />
             <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="16.0" layoutY="11.0" mouseTransparent="true" opacity="0.8" pickOnBounds="true" preserveRatio="true">
@@ -153,7 +154,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
-      <Pane layoutX="10.0" layoutY="427.0" pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
+      <Pane fx:id="pnVet" layoutX="10.0" layoutY="427.0" pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
          <children>
             <JFXButton fx:id="btnVeterinarian" layoutX="8.0" opacity="0.0" prefHeight="51.0" prefWidth="194.0" style="-fx-background-color: #000; -fx-background-radius: 10px;" text=" " />
             <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="16.0" layoutY="11.0" mouseTransparent="true" opacity="0.8" pickOnBounds="true" preserveRatio="true">
@@ -171,14 +172,15 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
-      <Pane layoutX="10.0" layoutY="477.0" pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
+      <Pane fx:id="pnAdmin" layoutX="10.0" layoutY="477.0" pickOnBounds="false" prefHeight="50.0" prefWidth="225.0">
          <children>
-            <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="16.0" layoutY="11.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
+            <JFXButton fx:id="btnAdmin" layoutX="5.0" opacity="0.0" prefHeight="51.0" prefWidth="194.0" style="-fx-background-color: #000; -fx-background-radius: 10px;" text=" " />
+            <ImageView fitHeight="28.0" fitWidth="50.0" layoutX="16.0" layoutY="11.0" mouseTransparent="true" opacity="0.8" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/Admin.png" />
                </image>
             </ImageView>
-            <Label layoutX="59.0" layoutY="16.0" opacity="0.8" prefHeight="20.0" prefWidth="157.0" text="Admin" textFill="WHITE">
+            <Label layoutX="59.0" layoutY="16.0" mouseTransparent="true" opacity="0.8" prefHeight="20.0" prefWidth="157.0" text="Admin" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
@@ -192,12 +194,16 @@
          <children>
             <Pane prefHeight="244.0" prefWidth="270.0">
                <children>
-                  <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="85.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/logout.png" />
-                     </image>
-                  </ImageView>
-                  <Circle fx:id="imgUserCircle" fill="DODGERBLUE" layoutX="127.0" layoutY="75.0" radius="47.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" />
+                  <JFXButton fx:id="btnLogout" layoutX="89.0" layoutY="189.0" text="Keluar" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/logout.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <Circle fx:id="imgUserCircle" fill="DODGERBLUE" layoutX="135.0" layoutY="75.0" radius="47.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" />
                   <ImageView fx:id="imgUser" fitHeight="84.0" fitWidth="100.0" layoutX="81.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
                         <Image url="@../../images/admin2.png" />
@@ -206,14 +212,13 @@
                         <Rectangle2D />
                      </viewport>
                   </ImageView>
-                  <Label fx:id="lblUsername" layoutX="102.0" layoutY="128.0" text="Admin" textFill="WHITE">
+                  <Label fx:id="lblUsername" alignment="CENTER" layoutX="-3.0" layoutY="128.0" prefHeight="20.0" prefWidth="270.0" text="Admin" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblUserId" layoutX="82.0" layoutY="167.0" prefHeight="16.0" prefWidth="86.0" style="-fx-alignment: center;" text="1000" textFill="WHITE" />
-                  <Label layoutX="118.0" layoutY="199.0" text="Logout" textFill="WHITE" />
-                  <Label fx:id="lblUserType" layoutX="85.0" layoutY="148.0" text="Super Admin" textFill="WHITE" />
+                  <Label fx:id="lblUserId" alignment="CENTER" layoutX="-6.0" layoutY="167.0" prefHeight="16.0" prefWidth="282.0" style="-fx-alignment: center;" text="1000" textFill="WHITE" />
+                  <Label fx:id="lblUserType" alignment="CENTER" layoutY="148.0" prefHeight="16.0" prefWidth="270.0" text="Super Admin" textFill="WHITE" />
                </children>
             </Pane>
          </children>

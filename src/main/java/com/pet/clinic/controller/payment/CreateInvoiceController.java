@@ -2,18 +2,21 @@ package com.pet.clinic.controller.payment;
 
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
+import java.sql.Connection;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatterBuilder;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 
 import com.pet.clinic.App;
+import com.pet.clinic.controller.login.ValidateUser;
+import com.pet.clinic.database.DbConnect;
 import com.pet.clinic.helper.ConfirmationDialog;
 import com.pet.clinic.helper.Message;
+import com.pet.clinic.helper.Popup;
+import com.pet.clinic.helper.Report;
 import com.pet.clinic.model.*;
 import com.pet.clinic.model.dao.*;
 import javafx.beans.value.ChangeListener;
@@ -22,10 +25,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.print.PrinterJob;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
@@ -169,6 +174,9 @@ public class CreateInvoiceController {
     @FXML
     private JFXButton btnSave;
 
+    @FXML
+    private GridPane gridPayment;
+
     private final ObservableList<MedicRecord> serviceInfoList = FXCollections.observableArrayList();
     private final ObservableList<ActionsData> serviceList = FXCollections.observableArrayList();
     private final ObservableList<Prescription> medicineList = FXCollections.observableArrayList();
@@ -228,7 +236,7 @@ public class CreateInvoiceController {
                 if(tblServiceInfo.getSelectionModel().getSelectedItem() != null){
                     MedicRecord medicRecord = tblServiceInfo.getSelectionModel().getSelectedItem();
                     medicRecordId = medicRecord.getMedicRecordId();
-                    if(medicRecord.getStatus().equalsIgnoreCase("Sudah di Bayar")) {
+                    if(medicRecord.getStatus().equalsIgnoreCase("Sudah Bayar")) {
                         if(ConfirmationDialog.showMakeSure("Pembayaran Sudah Pernah di Lakukan , " +
                                 "Lakukan Pemabayaran Ulang ?")) {
                             loadTblService(medicRecordId);
@@ -307,12 +315,16 @@ public class CreateInvoiceController {
         btnSave.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if(saveInvoicesData(medicRecordId)){
-                    Message.showSuccess();
+                Invoice invoice = saveInvoicesData(medicRecordId);
+                if(invoice != null){
+                    if(ConfirmationDialog.showMakeSure("Pembayaran Berhasi di Simapan, Cetak Struk ?")){
+                        printInVoice(invoice);
+                    }
                 }
                 else Message.showFailed();
             }
         });
+
 
 
 // END OF INITIALIZE
@@ -423,7 +435,7 @@ public class CreateInvoiceController {
             InvoicesData invoicesData = new InvoicesData();
             Prescription prescription = itrPrescription.next();
 
-            invoicesData.setInvoiceId(medicRecordId);
+            invoicesData.setInvoiceId(invoiceId);
             invoicesData.setItem(prescription.getMedicineName());
             invoicesData.setItemType("Obat");
             invoicesData.setDescription(prescription.getDescription());
@@ -434,33 +446,32 @@ public class CreateInvoiceController {
         }
         while(itrInvoicesData.hasNext()){
             InvoicesData invoicesData = itrInvoicesData.next();
-            invoicesData.setInvoiceId(medicRecordId);
+            invoicesData.setInvoiceId(invoiceId);
             allInvoicesList.add(invoicesData);
         }
     }
-    private boolean saveInvoicesData(int medicRecordId){
-        boolean status = true;
+    private Invoice saveInvoicesData(int medicRecordId){
         //create an invoice
         Invoice invoice = new Invoice();
         invoice.setMedicRecordId(medicRecordId);
         invoice.setPetId(petId);
         invoice.setCreateDate(LocalDate.now());
         invoice.setTotalAmount(totalPrice);
-        invoice.setUserId(App.userId);
+        invoice.setUserId(ValidateUser.getLoggedUser().getId());
         int invoiceId = InvoiceDao.insertInvoice(invoice);
+        invoice.setInvoiceId(invoiceId);
         if( invoiceId != 0) {
             //insert invoice data
             moveToInvoices(medicRecordId,invoiceId);
             Iterator<InvoicesData> itr = allInvoicesList.listIterator();
             while (itr.hasNext()) {
-                if (!InvoicesDataDao.insertInvoicesData(itr.next()))
-                    status = false;
-            }
+                InvoicesDataDao.insertInvoicesData(itr.next());
+            };
+            return  invoice;
         }
         else{
-            return  false;
+            return null;
         }
-        return status;
     }
     //clear things up
     private void clearTblOther(){
@@ -475,5 +486,23 @@ public class CreateInvoiceController {
     }private void clearTblPrescription(){
         medicineList.clear();
     }
+
+    private void  printInVoice(Invoice invoice){
+        Pet pet = PetDao.getPet(invoice.getPetId());
+        PetOwner petOwner = PetOwnerDao.getOwner(pet.getOwnerId());
+        User user = ValidateUser.getLoggedUser();
+        Popup popup = new Popup();
+        InvoicePrintViewController ipc = (InvoicePrintViewController) popup.load(btnSave.getScene().getWindow(),"payment/invoicePrintView");
+        ipc.getTblServices().setItems(serviceList);
+        ipc.getTblPrescription().setItems(medicineList);
+        ipc.getTblOtherItem().setItems(otherList);
+        ipc.getLblTotalAmount().setText(String.valueOf(totalPrice));
+        ipc.getLblPet().setText("("+pet.getId()+") "+pet.getName());
+        ipc.getLblPetOwner().setText("("+petOwner.getId()+") "+petOwner.getFirstName()+" "+petOwner.getLastName());
+        ipc.getLblInvoiceId().setText(String.valueOf(invoice.getInvoiceId()));
+        ipc.getLblUser().setText("("+user.getId()+") "+user.getFirstName()+" "+user.getLastName());
+        ipc.getLblPayDate().setText(invoice.getCreateDate().toString());
+    }
+
 }
 

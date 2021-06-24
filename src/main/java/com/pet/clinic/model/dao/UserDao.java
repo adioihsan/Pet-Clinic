@@ -32,6 +32,10 @@ public class UserDao {
             user.setUsername(res.getString("username"));
             user.setHash(res.getString("hash"));
             user.setSalt(res.getString("salt"));
+            user.setPhoneNumber(res.getDouble("phoneNumber"));
+            user.setPhoto(res.getString("photo"));
+            user.setPrivilege(res.getString("privilege"));
+            user.setType(res.getString("type"));
         }
         }
         catch (Exception e)
@@ -41,16 +45,53 @@ public class UserDao {
         return user;
     }
 
-    public static ResultSet test(String username) throws SQLException, ClassNotFoundException {
-      String query = "select * from users where username=?";
-      Connection connection = DbConnect.getConnection();
-      PreparedStatement ps = connection.prepareStatement(query);
-      ps.setString(1,username);
-      ResultSet res = ps.executeQuery();
-      return res;
+    public static boolean checkIsRegistered(String username){
+        try {
+            ResultSet res =  DbConnect.getConnection().createStatement().executeQuery("select * from " +
+                    "users where username="+"'"+username+"'");
+            return res.next();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
 
-    };
+    public static int insertUser(User user){
+        String query = "insert into users(firstname,lastname,username,hash,salt,privilege,phoneNumber,type) values(?,?,?,?,?,?,?,?)";
+        Connection con = DbConnect.getConnection();
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,user.getFirstName());
+            ps.setString(2,user.getLastName());
+            ps.setString(3,user.getUsername());
+            ps.setString(4,user.getHash());
+            ps.setString(5,user.getSalt());
+            ps.setString(6,user.getPrivilege());
+            ps.setDouble(7,user.getPhoneNumber());
+            ps.setString(8,user.getType());
+            if(ps.executeUpdate() > 0){
+                ResultSet res = con.createStatement().executeQuery("select last_insert_id()");
+                if(res.next()) return res.getInt(1);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return 0;
+    }
+    public static boolean updateUserPhoto(int userId ,String fileName){
+       String query = "update users set photo=? where userId=?";
+       Connection con = DbConnect.getConnection();
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,fileName);
+            ps.setInt(2,userId);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
+        return false;
+    }
 /*    public  static void main(String[] args) throws SQLException, ClassNotFoundException {
         User myuser = getUser("adsan");
         System.out.println(myuser.getUsername());

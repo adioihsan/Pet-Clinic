@@ -6,6 +6,7 @@ module com.pet.clinic {
     requires java.sql;
     requires org.mariadb.jdbc;
     requires commons.lang;
+    requires jasperreports;
 
     opens com.pet.clinic to javafx.fxml;
 //    opens com.pet.clinic.controller to javafx.fxml;
@@ -33,5 +34,11 @@ module com.pet.clinic {
     opens com.pet.clinic.helper to javafx.fxml;
     exports com.pet.clinic.controller.payment;
     opens com.pet.clinic.controller.payment to javafx.fxml;
+    exports com.pet.clinic.controller.report;
+    opens com.pet.clinic.controller.report to javafx.fxml;
+    exports com.pet.clinic.controller.admin;
+    opens com.pet.clinic.controller.admin to javafx.fxml;
+    exports com.pet.clinic.database;
+    opens com.pet.clinic.database to javafx.fxml;
 
 }

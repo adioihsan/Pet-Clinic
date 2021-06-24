@@ -59,7 +59,7 @@
                         <Insets bottom="15.0" />
                      </VBox.margin>
                   </HBox>
-                  <GridPane fx:id="panePetPhoto" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="218.0" prefWidth="229.0" style="-fx-border-color: gray; -fx-border-style: dotted;">
+                  <GridPane fx:id="panePetPhoto" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="320.0" prefWidth="243.0" style="-fx-border-color: gray; -fx-border-style: dotted;">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
@@ -73,14 +73,14 @@
                               <Image url="@../../images/pickpicture.png" />
                            </image>
                         </ImageView>
-                        <JFXButton fx:id="btnPhoto" alignment="BOTTOM_CENTER" prefHeight="216.0" prefWidth="251.0" text="Ganti Foto">
+                        <JFXButton fx:id="btnPhoto" alignment="BOTTOM_CENTER" prefHeight="193.0" prefWidth="254.0" text="Ganti Foto">
                            <font>
                               <Font size="16.0" />
                            </font>
                         </JFXButton>
                      </children>
                      <VBox.margin>
-                        <Insets bottom="15.0" />
+                        <Insets bottom="10.0" />
                      </VBox.margin>
                   </GridPane>
                   <TextField fx:id="tfFirstName" alignment="BOTTOM_LEFT" promptText="Nama Depan" stylesheets="@../../css/textField.css">
@@ -88,7 +88,7 @@
                         <Font size="16.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="15.0" />
+                        <Insets bottom="10.0" />
                      </VBox.margin>
                   </TextField>
                   <TextField fx:id="tfLastName" alignment="BOTTOM_LEFT" promptText="Nama Belakang" stylesheets="@../../css/textField.css">
@@ -96,7 +96,7 @@
                         <Font size="16.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="15.0" />
+                        <Insets bottom="10.0" />
                      </VBox.margin>
                   </TextField>
                   <TextField fx:id="tfTitle" alignment="BOTTOM_LEFT" promptText="Gelar" stylesheets="@../../css/textField.css">
@@ -104,7 +104,7 @@
                         <Font size="16.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="15.0" />
+                        <Insets bottom="10.0" />
                      </VBox.margin>
                   </TextField>
                   <TextField fx:id="tfSpecialist" alignment="BOTTOM_LEFT" promptText="Spesialis" stylesheets="@../../css/textField.css">
@@ -112,12 +112,12 @@
                         <Font size="16.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="15.0" />
+                        <Insets bottom="10.0" />
                      </VBox.margin>
                   </TextField>
                   <DateTimePicker fx:id="dpDob" editable="false" format="yyyy-MM-dd" maxWidth="1.7976931348623157E308" promptText="Tanggal Lahir" style="-fx-font-size: 16px; -fx-background-color: #005b4f;" stylesheets="@../../css/textField.css">
                      <VBox.margin>
-                        <Insets bottom="15.0" />
+                        <Insets bottom="10.0" />
                      </VBox.margin>
                   </DateTimePicker>
                   <JFXComboBox fx:id="comGender" focusColor="#005b4f" maxWidth="1.7976931348623157E308" promptText="Jenis Kelamin" style="-fx-font-size: 16px;" unFocusColor="#4ebaaa">
@@ -125,15 +125,15 @@
                         <Insets left="10.0" />
                      </padding>
                      <VBox.margin>
-                        <Insets bottom="15.0" />
+                        <Insets bottom="10.0" />
                      </VBox.margin>
                   </JFXComboBox>
-                  <TextField fx:id="tfPhone" alignment="BOTTOM_LEFT" promptText="Nomer Telpon" stylesheets="@../../css/textField.css">
+                  <TextField fx:id="tfPhone" alignment="BOTTOM_LEFT" prefHeight="108.0" prefWidth="250.0" promptText="Nomer Telpon" stylesheets="@../../css/textField.css">
                      <font>
                         <Font size="16.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="15.0" />
+                        <Insets bottom="10.0" />
                      </VBox.margin>
                   </TextField>
                   <Label prefHeight="16.0" prefWidth="57.0" text="Alamat" textFill="#666363bb">
@@ -141,15 +141,15 @@
                         <Font size="16.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="5.0" />
+                        <Insets />
                      </VBox.margin>
                   </Label>
-                  <JFXTextArea fx:id="taAddress" focusColor="#005b4f" prefHeight="27.0" prefWidth="250.0" text=" " unFocusColor="#4ebaaa">
+                  <JFXTextArea fx:id="taAddress" focusColor="#005b4f" prefHeight="0.0" prefWidth="250.0" text=" " unFocusColor="#4ebaaa" VBox.vgrow="NEVER">
                      <font>
                         <Font size="16.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="15.0" />
+                        <Insets />
                      </VBox.margin>
                   </JFXTextArea>
                   <HBox fx:id="boxBtns" alignment="BOTTOM_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="145.0" prefWidth="250.0" VBox.vgrow="ALWAYS">

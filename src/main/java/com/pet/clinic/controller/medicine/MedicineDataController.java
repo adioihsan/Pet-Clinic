@@ -4,12 +4,14 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import com.pet.clinic.helper.Message;
 import com.pet.clinic.model.Medicine;
 import com.pet.clinic.model.dao.MedicineDao;
 import javafx.beans.property.SimpleStringProperty;
@@ -20,10 +22,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -75,6 +74,17 @@ public class MedicineDataController {
 
     @FXML
     private JFXButton btnAdd;
+
+    @FXML
+    private Label lblMedicineId;
+
+    @FXML
+    private CheckBox chkIsNewMedicine;
+
+    @FXML
+    private CheckBox chkIsAddStock;
+
+    private int medicineOldStock=0;
 
     @FXML
     void initialize() {
@@ -139,6 +149,16 @@ public class MedicineDataController {
             else return sellPriceCol.getComputedValue(param);
         });
 
+        tvMedicine.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(chkIsAddStock.isSelected() && tvMedicine.getSelectionModel().getSelectedItem() != null){
+                    Medicines medicines = tvMedicine.getSelectionModel().getSelectedItem().getValue();
+                    setMedicineField(medicines);
+                    setEnableForm(true);
+                }
+            }
+        });
 
         // add Columns to table
         tvMedicine.getColumns().setAll(idCol,nameCol,fillCol,unitCol,stcokCol,expiredCol,buyPriceCol,sellPriceCol);
@@ -176,21 +196,59 @@ public class MedicineDataController {
             }
         });
 
+        //check button
+        chkIsAddStock.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(chkIsAddStock.isSelected()){
+                    chkIsNewMedicine.setSelected(false);
+                    setEnableForm(false);
+                }
+                else{
+                    chkIsNewMedicine.setSelected(true);
+                    clearForm();
+                }
+            }
+        });
+        chkIsNewMedicine.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(chkIsNewMedicine.isSelected()){
+                    chkIsAddStock.setSelected(false);
+                    setEnableForm(true);
+                    clearForm();
+                }
+                else{
+                    chkIsAddStock.setSelected(true);
+                }
+            }
+        });
         //add or save button
         btnAdd.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                int id = saveMedicine();
-                if(id != 0){
-                    Alert sucsess = new Alert(Alert.AlertType.INFORMATION,"Obat Berhasil di Tambahkan");
-                    sucsess.show();
+                if(chkIsNewMedicine.isSelected()) {
+                    int id = 0;
+                    if (isNotNull()) id = saveMedicine();
+                    if (id != 0) {
+                        Message.showSuccess("Obat Berhasil di Tambahkan");
+                        loadTableData(Integer.parseInt(tfLimit.getText()));
+                    } else {
+                        Message.showFailed("Terjadi Kesalahan" +
+                                "Obat Gagal di Tambahkan");
+                    }
                 }
-                else
-                {
-                    Alert sucsess = new Alert(Alert.AlertType.ERROR,"Terjadi Kesalahan" +
-                            "Obat Berhasil Gagal di Tambahkan");
+                else if(chkIsAddStock.isSelected()){
+                    if(updateMedicine()){
+                        Message.showSuccess("Data Obat Berhasil di Update");
+                        loadTableData(Integer.parseInt(tfLimit.getText()));
+                        }
+                    else {
+                        Message.showFailed("Terjadi Kesalahan" +
+                                "Data Obat Gagal di Update");
+                        }
+                    }
                 }
-            }
         });
     }
 
@@ -224,6 +282,18 @@ public class MedicineDataController {
         TreeItem<Medicines> rootFind = new RecursiveTreeItem<Medicines>(medicinesList, RecursiveTreeObject::getChildren);
         tvMedicine.setRoot(rootFind);
     }
+    private void setMedicineField(Medicines medicine){
+        lblMedicineId.setText(medicine.id.getValue());
+        tfName.setText(medicine.name.getValue());
+        tfBuyPrice.setText(medicine.buyPrice.getValue());
+        tfStock.setPromptText(medicine.stock.getValue() +" + ");
+        tfUnit.setText(medicine.unit.getValue());
+        tfSellPrice.setText(medicine.sellPrice.getValue());
+        tfFill.setText(medicine.fill.getValue());
+        dpExpired.setValue(LocalDate.parse(medicine.expired.getValue()));
+        medicineOldStock = Integer.parseInt(medicine.stock.getValue());
+
+    }
 
     private int saveMedicine(){
         Medicine medicine = new Medicine();
@@ -235,6 +305,49 @@ public class MedicineDataController {
         medicine.setSellPrice(Double.parseDouble(tfSellPrice.getText()));
         medicine.setBuyPrice(Double.parseDouble(tfSellPrice.getText()));
         return MedicineDao.insertMedicine(medicine);
+    }
+    private boolean updateMedicine(){
+        Medicine medicine = new Medicine();
+        medicine.setId(Integer.parseInt(lblMedicineId.getText()));
+        medicine.setName(tfName.getText());
+        medicine.setFill(tfFill.getText());
+        medicine.setUnit(tfUnit.getText());
+        medicine.setStock(Integer.parseInt(tfStock.getText())+medicineOldStock);
+        medicine.setIn(Integer.parseInt(tfStock.getText()));
+        medicine.setExpired(dpExpired.getValue());
+        medicine.setSellPrice(Double.parseDouble(tfSellPrice.getText()));
+        medicine.setBuyPrice(Double.parseDouble(tfSellPrice.getText()));
+        return  MedicineDao.updateMedicine(medicine);
+    }
+    private boolean isNotNull(){
+        boolean status = true;
+        if(tfName.getText().equalsIgnoreCase("")) status=false;
+        if(tfUnit.getText().equalsIgnoreCase("")) status=false;
+        if(tfFill.getText().equalsIgnoreCase("")) status=false;
+        if(tfStock.getText().equalsIgnoreCase("")) status=false;
+        if(tfBuyPrice.getText().equalsIgnoreCase("")) status=false;
+        if(tfSellPrice.getText().equalsIgnoreCase("")) status=false;
+        if(dpExpired.getValue() == null) status=false;
+        return status;
+    }
+    private void clearForm(){
+        tfFill.clear();
+        tfUnit.clear();
+        tfSellPrice.clear();
+        tfBuyPrice.clear();
+        tfName.clear();
+        tfStock.clear();
+        dpExpired.setValue(null);
+        lblMedicineId.setText("ID");
+    }
+    private void setEnableForm(Boolean isTrue){
+        tfFill.setEditable(isTrue);
+        tfUnit.setEditable(isTrue);
+        tfSellPrice.setEditable(isTrue);
+        tfBuyPrice.setEditable(isTrue);
+        tfName.setEditable(isTrue);
+        tfStock.setEditable(isTrue);
+        dpExpired.setEditable(isTrue);
     }
 
 
@@ -260,6 +373,5 @@ class Medicines extends RecursiveTreeObject<com.pet.clinic.controller.medicine.M
         this.buyPrice = new SimpleStringProperty(buyPrice);
         this.sellPrice = new SimpleStringProperty(sellPrice);
     }
-
 
 }

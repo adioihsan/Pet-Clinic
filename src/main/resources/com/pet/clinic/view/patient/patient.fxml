@@ -17,7 +17,7 @@
 
 <BorderPane fx:id="mainPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.patient.PatientController">
    <left>
-      <StackPane pickOnBounds="false" prefHeight="800.0" prefWidth="260.0" BorderPane.alignment="CENTER">
+      <StackPane pickOnBounds="false" prefHeight="768.0" prefWidth="260.0" BorderPane.alignment="CENTER">
          <children>
             <JFXDrawer fx:id="menuDrawer" defaultDrawerSize="175.0" layoutX="650.0" layoutY="410.0" maxWidth="0.0" resizeContent="true" style="-fx-background-color: rgba(0,0,0,0.5);" viewOrder="-1.0" StackPane.alignment="TOP_LEFT" />
             <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="800.0" prefWidth="280.0" style="-fx-background-color: #00695c;" StackPane.alignment="TOP_LEFT">

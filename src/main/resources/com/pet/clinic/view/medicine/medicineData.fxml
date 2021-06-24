@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
@@ -54,28 +55,47 @@
             <Insets left="30.0" right="30.0" top="10.0" />
          </VBox.margin>
       </HBox>
-      <JFXTreeTableView fx:id="tvMedicine" prefHeight="506.0" prefWidth="940.0" VBox.vgrow="ALWAYS">
+      <JFXTreeTableView fx:id="tvMedicine" prefHeight="453.0" prefWidth="940.0" VBox.vgrow="ALWAYS">
          <VBox.margin>
             <Insets left="30.0" right="30.0" />
          </VBox.margin>
       </JFXTreeTableView>
-      <HBox alignment="CENTER" maxHeight="-Infinity" prefHeight="42.0" prefWidth="940.0" VBox.vgrow="NEVER">
-         <children>
-            <TextField fx:id="tfName" promptText="Nama obat" stylesheets="@../../css/textField.css" HBox.hgrow="ALWAYS" />
-            <TextField fx:id="tfFill" layoutX="280.0" layoutY="37.0" promptText="Isi" stylesheets="@../../css/textField.css" />
-            <TextField fx:id="tfUnit" layoutX="425.0" layoutY="37.0" promptText="Satuan" stylesheets="@../../css/textField.css" HBox.hgrow="ALWAYS" />
-            <TextField fx:id="tfStock" layoutX="510.0" layoutY="37.0" promptText="Stok" stylesheets="@../../css/textField.css" HBox.hgrow="ALWAYS" />
-            <DateTimePicker fx:id="dpExpired" editable="false" format="yyyy-MM-dd" maxWidth="1.7976931348623157E308" promptText="Kadaluarsa" style="-fx-font-size: 13px; -fx-background-color: #005b4f;" stylesheets="@../../css/textField.css" />
-            <TextField fx:id="tfBuyPrice" layoutX="596.0" layoutY="37.0" promptText="harga beli" stylesheets="@../../css/textField.css" HBox.hgrow="ALWAYS" />
-            <TextField fx:id="tfSellPrice" layoutX="484.0" layoutY="37.0" promptText=" harga jual" stylesheets="@../../css/textField.css" />
-            <JFXButton fx:id="btnAdd" prefHeight="27.0" prefWidth="108.0" stylesheets="@../../css/buttonSave.css" text="Tambah" HBox.hgrow="ALWAYS" />
-         </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
+      <VBox VBox.vgrow="NEVER">
          <VBox.margin>
             <Insets bottom="30.0" left="30.0" right="30.0" top="10.0" />
          </VBox.margin>
-      </HBox>
+         <children>
+            <HBox>
+               <children>
+                  <CheckBox fx:id="chkIsNewMedicine" mnemonicParsing="false" text="Obat Baru" />
+                  <CheckBox fx:id="chkIsAddStock" mnemonicParsing="false" text="Tambah Stock">
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </CheckBox>
+                  <Label fx:id="lblMedicineId" prefHeight="16.0" prefWidth="87.0" text="ID">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_LEFT" maxHeight="-Infinity" prefHeight="38.0" prefWidth="940.0">
+               <children>
+                  <TextField fx:id="tfName" promptText="Nama obat" stylesheets="@../../css/textField.css" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="tfFill" layoutX="280.0" layoutY="37.0" promptText="Isi" stylesheets="@../../css/textField.css" />
+                  <TextField fx:id="tfUnit" layoutX="425.0" layoutY="37.0" promptText="Satuan" stylesheets="@../../css/textField.css" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="tfStock" layoutX="510.0" layoutY="37.0" promptText="Stok" stylesheets="@../../css/textField.css" HBox.hgrow="ALWAYS" />
+                  <DateTimePicker fx:id="dpExpired" editable="false" format="yyyy-MM-dd" maxWidth="1.7976931348623157E308" promptText="Kadaluarsa" style="-fx-font-size: 13px; -fx-background-color: #005b4f;" stylesheets="@../../css/textField.css" />
+                  <TextField fx:id="tfBuyPrice" layoutX="596.0" layoutY="37.0" promptText="harga beli" stylesheets="@../../css/textField.css" HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="tfSellPrice" layoutX="484.0" layoutY="37.0" promptText=" harga jual" stylesheets="@../../css/textField.css" />
+                  <JFXButton fx:id="btnAdd" prefHeight="27.0" prefWidth="108.0" stylesheets="@../../css/buttonSave.css" text="Tambah" HBox.hgrow="ALWAYS" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </VBox>

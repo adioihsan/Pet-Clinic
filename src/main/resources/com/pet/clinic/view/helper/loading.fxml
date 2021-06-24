@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="156.0" prefWidth="235.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.helper.LoadingController">
+   <children>
+      <ProgressIndicator layoutX="102.0" layoutY="58.0" prefHeight="84.0" prefWidth="96.0" progress="0.0" />
+   </children>
+</AnchorPane>

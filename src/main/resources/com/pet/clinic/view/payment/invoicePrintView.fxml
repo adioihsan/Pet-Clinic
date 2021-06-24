@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="boxBill" prefHeight="767.0" prefWidth="398.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.payment.InvoicePrintViewController">
+   <children>
+      <GridPane prefHeight="702.0" prefWidth="398.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="179.0" minHeight="10.0" prefHeight="68.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="587.0" minHeight="10.0" prefHeight="554.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="140.0" minHeight="3.0" prefHeight="50.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <VBox GridPane.rowIndex="1">
+               <children>
+                  <Label text="Pelayanan">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="3.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TableView fx:id="tblServices" prefHeight="99.0" prefWidth="368.0" VBox.vgrow="ALWAYS">
+                     <columns>
+                        <TableColumn fx:id="colServiceName" prefWidth="209.0" text="Jenis Layanan" />
+                        <TableColumn fx:id="colServiceAmount" editable="false" prefWidth="158.0" text="Biaya" />
+                     </columns>
+                  </TableView>
+                  <Label layoutX="10.0" layoutY="145.0" text="Obat">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="15.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TableView fx:id="tblPrescription" prefHeight="140.0" prefWidth="368.0" VBox.vgrow="ALWAYS">
+                     <columns>
+                        <TableColumn fx:id="colMedicineName" prefWidth="107.0" text="Nama Obat" />
+                        <TableColumn fx:id="colMedicineQuantity" prefWidth="101.0" text="Kuantitas" />
+                        <TableColumn fx:id="colMedicinePriceTotal" prefWidth="159.0" text="Harga Total" />
+                     </columns>
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
+                  </TableView>
+                  <Label text="Lainnya">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <TableView fx:id="tblOtherItem" prefHeight="89.0" prefWidth="368.0" VBox.vgrow="ALWAYS">
+                     <columns>
+                        <TableColumn fx:id="colOtherItem" prefWidth="104.0" text="Nama Item" />
+                        <TableColumn fx:id="colOtherQuantity" prefWidth="115.0" text="Kuantitas" />
+                        <TableColumn fx:id="colOtherPriceTotal" prefWidth="148.0" text="Biaya Total" />
+                     </columns>
+                  </TableView>
+                  <HBox alignment="TOP_RIGHT" prefHeight="49.0" prefWidth="470.0">
+                     <children>
+                        <Label text="Total : Rp.">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets top="15.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="lblTotalAmount" alignment="CENTER_RIGHT" prefHeight="16.0" prefWidth="138.0" text="99999999">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets top="15.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox prefHeight="61.0" prefWidth="368.0">
+               <children>
+                  <AnchorPane prefHeight="60.0" prefWidth="204.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="6.0" prefHeight="17.0" prefWidth="54.0" text="ID Struk :" />
+                        <Label layoutX="14.0" layoutY="23.0" prefHeight="17.0" prefWidth="70.0" text="Pelanggan :" />
+                        <Label layoutX="14.0" layoutY="41.0" prefHeight="17.0" prefWidth="81.0" text="Peliharaan :" />
+                        <Label fx:id="lblInvoiceId" layoutX="69.0" layoutY="7.0" prefHeight="17.0" prefWidth="54.0" text="ID" />
+                        <Label fx:id="lblPetOwner" layoutX="84.0" layoutY="26.0" prefHeight="17.0" prefWidth="112.0" text="Pelanggan" />
+                        <Label fx:id="lblPet" layoutX="84.0" layoutY="43.0" prefHeight="17.0" prefWidth="81.0" text="Peliharaan" />
+                     </children>
+                  </AnchorPane>
+                  <ImageView fitHeight="56.0" fitWidth="174.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/LogoPetClinicBlack.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <AnchorPane prefHeight="50.0" prefWidth="368.0" GridPane.rowIndex="2">
+               <children>
+                  <Label layoutX="14.0" layoutY="11.0" prefHeight="17.0" prefWidth="81.0" text="Petugas :" />
+                  <Label layoutX="236.0" layoutY="10.0" prefHeight="17.0" prefWidth="128.0" text="Tanggal Pembayaran :" />
+                  <Label fx:id="lblUser" layoutX="14.0" layoutY="29.0" prefHeight="17.0" prefWidth="145.0" text="Petugas" />
+                  <Label fx:id="lblPayDate" layoutX="237.0" layoutY="28.0" prefHeight="17.0" prefWidth="128.0" text="Tanggal Pembayaran" />
+               </children>
+            </AnchorPane>
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+      </GridPane>
+      <Pane prefHeight="46.0" prefWidth="398.0">
+         <children>
+            <JFXButton fx:id="btnPrint" layoutX="298.0" layoutY="13.0" stylesheets="@../../css/buttonSaveSmall.css" text="Cetak Struk" />
+         </children>
+      </Pane>
+   </children>
+</VBox>

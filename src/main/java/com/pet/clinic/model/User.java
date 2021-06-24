@@ -8,6 +8,9 @@ public class User {
     private String username;
     private String hash;
     private String salt;
+    private String photo;
+    private double phoneNumber;
+    private String privilege;
 
     public String getUsername() {
         return username;
@@ -63,5 +66,29 @@ public class User {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public double getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(double phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getPrivilege() {
+        return privilege;
+    }
+
+    public void setPrivilege(String privilege) {
+        this.privilege = privilege;
     }
 }

@@ -4,6 +4,7 @@ import com.pet.clinic.database.DbConnect;
 import com.pet.clinic.model.Action;
 import javafx.beans.property.ReadOnlySetProperty;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,6 +28,20 @@ public class ActionDao {
             throwables.printStackTrace();
         }
         return actions;
+    }
+
+    public static boolean insertAction(String actionName,Double actionPrice){
+        String query = "insert into action(name,price) values(?,?)";
+        Connection con = DbConnect.getConnection();
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,actionName);
+            ps.setDouble(2,actionPrice);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
     }
 
     public static ArrayList<Action> findAction(String keyword , int limit){

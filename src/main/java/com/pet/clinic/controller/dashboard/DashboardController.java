@@ -28,6 +28,19 @@ public class DashboardController {
         leftMenuController.removeActive();
         leftMenuController.setActive("dashboard");
 
+        //main
+        setCenterPane("dashboardMain");
 
+    }
+
+    private void setCenterPane(String paneName){
+        URL fxmlLocation = App.class.getResource("view/dashboard/"+paneName+".fxml");
+        FXMLLoader loadPane = new FXMLLoader(fxmlLocation);
+        try {
+            VBox thePane = loadPane.load();
+            mainPane.setCenter(thePane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

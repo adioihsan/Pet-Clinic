@@ -28,11 +28,11 @@ public class ValidateUser {
 
     };
 
-    public static User getLoggeduser(){
+    public static User getLoggedUser(){
         return userDb;
     }
 
-    protected static byte[] getSalt() {
+    public static byte[] getSalt() {
         byte[] salt = null;
         //user secure random generator
         SecureRandom sr = null;
@@ -47,7 +47,7 @@ public class ValidateUser {
         };
         return salt;
     }
-    protected static String generatePassword(String password,byte[] salt){
+    public static String generatePassword(String password,byte[] salt){
         String generatedPassword = null;
         try {
             //create MessageDigest instance for md5

@@ -27,6 +27,15 @@
               </ImageView>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="437.0" prefWidth="593.0" style="-fx-background-color: #fff; -fx-background-radius: 15px;" VBox.vgrow="NEVER">
                <children>
+                  <JFXButton fx:id="btnSetting" layoutX="547.0" layoutY="6.0">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/settingGearGreen.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
                     <TextField fx:id="tfUsername" layoutX="82.0" layoutY="188.0" prefHeight="50.0" prefWidth="425.0" promptText="Username">
                         <padding>
                             <Insets left="48.0" />

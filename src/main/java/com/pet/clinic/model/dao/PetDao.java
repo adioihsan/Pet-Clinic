@@ -195,6 +195,19 @@ public class PetDao {
         return  petkinds;
     }
 
+    public static boolean insertPetKind(String name){
+        String query = "insert into petKind(name) values(?)";
+        Connection con = DbConnect.getConnection();
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,name);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+
     public static double getPetWeight(int petId){
         double petWeight = 0;
         String query = "select petWeight from medicRecord where petId=? order by medicRecordId desc limit 1;";

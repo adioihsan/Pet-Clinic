@@ -63,7 +63,7 @@
             <Label fx:id="lblSearchStatus" prefHeight="16.0" prefWidth="341.0" text="Label" textFill="RED" visible="false" />
          </children>
       </VBox>
-      <GridPane alignment="TOP_CENTER" prefHeight="576.0" prefWidth="940.0" VBox.vgrow="ALWAYS">
+      <GridPane fx:id="gridPayment" alignment="TOP_CENTER" prefHeight="576.0" prefWidth="940.0" VBox.vgrow="ALWAYS">
         <columnConstraints>
           <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />

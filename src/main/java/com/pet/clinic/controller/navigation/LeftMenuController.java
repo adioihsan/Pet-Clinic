@@ -8,35 +8,80 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.pet.clinic.App;
+import com.pet.clinic.helper.ConfirmationDialog;
 import com.pet.clinic.model.User;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import com.pet.clinic.controller.login.ValidateUser;
 
 public class LeftMenuController {
-
-    private User loggedUser = ValidateUser.getLoggeduser();
+    @FXML
+    private VBox pnMainPane;
 
     @FXML
-    private ResourceBundle resources;
+    public JFXHamburger hmbMenu;
 
     @FXML
-    private URL location;
+    private Pane pnDashboard;
 
     @FXML
     private JFXButton btnDashboard;
 
     @FXML
+    private Pane pnPatient;
+
+    @FXML
     private JFXButton btnPatient;
 
     @FXML
-    public JFXHamburger hmbMenu;
+    private Pane pnMedicRecord;
+
+    @FXML
+    private JFXButton btnMedicRecord;
+
+    @FXML
+    private Pane pnPayment;
+
+    @FXML
+    private JFXButton btnPayment;
+
+    @FXML
+    private Pane pnReport;
+
+    @FXML
+    private JFXButton btnReport;
+
+    @FXML
+    private Pane pnGuestBook;
+
+    @FXML
+    private JFXButton btnGuestBook;
+
+    @FXML
+    private Pane pnMedicine;
+
+    @FXML
+    private JFXButton btnMedicine;
+
+    @FXML
+    private Pane pnVet;
+
+    @FXML
+    private JFXButton btnVeterinarian;
+
+    @FXML
+    private Pane pnAdmin;
+
+    @FXML
+    private JFXButton btnAdmin;
 
     @FXML
     private Circle imgUserCircle;
@@ -45,29 +90,20 @@ public class LeftMenuController {
     private ImageView imgUser;
 
     @FXML
-    private Label lblUserType;
+    private Label lblUsername;
 
     @FXML
     private Label lblUserId;
 
     @FXML
-    private Label lblUsername;
+    private Label lblUserType;
 
     @FXML
-    private JFXButton btnMedicRecord;
-
-    @FXML
-    private JFXButton btnPayment;
+    private JFXButton btnLogout;
 
 
-    @FXML
-    private JFXButton btnVeterinarian;
 
-    @FXML
-    private JFXButton btnMedicine;
-
-    @FXML
-    private JFXButton btnGuestBook;
+    private User loggedUser = ValidateUser.getLoggedUser();
 
     @FXML
     void initialize() {
@@ -128,6 +164,35 @@ public class LeftMenuController {
                 ioException.printStackTrace();
             }
         });
+        btnReport.setOnAction(e->{
+            try {
+                App.setRoot("report/report");
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+        btnAdmin.setOnAction(e->{
+            try {
+                App.setRoot("admin/admin");
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+
+        btnLogout.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                boolean isLogOut = ConfirmationDialog.showMakeSure("Yakin Keluar Dari Aplikasi ?");
+                if(isLogOut) {
+                    try {
+                        App.setRoot("login/login");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
 
         // Logged User
        imgUserCircle.setFill(new ImagePattern(imgUser.getImage()));
@@ -135,7 +200,8 @@ public class LeftMenuController {
        lblUserId.setText(Integer.toString(loggedUser.getId()));
        lblUserType.setText(loggedUser.getType());
 
-       //Active Butoon
+       //set privilege
+        setPrivilege();
     }
 
     public void removeActive(){
@@ -146,6 +212,8 @@ public class LeftMenuController {
        btnMedicine.setOpacity(0);
        btnGuestBook.setOpacity(0);
        btnPayment.setOpacity(0);
+       btnReport.setOpacity(0);
+       btnAdmin.setOpacity(0);
     }
     public void setActive(String btnActive){
         switch (btnActive){
@@ -161,18 +229,33 @@ public class LeftMenuController {
             case "payment":
                 btnPayment.setOpacity(0.5);
                 break;
+            case "report":
+                btnReport.setOpacity(0.5);
+                break;
             case "veterinarian":
                 btnVeterinarian.setOpacity(0.5);
                 break;
             case "guestBook":
                 btnGuestBook.setOpacity(0.5);
                 break;
+            case "admin":
+                btnAdmin.setOpacity(0.5);
+                break;
             default:
                 System.out.println("Cant Find Button");
                 break;
         }
     }
-
-
+    public void setPrivilege(){
+        String privilege = loggedUser.getPrivilege();
+        if(privilege.charAt(0) == '0') pnMainPane.getChildren().remove(pnPatient);
+        if(privilege.charAt(1) == '0') pnMainPane.getChildren().remove(pnMedicRecord);
+        if(privilege.charAt(2) == '0') pnMainPane.getChildren().remove(pnPayment);
+        if(privilege.charAt(3) == '0') pnMainPane.getChildren().remove(pnReport);
+        if(privilege.charAt(4) == '0') pnMainPane.getChildren().remove(pnGuestBook);
+        if(privilege.charAt(5) == '0') pnMainPane.getChildren().remove(pnMedicine);
+        if(privilege.charAt(6) == '0') pnMainPane.getChildren().remove(pnVet);
+        if(privilege.charAt(7) == '0') pnMainPane.getChildren().remove(pnAdmin);
+    }
 
 }

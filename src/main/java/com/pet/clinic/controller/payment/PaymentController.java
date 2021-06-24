@@ -97,6 +97,7 @@ public class PaymentController {
         });
 
         //main menu
+        setCenterPane("createInvoice");
         btnCreateInvoice.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
