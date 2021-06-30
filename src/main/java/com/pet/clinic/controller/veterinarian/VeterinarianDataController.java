@@ -3,9 +3,15 @@ package com.pet.clinic.controller.veterinarian;
 import com.jfoenix.controls.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
@@ -13,6 +19,8 @@ import com.pet.clinic.model.Veterinarian;
 import com.pet.clinic.model.dao.VeterinarianDao;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -20,6 +28,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -95,6 +104,15 @@ public class VeterinarianDataController {
     private File photo;
 
     @FXML
+    private TextField tfLimit;
+
+    @FXML
+    private JFXButton btnAddLimit;
+
+    @FXML
+    private TextField tfFind;
+
+    @FXML
     void initialize() {
 
         //set gender
@@ -165,7 +183,7 @@ public class VeterinarianDataController {
         tableView.setEditable(false);
 
         //load table data
-        loadTableData();
+        loadTableData(Integer.parseInt(tfLimit.getText()));
 
         // Table on click
         tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -183,8 +201,7 @@ public class VeterinarianDataController {
         FileChooser choosePhoto = new FileChooser();
         choosePhoto.setTitle("Piih Foto");
         choosePhoto.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PNG","*.png") ,
-                new FileChooser.ExtensionFilter("JPG","*.JPG"),
-                new FileChooser.ExtensionFilter("JPEG","*.JPEG"));
+                new FileChooser.ExtensionFilter("JPG","*.jpg"),new FileChooser.ExtensionFilter("JPEG","*.jpeg"));
 
         btnPhoto.setOpacity(0);
         imgPhoto.setOpacity(0);
@@ -231,7 +248,7 @@ public class VeterinarianDataController {
                 if(status){
                     Alert success = new Alert(Alert.AlertType.INFORMATION,"Data Berhasil di Ubah");
                     success.show();
-                    loadTableData();
+                    loadTableData(Integer.parseInt(tfLimit.getText()));
                 }
                 else{
                     Alert failed = new Alert(Alert.AlertType.ERROR,"Terjadi Kesalahan. Data Gagal di ubah");
@@ -245,7 +262,7 @@ public class VeterinarianDataController {
             if(status){
                 Alert success = new Alert(Alert.AlertType.INFORMATION,"Data Berhasil di Hapus");
                 success.show();
-                loadTableData();
+                loadTableData(Integer.parseInt(tfLimit.getText()));
             }
             else{
                 Alert failed = new Alert(Alert.AlertType.ERROR,"Terjadi Kesalahan. Data Gagal di Hapus");
@@ -254,10 +271,57 @@ public class VeterinarianDataController {
         });
 
 
+        tfFind.setOnKeyTyped(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                int limit = Integer.parseInt(tfLimit.getText());
+                loadTableData(tfFind.getText() ,limit);
+                if(tfFind.getText().equalsIgnoreCase(""))
+                    loadTableData(limit);
+            }
+        });
+        // field rules
+        tfLimit.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    tfLimit.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+        tfLimit.setOnKeyTyped(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if(tfLimit.getText().equalsIgnoreCase(""))
+                    tfLimit.setText(String.valueOf(1));
+                loadTableData(Integer.parseInt(tfLimit.getText()));
+            }
+        });
+        btnAddLimit.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                tfLimit.setText(String.valueOf(Integer.parseInt(tfLimit.getText())+1));
+                loadTableData(Integer.parseInt(tfLimit.getText()));
+            }
+        });
     }
 
-    private void loadTableData(){
-        ArrayList<Veterinarian> vetsFromDb = VeterinarianDao.getAllVet();
+    private void loadTableData(int limit){
+        ArrayList<Veterinarian> vetsFromDb = VeterinarianDao.getAllVet(limit);
+        ObservableList<Vets> vetsList = FXCollections.observableArrayList();
+        Iterator<Veterinarian> itr = vetsFromDb.iterator();
+        while(itr.hasNext()){
+            Veterinarian vet = itr.next();
+            vetsList.add(new Vets( String.valueOf(vet.getId()),vet.getFirstName(),vet.getLastName(),
+                    vet.getTitle(),vet.getSpecialist(),String.valueOf(vet.getDob()),
+                    vet.getGender(),String.format("%.0f",vet.getPhoneNumber()),vet.getAddress()));
+        }
+        TreeItem<Vets> root = new RecursiveTreeItem<Vets>(vetsList, RecursiveTreeObject::getChildren);
+        tableView.setRoot(root);
+    }
+
+    private void loadTableData(String keyword,int limit){
+        ArrayList<Veterinarian> vetsFromDb = VeterinarianDao.findVet(keyword,limit);
         ObservableList<Vets> vetsList = FXCollections.observableArrayList();
         Iterator<Veterinarian> itr = vetsFromDb.iterator();
         while(itr.hasNext()){
@@ -279,7 +343,7 @@ public class VeterinarianDataController {
         tfSpecialist.setText(vet.getSpecialist());
         dpDob.setValue(vet.getDob());
         comGender.setValue(vet.getGender());
-        tfPhone.setText(String.valueOf(vet.getPhoneNumber()));
+        tfPhone.setText(String.format("%.0f",vet.getPhoneNumber()));
         taAddress.setText(vet.getAddress());
         setPhoto(vet.getPhoto());
 
@@ -297,6 +361,10 @@ public class VeterinarianDataController {
         veterinarian.setGender(comGender.getValue());
         veterinarian.setPhoneNumber(Double.valueOf(tfPhone.getText()));
         veterinarian.setAddress(taAddress.getText());
+        if(photo.exists()) {
+            String photoName = saveLocalVetPhotos(id, veterinarian.getFirstName());
+            VeterinarianDao.insertPhoto(id, photoName);
+        }
         status = VeterinarianDao.updateVeterinarian(veterinarian);
         return status;
     }
@@ -332,6 +400,24 @@ public class VeterinarianDataController {
         tfTitle.setOpacity(opacity);
         tfPhone.setOpacity(opacity);
     }
+    private String saveLocalVetPhotos(int id,String name){
+        String extension = getFileExtension(photo.getName()).get();
+        String fileName = String.valueOf(id)+name+"."+extension;
+        Path copied = Paths.get("files/photos/veterinarian/"+fileName);
+        Path source = photo.toPath();
+        try {
+            Files.copy(source,copied, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return fileName;
+    }
+
+    private Optional<String> getFileExtension(String filename) {
+        return Optional.ofNullable(filename)
+                .filter(f -> f.contains("."))
+                .map(f -> f.substring(filename.lastIndexOf(".") + 1));
+    }
 
 }
 class Vets extends RecursiveTreeObject<Vets> {
@@ -358,6 +444,8 @@ class Vets extends RecursiveTreeObject<Vets> {
         this.phoneNumber = new SimpleStringProperty(phoneNumber);
         this.address = new SimpleStringProperty(address);
     }
+
+
 
 }
 

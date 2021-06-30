@@ -13,19 +13,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.login.LoginController">
+<BorderPane style="-fx-background-color: #005b4f;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.login.LoginController">
    <center>
-      <VBox alignment="CENTER" style="-fx-background-color: #005b4f;">
+      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
               <ImageView fitHeight="167.0" fitWidth="425.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
                   <image>
                       <Image url="@../../images/Logo.png" />
                   </image>
                <VBox.margin>
-                  <Insets bottom="75.0" top="40.0" />
+                  <Insets bottom="75.0" />
                </VBox.margin>
               </ImageView>
-            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="437.0" prefWidth="593.0" style="-fx-background-color: #fff; -fx-background-radius: 15px;" VBox.vgrow="NEVER">
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="437.0" prefWidth="593.0" style="-fx-background-color: #fff; -fx-background-radius: 15px;" VBox.vgrow="ALWAYS">
                <children>
                   <JFXButton fx:id="btnSetting" layoutX="547.0" layoutY="6.0">
                      <graphic>
@@ -82,10 +82,13 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
                <VBox.margin>
-                  <Insets bottom="125.0" />
+                  <Insets />
                </VBox.margin>
             </AnchorPane>
          </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </VBox>
    </center>
 </BorderPane>

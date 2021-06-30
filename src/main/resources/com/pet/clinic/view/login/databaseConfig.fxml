@@ -12,36 +12,35 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="486.0" prefWidth="435.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.database.ConfigController">
+<AnchorPane prefHeight="585.0" prefWidth="435.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.database.ConfigController">
    <children>
       <Label layoutX="44.0" layoutY="14.0" opacity="0.8" text="Pengaturan Database">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <CheckBox fx:id="chkIsDefault" layoutX="20.0" layoutY="55.0" mnemonicParsing="false" text="Default" />
-      <TextField fx:id="tfHost" layoutX="21.0" layoutY="97.0" prefHeight="24.0" prefWidth="180.0" promptText="Host" />
-      <TextField fx:id="tfUsername" layoutX="215.0" layoutY="97.0" prefHeight="24.0" prefWidth="196.0" promptText="Username" />
-      <TextField fx:id="tfPort" layoutX="21.0" layoutY="139.0" prefHeight="24.0" prefWidth="180.0" promptText="Port" />
-      <TextField fx:id="tfDatabase" layoutX="21.0" layoutY="178.0" prefHeight="24.0" prefWidth="180.0" promptText="Database" />
-      <Button fx:id="btnCheckCon" layoutX="218.0" layoutY="179.0" mnemonicParsing="false" prefWidth="101.0" stylesheets="@../../css/buttonEditSmall.css" text="Cek Koneksi" />
-      <Button fx:id="btnSaveCon" layoutX="330.0" layoutY="179.0" mnemonicParsing="false" stylesheets="@../../css/buttonSaveSmall.css" text="Simpan" />
+      <CheckBox fx:id="chkIsLastCon" layoutX="20.0" layoutY="55.0" mnemonicParsing="false" text="Gunakan Koneksi Terakhir" />
+      <TextField fx:id="tfHost" layoutX="21.0" layoutY="156.0" prefHeight="24.0" prefWidth="180.0" promptText="Host" style="-fx-border-color: silver;" />
+      <TextField fx:id="tfUsername" layoutX="215.0" layoutY="156.0" prefHeight="24.0" prefWidth="196.0" promptText="Username" />
+      <TextField fx:id="tfPort" layoutX="21.0" layoutY="198.0" prefHeight="24.0" prefWidth="180.0" promptText="Port" />
+      <TextField fx:id="tfDatabase" layoutX="21.0" layoutY="237.0" prefHeight="24.0" prefWidth="180.0" promptText="Database" />
+      <Button fx:id="btnUseCon" layoutX="266.0" layoutY="238.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="138.0" stylesheets="@../../css/buttonEditSmall.css" text="Cek Koneksi" />
       <ImageView fitHeight="24.0" fitWidth="21.0" layoutX="18.0" layoutY="14.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/settingGear.png" />
          </image>
       </ImageView>
-      <Label layoutX="46.0" layoutY="230.0" opacity="0.8" text="Riwayat Koneksi">
+      <Label layoutX="46.0" layoutY="293.0" opacity="0.8" text="Riwayat Koneksi">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <ImageView fitHeight="24.0" fitWidth="21.0" layoutX="20.0" layoutY="230.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="24.0" fitWidth="21.0" layoutX="20.0" layoutY="293.0" opacity="0.8" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/history.png" />
          </image>
       </ImageView>
-      <TableView fx:id="tblConHistory" layoutX="19.0" layoutY="266.0" prefHeight="200.0" prefWidth="396.0">
+      <TableView fx:id="tblConHistory" layoutX="19.0" layoutY="332.0" prefHeight="200.0" prefWidth="396.0">
         <columns>
             <TableColumn fx:id="colConId" prefWidth="41.0" text="ID" />
           <TableColumn fx:id="colConHost" prefWidth="121.0" text="Host" />
@@ -50,6 +49,9 @@
             <TableColumn fx:id="colConUser" prefWidth="98.0" text="Username" />
         </columns>
       </TableView>
-      <PasswordField fx:id="pfPassword" layoutX="216.0" layoutY="138.0" prefHeight="24.0" prefWidth="196.0" promptText="Password" />
+      <PasswordField fx:id="pfPassword" layoutX="216.0" layoutY="197.0" prefHeight="24.0" prefWidth="196.0" promptText="Password" />
+      <CheckBox fx:id="chkIsNewCon" layoutX="20.0" layoutY="119.0" mnemonicParsing="false" text="Buat Koneksi Baru" />
+      <Label fx:id="lblUsedConnection" layoutX="44.0" layoutY="83.0" prefHeight="16.0" prefWidth="364.0" text="Koneksi" textFill="#00000099" />
+      <Button fx:id="btnCleanHistory" layoutX="277.0" layoutY="543.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="132.0" stylesheets="@../../css/buttonDeleteSmall.css" text="Bersihkan Riwayat" />
    </children>
 </AnchorPane>

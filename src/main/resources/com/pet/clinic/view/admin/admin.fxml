@@ -72,14 +72,14 @@
                   </Pane>
                   <Pane layoutX="90.0" layoutY="149.0" prefHeight="36.0" prefWidth="199.0">
                      <children>
-                        <JFXButton fx:id="btnUserSetting" layoutX="-11.0" layoutY="-8.0" opacity="0.0" prefHeight="43.0" prefWidth="173.0" style="-fx-background-color: #000; -fx-background-radius: 15px;">
+                        <JFXButton fx:id="btnUserSetting" layoutX="-11.0" layoutY="-10.0" opacity="0.0" prefHeight="43.0" prefWidth="173.0" style="-fx-background-color: #000; -fx-background-radius: 15px;">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXButton>
                         <ImageView fitHeight="24.0" fitWidth="24.0" mouseTransparent="true" opacity="0.85" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../images/pet.png" />
+                              <Image url="@../../images/userwhite.png" />
                            </image>
                         </ImageView>
                         <Label mouseTransparent="true" opacity="0.85" prefHeight="24.0" prefWidth="193.0" text="Pengguna" textFill="WHITE">

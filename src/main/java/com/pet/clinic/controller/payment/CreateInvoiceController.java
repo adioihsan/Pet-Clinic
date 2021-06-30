@@ -315,14 +315,15 @@ public class CreateInvoiceController {
         btnSave.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                Invoice invoice = saveInvoicesData(medicRecordId);
-                if(invoice != null){
-                    if(ConfirmationDialog.showMakeSure("Pembayaran Berhasi di Simapan, Cetak Struk ?")){
-                        printInVoice(invoice);
-                    }
+                    if (!isFieldNull()) {
+                        Invoice invoice = saveInvoicesData(medicRecordId);
+                        if (invoice != null) {
+                            if (ConfirmationDialog.showMakeSure("Pembayaran Berhasi di Simapan, Cetak Struk ?")) {
+                                printInVoice(invoice);
+                            }
+                        } else Message.showFailed();
+                    } else Message.showFailed("Tidak ada yang harus di bayar");
                 }
-                else Message.showFailed();
-            }
         });
 
 
@@ -342,6 +343,9 @@ public class CreateInvoiceController {
             } else {
                 lblSearchStatus.setText("Peliharaan Tidak di Temukan");
                 lblSearchStatus.setVisible(true);
+                clearTblOther();
+                clearTblService();
+                clearTblPrescription();
             }
         }
     }
@@ -502,6 +506,15 @@ public class CreateInvoiceController {
         ipc.getLblInvoiceId().setText(String.valueOf(invoice.getInvoiceId()));
         ipc.getLblUser().setText("("+user.getId()+") "+user.getFirstName()+" "+user.getLastName());
         ipc.getLblPayDate().setText(invoice.getCreateDate().toString());
+    }
+
+    private boolean isFieldNull(){
+        if(serviceInfoList.isEmpty()) return true;
+        if(!medicineList.isEmpty() || !serviceList.isEmpty() || !otherList.isEmpty()){
+            return false;
+        }
+        else
+        return true;
     }
 
 }

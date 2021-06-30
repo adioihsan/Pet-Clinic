@@ -8,9 +8,9 @@ import java.util.ArrayList;
 public class Config {
     public static String usedDbHost = "localhost";
     public static int usedDbPort = 3306;
-    public static String usedDbUser = "root";
-    public static String usedDbName = "petclinic";
-    public static String usedDbPass = "";
+    public static String usedDbUser = "k3";
+    public static String usedDbName = "";
+    public static String usedDbPass = "123456";
 
     public static void loadFirstConnection(){
         try {
@@ -28,21 +28,43 @@ public class Config {
         }
     }
 
-    public static void setUsed(int connectionId, String host,int port,String dbname,String user,String pass ){
-        usedDbHost = host;
-        usedDbPort = port;
-        usedDbUser = user;
-        usedDbName = dbname;
-        usedDbPass = pass;
+    public static ConfigVar getConnectionUsed(){
+        ConfigVar cv = new ConfigVar();
         try {
-            DbConnect.getSqliteConnection().createStatement().executeQuery("update configs set isUsed=0 where isUsed=1");
-            DbConnect.getSqliteConnection().createStatement().executeQuery("update configs set isUsed=1 where " +
-                    "connectionId="+connectionId);
+            ResultSet res = DbConnect.getSqliteConnection().createStatement().executeQuery("select * from configs " +
+                    "where isUsed=1");
+            if(res.next()){
+                cv.setConnectionId(res.getInt("connectionId"));
+                cv.setDbHost(res.getString("host"));
+                cv.setDbPort(res.getInt("port"));
+                cv.setDbUser(res.getString("user"));
+                cv.setDbPass(res.getString("password"));
+                cv.setDbName(res.getString("database"));
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return cv;
     }
 
+    public static void setUsed(ConfigVar configVar){
+        usedDbHost = configVar.getDbHost();
+        usedDbPort = configVar.getDbPort();
+        usedDbUser = configVar.getDbUser();
+        usedDbName = configVar.getDbName();
+        usedDbPass = configVar.getDbPass();
+    }
+
+    public static void setActive(ConfigVar configVar){
+        try {
+            DbConnect.getSqliteConnection().createStatement().executeUpdate("update configs set isUsed=0 where isUsed=1");
+            DbConnect.getSqliteConnection().createStatement().executeUpdate("update configs set isUsed=1 where " +
+                    "connectionId="+configVar.getConnectionId());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
     public static ArrayList<ConfigVar> getConfigsHistory(){
         ArrayList<ConfigVar> configVarList = new ArrayList<>();
         try {
@@ -62,7 +84,8 @@ public class Config {
         }
         return configVarList;
     }
-    public static boolean insertConfigs(ConfigVar configVar){
+    public static int insertConfig(ConfigVar configVar){
+        int id=0;
         String query = "insert into configs(host,port,user,password,database,isUsed) values(?,?,?,?,?,?)";
         try {
             PreparedStatement ps = DbConnect.getSqliteConnection().prepareStatement(query);
@@ -72,12 +95,25 @@ public class Config {
             ps.setString(4, configVar.getDbPass());
             ps.setString(5, configVar.getDbName());
             ps.setInt(6,0);
-            return ps.executeUpdate() > 0;
+            if(ps.executeUpdate() > 0);
+            ResultSet res = DbConnect.getSqliteConnection().createStatement().executeQuery("select last_insert_rowid()");
+            res.next();
+            id = res.getInt(1);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-    return false;
+    return id;
     }
+
+    public static void deleteHistory(){
+        String query ="delete from configs where isUsed=0";
+        try {
+            DbConnect.getSqliteConnection().createStatement().executeUpdate(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
 
 }
 

@@ -7,10 +7,12 @@ module com.pet.clinic {
     requires org.mariadb.jdbc;
     requires commons.lang;
     requires jasperreports;
+    requires  sqlite.jdbc;
+    requires org.mybatis;
 
+    exports com.pet.clinic;
     opens com.pet.clinic to javafx.fxml;
 //    opens com.pet.clinic.controller to javafx.fxml;
-    exports com.pet.clinic;
 //    exports com.pet.clinic.controller;
     exports com.pet.clinic.controller.patient;
     opens com.pet.clinic.controller.patient to javafx.fxml;

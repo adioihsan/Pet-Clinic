@@ -33,4 +33,17 @@ public class ConfirmationDialog {
         if(res.get() == btnYes) return true;
         else return  false;
     }
+    public static boolean showDialog(String header,String message){
+        Alert delete = new Alert(Alert.AlertType.CONFIRMATION, message);
+        delete.setTitle("Pet Clinic");
+        delete.setHeaderText(header);
+
+        ButtonType btnYes = new ButtonType("Ya");
+        ButtonType btnNo = new ButtonType("Tidak");
+        delete.getButtonTypes().setAll(btnYes,btnNo);
+
+        Optional<ButtonType> res = delete.showAndWait();
+        if(res.get() == btnYes) return true;
+        else return  false;
+    }
 }

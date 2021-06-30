@@ -76,8 +76,8 @@
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="413.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="348.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="0.0" prefHeight="240.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="377.0" minHeight="10.0" prefHeight="340.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="225.0" minHeight="0.0" prefHeight="223.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <GridPane prefHeight="345.0" prefWidth="509.0">
@@ -229,7 +229,7 @@
                               </Label>
                            </children>
                         </Pane>
-                        <HBox prefHeight="172.0" prefWidth="413.0">
+                        <HBox prefHeight="154.0" prefWidth="413.0">
                            <children>
                               <GridPane fx:id="panePetPhoto" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="175.0" prefWidth="151.0" style="-fx-border-color: gray; -fx-border-style: dotted;">
                                  <columnConstraints>
@@ -239,7 +239,7 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <ImageView fx:id="imgPet" fitHeight="173.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <ImageView fx:id="imgPet" fitHeight="173.0" fitWidth="155.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin>
@@ -289,14 +289,6 @@
                                        </VBox.margin>
                                     </Label>
                                     <Label layoutX="10.0" layoutY="74.0" text="Ras" textFill="#003d32">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <Label layoutX="10.0" layoutY="90.0" text="Warna" textFill="#003d32">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
@@ -367,14 +359,6 @@
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <Label fx:id="lblPetColor" layoutX="10.0" layoutY="90.0" text="Warna">
-                                       <font>
-                                          <Font size="12.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" />
-                                       </VBox.margin>
-                                    </Label>
                                     <Label fx:id="lblPetWeight" layoutX="10.0" layoutY="160.0" text="Berat Badan">
                                        <font>
                                           <Font size="12.0" />
@@ -394,7 +378,7 @@
                   </VBox>
                   <VBox prefHeight="129.0" prefWidth="443.0" GridPane.rowIndex="1">
                      <children>
-                        <Pane prefHeight="32.0" prefWidth="401.0" style="-fx-background-color: #439889;">
+                        <Pane prefHeight="50.0" prefWidth="413.0" style="-fx-background-color: #439889;">
                            <children>
                               <Label layoutX="8.0" layoutY="6.0" text="Informasi Dokter" textFill="WHITE">
                                  <font>

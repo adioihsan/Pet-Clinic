@@ -117,12 +117,48 @@ public class VeterinarianDao {
         return vet;
     }
 
-    public static ArrayList<Veterinarian> getAllVet(){
-        String query = "select * from veterinarian";
+    public static ArrayList<Veterinarian> getAllVet(int limit){
+        String query = "select * from veterinarian limit "+limit;
         ArrayList<Veterinarian> vetsList = new ArrayList();
         Connection con = DbConnect.getConnection();
         try {
             ResultSet res = con.createStatement().executeQuery(query);
+            while(res.next()){
+                Veterinarian veterinarian = new Veterinarian();
+                veterinarian.setId(res.getInt("veterinarianId"));
+                veterinarian.setFirstName(res.getString("firstName"));
+                veterinarian.setLastName(res.getString("lastName"));
+                veterinarian.setTitle(res.getString("title"));
+                veterinarian.setSpecialist(res.getString("specialist"));
+                veterinarian.setDob(res.getDate("dob").toLocalDate());
+                veterinarian.setGender(res.getString("gender"));
+                veterinarian.setPhoneNumber(Double.valueOf(res.getString("phoneNumber")));
+                veterinarian.setAddress(res.getString("address"));
+                vetsList.add(veterinarian);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return vetsList;
+    }
+    public static ArrayList<Veterinarian> findVet(String keyword, int limit){
+        String query = "select * from veterinarian where veterinarianId like(?) or firstname like(?) or" +
+                " lastName like(?) or title like(?) or specialist like(?) or dob like(?) or gender like(?) " +
+                "or phoneNumber like(?) or address like(?) limit "+limit;
+        ArrayList<Veterinarian> vetsList = new ArrayList();
+        Connection con = DbConnect.getConnection();
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,"%"+keyword+"%");
+            ps.setString(2,"%"+keyword+"%");
+            ps.setString(3,"%"+keyword+"%");
+            ps.setString(4,"%"+keyword+"%");
+            ps.setString(5,"%"+keyword+"%");
+            ps.setString(6,"%"+keyword+"%");
+            ps.setString(7,"%"+keyword+"%");
+            ps.setString(8,"%"+keyword+"%");
+            ps.setString(9,"%"+keyword+"%");
+            ResultSet res = ps.executeQuery();
             while(res.next()){
                 Veterinarian veterinarian = new Veterinarian();
                 veterinarian.setId(res.getInt("veterinarianId"));

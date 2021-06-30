@@ -31,10 +31,10 @@
             </Label>
          </children>
          <VBox.margin>
-            <Insets right="3.0" />
+            <Insets bottom="15.0" right="3.0" />
          </VBox.margin>
       </HBox>
-      <VBox alignment="CENTER" prefHeight="70.0" prefWidth="1000.0">
+      <VBox alignment="CENTER" prefHeight="75.0" prefWidth="1000.0">
          <children>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="1000.0">
                <children>
@@ -60,7 +60,10 @@
                   <Insets />
                </VBox.margin>
             </HBox>
-            <Label fx:id="lblSearchStatus" prefHeight="16.0" prefWidth="341.0" text="Label" textFill="RED" visible="false" />
+            <Label fx:id="lblSearchStatus" prefHeight="16.0" prefWidth="341.0" text="Label" textFill="RED" visible="false">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin></Label>
          </children>
       </VBox>
       <GridPane fx:id="gridPayment" alignment="TOP_CENTER" prefHeight="576.0" prefWidth="940.0" VBox.vgrow="ALWAYS">
@@ -498,7 +501,7 @@
                               <Insets top="15.0" />
                            </HBox.margin>
                         </Label>
-                        <Label fx:id="lblTotalAmount" alignment="CENTER_RIGHT" prefHeight="16.0" prefWidth="138.0" text="99999999">
+                        <Label fx:id="lblTotalAmount" alignment="CENTER_RIGHT" prefHeight="16.0" prefWidth="138.0" text="0">
                            <font>
                               <Font size="16.0" />
                            </font>

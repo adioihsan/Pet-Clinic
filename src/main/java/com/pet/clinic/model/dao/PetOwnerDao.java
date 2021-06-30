@@ -1,23 +1,15 @@
 package com.pet.clinic.model.dao;
 
 import com.pet.clinic.database.DbConnect;
-import com.pet.clinic.model.Pet;
 import com.pet.clinic.model.PetOwner;
-import com.pet.clinic.model.Prescription;
-
 import java.sql.*;
-import java.text.ParseException;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Queue;
+
 
 public class PetOwnerDao {
 
     public static int insertPetOwner(PetOwner petOwner){
         int  id = 0;
-        boolean isOk = false;
         String query = "insert into petOwner(firstname,lastName,dob,gender,phoneNumber,address,timestamp) values(?,?,?,?,?,?,?)";
         Connection con = DbConnect.getConnection();
         try {
@@ -29,8 +21,7 @@ public class PetOwnerDao {
             ps.setDouble(5,petOwner.getPhoneNumber());
             ps.setString(6,petOwner.getAddress());
             ps.setTimestamp(7,petOwner.getTimestamp());
-            isOk = ps.executeUpdate() > 0;
-            if(isOk){
+            if( ps.executeUpdate() > 0){
                 ResultSet res = con.createStatement().executeQuery("select LAST_INSERT_ID()");
                 res.next();
                 id = res.getInt(1);
@@ -129,18 +120,18 @@ public class PetOwnerDao {
 
     public static ArrayList<PetOwner> findPetOwners(String keyword , int limit){
         ArrayList<PetOwner> petOwners = new ArrayList<>();
-        String query = "select * from petOwner where petOwnerId=? or firstName like(?) or lastName like(?) " +
-                "or gender like(?) or phoneNumber=?  or address like(?) limit ?";
+        String query = "select * from petOwner where petOwnerId like(?) or firstName like(?) or lastName like(?) " +
+                "or gender like(?) or phoneNumber like(?) or dob like(?) or address like(?)"+limit;
         Connection con =  DbConnect.getConnection();
         try {
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1,keyword);
+            ps.setString(1,"%"+keyword+"%");
             ps.setString(2,"%"+keyword+"%");
             ps.setString(3,"%"+keyword+"%");
             ps.setString(4,"%"+keyword+"%");
-            ps.setString(5,keyword);
-            ps.setString(6,"%"+keyword+"%");;
-            ps.setInt(7,limit);
+            ps.setString(5,"%"+keyword+"%");
+            ps.setString(6,"%"+keyword+"%");
+            ps.setString(7,"%"+keyword+"%");
             ResultSet res = ps.executeQuery();
             while(res.next()){
                 PetOwner petOwner = new PetOwner();
@@ -172,7 +163,7 @@ public class PetOwnerDao {
             throwables.printStackTrace();
         }
         return status;
-    };
+    }
 
 
     public static ArrayList<String> getPetsName(int petOwnerId){

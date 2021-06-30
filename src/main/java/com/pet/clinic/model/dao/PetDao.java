@@ -144,14 +144,14 @@ public class PetDao {
     }
 
     public static ArrayList<Pet> findPets(String keyword,int limit){
-        String query = "select * from pet where petId=? or petOwnerId=? or name like(?) or gender like(?)" +
+        String query = "select * from pet where petId like(?) or petOwnerId like(?) or name like(?) or gender like(?)" +
                 " or kind like(?) or race like(?) or color like(?) limit "+limit;
         ArrayList<Pet> petsList = new ArrayList();
         Connection con = DbConnect.getConnection();
         try {
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1,keyword);
-            ps.setString(2,keyword);
+            ps.setString(1,"%"+keyword+"%");
+            ps.setString(2,"%"+keyword+"%");
             ps.setString(3,"%"+keyword+"%");
             ps.setString(4,"%"+keyword+"%");
             ps.setString(5,"%"+keyword+"%");
@@ -193,6 +193,16 @@ public class PetDao {
             throwables.printStackTrace();
         }
         return  petkinds;
+    }
+
+    public static boolean deletePetKind(int petKindId){
+        try {
+            return DbConnect.getConnection().createStatement().executeUpdate("delete from petKind where petKindId="
+                    +petKindId) > 0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
     }
 
     public static boolean insertPetKind(String name){

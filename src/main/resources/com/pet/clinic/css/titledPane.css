@@ -1,0 +1,44 @@
+.titled-pane {
+    -fx-text-fill:  #00695c;
+    -fx-color: transparent;
+    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
+    -fx-background-color: #f7f7f7 , #005b4f , #f7f7f7;
+}
+.titled-pane:focused {
+    -fx-color: -fx-base;
+    -fx-text-fill: white;
+}
+.titled-pane > .title {
+    -fx-text-fill:  #00695c;
+    -fx-font-weight: bold;
+}
+titled-pane > .title  > .label{
+    -fx-text-fill:  #00695c;
+    -fx-font-weight: bold;
+}
+.titled-pane:focused > .title {
+/*    -fx-color: rgb(0,100,157);*/
+    -fx-color :  #00695c;
+    -fx-text-fill: white;
+}
+.titled-pane > .title:hover {
+    -fx-color :  rgba(240,240,240,0.5);
+}
+.titled-pane .content Vbox{
+    -fx-padding: 0px;
+}
+.titled-pane > .title > .arrow-button
+{
+-fx-background-color: null ;
+-fx-background-insets: 0;
+-fx-background-radius: 0;
+-fx-padding: 0.0em 0.25em 0.0em 0.0em; /* 0 3 0 0 */
+}
+
+.titled-pane > .title > .arrow-button .arrow
+{
+-fx-background-color: #00695c;
+-fx-background-insets: 1 0 -1 0, 0;
+-fx-padding: 0.25em 0.3125em 0.25em 0.3125em; /* 3 3.75 3 3.75 */
+-fx-shape: "M 0 0 h 7 l -3.5 4 z";
+}

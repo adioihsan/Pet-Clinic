@@ -21,6 +21,8 @@ import com.pet.clinic.model.PetKind;
 import com.pet.clinic.model.dao.PetDao;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -206,8 +208,7 @@ public class PetDataController {
         FileChooser choosePhoto = new FileChooser();
         choosePhoto.setTitle("Piih Foto");
         choosePhoto.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PNG","*.png") ,
-                new FileChooser.ExtensionFilter("JPG","*.JPG"),
-                new FileChooser.ExtensionFilter("JPEG","*.JPEG"));
+                new FileChooser.ExtensionFilter("JPG","*.jpg"),new FileChooser.ExtensionFilter("JPEG","*.jpeg"));
 
         imgAddPetPhoto.setOpacity(0);
         btnPetPhoto.setOpacity(0);
@@ -278,6 +279,15 @@ public class PetDataController {
                 loadTableData(tfFind.getText() ,limit);
                 if(tfFind.getText().equalsIgnoreCase(""))
                     loadTableData(limit);
+            }
+        });
+        // field rules
+        tfLimit.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    tfLimit.setText(newValue.replaceAll("[^\\d]", ""));
+                }
             }
         });
         tfLimit.setOnKeyTyped(new EventHandler<KeyEvent>() {

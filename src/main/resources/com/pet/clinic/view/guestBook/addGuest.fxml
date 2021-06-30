@@ -67,6 +67,56 @@
             </Label>
          </children>
       </VBox>
+      <VBox prefHeight="344.0" prefWidth="940.0" VBox.vgrow="ALWAYS">
+         <VBox.margin>
+            <Insets bottom="15.0" left="30.0" right="30.0" />
+         </VBox.margin>
+         <children>
+            <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="63.0" prefWidth="1000.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="374.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label alignment="BOTTOM_CENTER" prefHeight="26.0" prefWidth="99.0" text="Jumlah Data" textFill="#666363bb">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="tfLimit" alignment="CENTER" prefHeight="24.0" prefWidth="57.0" stylesheets="@../../css/textField2.css" text="100">
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <JFXButton fx:id="btnAddLimit" prefHeight="20.0" prefWidth="36.0" stylesheets="@../../css/buttonAddSmall.css" text="+" textFill="#233690">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+                  <TextField fx:id="tfFind" prefHeight="24.0" prefWidth="287.0" promptText="Cari">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <TableView fx:id="tblGuest" prefHeight="307.0" prefWidth="940.0" VBox.vgrow="ALWAYS">
+              <columns>
+                <TableColumn fx:id="colVisitDate" prefWidth="75.0" text="Tanggal" />
+                  <TableColumn fx:id="colPetOwnerId" prefWidth="126.0" text="ID Tamu" />
+                <TableColumn fx:id="colPetOwnerName" prefWidth="140.0" text="Nama Tamu" />
+                  <TableColumn fx:id="colPetId" prefWidth="126.0" text="ID Peliharaan" />
+                  <TableColumn fx:id="colPetName" prefWidth="150.0" text="Nama Peliharaan" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </children>
+      </VBox>
       <HBox alignment="CENTER" prefHeight="202.0" prefWidth="920.0" VBox.vgrow="NEVER">
          <children>
             <VBox>
@@ -348,23 +398,8 @@
             </VBox>
          </children>
          <VBox.margin>
-            <Insets left="30.0" right="30.0" />
+            <Insets bottom="30.0" left="30.0" right="30.0" />
          </VBox.margin>
       </HBox>
-      <TableView fx:id="tblGuest" prefHeight="307.0" prefWidth="940.0" VBox.vgrow="ALWAYS">
-        <columns>
-          <TableColumn fx:id="colVisitDate" prefWidth="75.0" text="Tanggal" />
-            <TableColumn fx:id="colPetOwnerId" prefWidth="126.0" text="ID Tamu" />
-          <TableColumn fx:id="colPetOwnerName" prefWidth="140.0" text="Nama Tamu" />
-            <TableColumn fx:id="colPetId" prefWidth="126.0" text="ID Peliharaan" />
-            <TableColumn fx:id="colPetName" prefWidth="150.0" text="Nama Peliharaan" />
-        </columns>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
-         <VBox.margin>
-            <Insets bottom="30.0" left="30.0" right="30.0" top="15.0" />
-         </VBox.margin>
-      </TableView>
    </children>
 </VBox>

@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1000.0" style="-fx-background-color: #f7f7f7;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.admin.DynamicDataController">
    <children>
       <HBox fx:id="boxHeader" alignment="BOTTOM_LEFT" maxHeight="-Infinity" prefHeight="100.0" prefWidth="1000.0" stylesheets="@../../css/boxHeaderRegistration.css" VBox.vgrow="NEVER">
@@ -53,15 +52,15 @@
                   </Label>
                   <TableView fx:id="tblPetKind" prefHeight="200.0" prefWidth="200.0">
                     <columns>
-                      <TableColumn fx:id="colKindId" prefWidth="75.0" text="ID Jenis" />
-                      <TableColumn fx:id="colKindName" prefWidth="75.0" text="Nama " />
+                      <TableColumn fx:id="colKindId" prefWidth="82.0" text="ID Jenis" />
+                      <TableColumn fx:id="colKindName" prefWidth="326.0" text="Nama " />
                     </columns>
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
                      <VBox.margin>
                         <Insets bottom="15.0" />
                      </VBox.margin>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
                   </TableView>
                   <HBox fx:id="tfKindName">
                      <children>

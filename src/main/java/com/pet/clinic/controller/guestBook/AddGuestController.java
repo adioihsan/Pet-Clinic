@@ -110,6 +110,15 @@ public class AddGuestController {
     private TableColumn<Guest, Integer> colPetId;
 
     @FXML
+    private TextField tfLimit;
+
+    @FXML
+    private JFXButton btnAddLimit;
+
+    @FXML
+    private TextField tfFind;
+
+    @FXML
     private TableColumn<Guest, String> colPetName;
     private  final ObservableList<Guest> guestList = FXCollections.observableArrayList();
     private  boolean isFound = false;
@@ -129,11 +138,14 @@ public class AddGuestController {
         tfPetId.setOnKeyTyped(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                findPet();
+                if (!tfPetId.getText().equalsIgnoreCase("")) {
+                   int  petId = Integer.valueOf(tfPetId.getText());
+                    findPet(petId);
+                }
             }
         });
         //table guest column
-        loadGuest();
+        loadGuest(Integer.parseInt(tfLimit.getText()));
         tblGuest.setItems(guestList);
         colPetId.setCellValueFactory(new PropertyValueFactory<Guest,Integer>("petId"));
         colPetName.setCellValueFactory(new PropertyValueFactory<Guest,String>("petName"));
@@ -147,7 +159,7 @@ public class AddGuestController {
                 if(isFound){
                     if(saveGuest(Integer.parseInt(tfPetId.getText()))){
                         Message.showSuccess("Tamu Berhasil di Tambahkan");
-                        loadGuest();
+                        loadGuest(Integer.parseInt(tfLimit.getText()));
                     }
                     else
                         Message.showFailed("Tamu Gagal di Tambahkan");
@@ -161,18 +173,53 @@ public class AddGuestController {
                     Guest guest = tblGuest.getSelectionModel().getSelectedItem();
                     if(ConfirmationDialog.showMakeSure("Hapus Tamu dengan ID "+guest.getPetId())){
                         deleteGuest(guest.getPetId(),guest.getVisitTime());
-                        loadGuest();
+                        loadGuest(Integer.parseInt(tfLimit.getText()));
                     };
                 }
+                else if(event.getClickCount() == 1 && tblGuest.getSelectionModel().getSelectedItem() != null){
+                    Guest guest = tblGuest.getSelectionModel().getSelectedItem();
+                    findPet(guest.getPetId());
+                }
+            }
+        });
+
+        tfFind.setOnKeyTyped(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                int limit = Integer.parseInt(tfLimit.getText());
+                loadGuest(tfFind.getText() ,limit);
+                if(tfFind.getText().equalsIgnoreCase(""))
+                    loadGuest(limit);
+            }
+        });
+        // field rules
+        tfLimit.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    tfLimit.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+        tfLimit.setOnKeyTyped(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if(tfLimit.getText().equalsIgnoreCase(""))
+                    tfLimit.setText(String.valueOf(1));
+                loadGuest(Integer.parseInt(tfLimit.getText()));
+            }
+        });
+        btnAddLimit.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                tfLimit.setText(String.valueOf(Integer.parseInt(tfLimit.getText())+1));
+                loadGuest(Integer.parseInt(tfLimit.getText()));
             }
         });
     }
 
 
-    private void findPet(){
-        int petId = 0;
-        if (!tfPetId.getText().equalsIgnoreCase("")) {
-            petId = Integer.valueOf(tfPetId.getText());
+    private void findPet(int petId){
             int ownerId = setPet(petId);
             if (ownerId != 0) {
                 boolean isOwner = setOwner(ownerId);
@@ -186,7 +233,6 @@ public class AddGuestController {
                 clearAllData();
                 isFound = false;
             }
-        }
     }
 
     private int setPet(int petId) {
@@ -235,16 +281,23 @@ public class AddGuestController {
         }
     }
 
-    private  void loadGuest(){
-        ArrayList<Guest> listFromDb = GuestDao.getAllGuest();
+    private  void loadGuest(int limit){
+        ArrayList<Guest> listFromDb = GuestDao.getAllGuest(limit);
         guestList.setAll(listFromDb);
     }
+    private  void loadGuest(String keyword,int limit){
+        ArrayList<Guest> listFromDb = GuestDao.findGuest(keyword,limit);
+        guestList.setAll(listFromDb);
+    }
+
     private  boolean saveGuest(int petId){
         return GuestDao.insertGuest(petId, Timestamp.from(Instant.now()));
     }
+
     private boolean deleteGuest(int petId,LocalDateTime localDateTime){
         return GuestDao.deleteGuest(petId,Timestamp.valueOf(localDateTime));
     }
+
 
     private void clearAllData(){
         //clear owner labels

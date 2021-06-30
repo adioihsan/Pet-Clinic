@@ -3,17 +3,20 @@ package com.pet.clinic.controller.navigation;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXHamburger;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.pet.clinic.App;
 import com.pet.clinic.helper.ConfirmationDialog;
+import com.pet.clinic.helper.Popup;
 import com.pet.clinic.model.User;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -87,9 +90,6 @@ public class LeftMenuController {
     private Circle imgUserCircle;
 
     @FXML
-    private ImageView imgUser;
-
-    @FXML
     private Label lblUsername;
 
     @FXML
@@ -100,8 +100,6 @@ public class LeftMenuController {
 
     @FXML
     private JFXButton btnLogout;
-
-
 
     private User loggedUser = ValidateUser.getLoggedUser();
 
@@ -195,10 +193,20 @@ public class LeftMenuController {
 
 
         // Logged User
-       imgUserCircle.setFill(new ImagePattern(imgUser.getImage()));
+        File photo = new File("files/photos/admin/"+loggedUser.getPhoto());
+        if(photo.exists()) {
+            imgUserCircle.setFill(new ImagePattern(new Image(photo.toURI().toString())));
+        }
        lblUsername.setText(loggedUser.getUsername());
        lblUserId.setText(Integer.toString(loggedUser.getId()));
        lblUserType.setText(loggedUser.getType());
+
+       imgUserCircle.setOnMouseClicked(new EventHandler<MouseEvent>() {
+           @Override
+           public void handle(MouseEvent event) {
+            showUserView();
+           }
+       });
 
        //set privilege
         setPrivilege();
@@ -238,6 +246,9 @@ public class LeftMenuController {
             case "guestBook":
                 btnGuestBook.setOpacity(0.5);
                 break;
+            case "medicine":
+                btnMedicine.setOpacity(0.5);
+                break;
             case "admin":
                 btnAdmin.setOpacity(0.5);
                 break;
@@ -256,6 +267,11 @@ public class LeftMenuController {
         if(privilege.charAt(5) == '0') pnMainPane.getChildren().remove(pnMedicine);
         if(privilege.charAt(6) == '0') pnMainPane.getChildren().remove(pnVet);
         if(privilege.charAt(7) == '0') pnMainPane.getChildren().remove(pnAdmin);
+    }
+
+    public void showUserView(){
+        Popup popup = new Popup();
+        popup.load(imgUserCircle.getScene().getWindow(),"user/userView");
     }
 
 }

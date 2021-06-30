@@ -43,6 +43,15 @@ public class ActionDao {
         }
         return false;
     }
+    public static boolean deleteAction(int actionId){
+        try {
+            return DbConnect.getConnection().createStatement().executeUpdate("delete from action where actionId="
+                    +actionId) > 0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
 
     public static ArrayList<Action> findAction(String keyword , int limit){
         ArrayList<Action> actions = new ArrayList<>();

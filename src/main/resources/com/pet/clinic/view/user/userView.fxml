@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="1079.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.navigation.UserViewController">
+   <children>
+      <HBox>
+         <children>
+            <VBox prefHeight="479.0" prefWidth="428.0">
+               <children>
+                  <Label text="Ganti Password">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="tfCpUsername" editable="false" opacity="0.6" promptText="Username" stylesheets="@../../css/textField.css">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <PasswordField fx:id="pfCpOldPassword" layoutX="10.0" layoutY="70.0" promptText="Password Lama" stylesheets="@../../css/textField.css">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </PasswordField>
+                  <Label fx:id="lblCheckOldPassword" prefHeight="16.0" prefWidth="185.0" text="Label" textFill="#c31c1c" visible="false">
+                     <VBox.margin>
+                        <Insets bottom="12.0" />
+                     </VBox.margin>
+                  </Label>
+                  <PasswordField fx:id="pfCpNewPassword" promptText="Password Baru" stylesheets="@../../css/textField.css">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </PasswordField>
+                  <PasswordField fx:id="pfCpNewPasswordRe" promptText="Ulangi Password Baru" stylesheets="@../../css/textField.css">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </PasswordField>
+                  <Label fx:id="lblCheckNewPassword" layoutX="10.0" layoutY="141.0" prefHeight="16.0" prefWidth="185.0" text="Label" textFill="#c31c1c" visible="false" />
+                  <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="45.0" prefWidth="938.0">
+                     <children>
+                        <JFXButton fx:id="btnChangePassword" alignment="CENTER" layoutX="788.0" layoutY="14.0" prefWidth="108.0" stylesheets="@../../css/buttonEdit.css" text="Ganti Password" />
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox prefHeight="349.0" prefWidth="573.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="Ubah Data">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox prefHeight="231.0" prefWidth="518.0">
+                     <children>
+                        <VBox prefHeight="244.0" prefWidth="303.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <TextField fx:id="tfEditUserFirstName" promptText="Nama Depan" stylesheets="@../../css/textField.css">
+                                 <VBox.margin>
+                                    <Insets bottom="30.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="tfEditUserLastName" promptText="Nama Belakang" stylesheets="@../../css/textField.css">
+                                 <VBox.margin>
+                                    <Insets bottom="30.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="tfEditUserPhoneNumber" promptText="Nomer Telpon" stylesheets="@../../css/textField.css">
+                                 <VBox.margin>
+                                    <Insets bottom="30.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="tfEditUserAdminType" promptText="Tipe Admin" stylesheets="@../../css/textField.css">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="-0.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <Label fx:id="lblEditCheckPassword" prefHeight="16.0" prefWidth="197.0" text="Label" textFill="#c31c1c" visible="false" />
+                           </children>
+                           <HBox.margin>
+                              <Insets right="30.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <GridPane fx:id="panePetPhoto1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="168.0" prefWidth="205.0" style="-fx-border-color: gray; -fx-border-style: dotted;">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <ImageView fx:id="imgPhoto1" fitHeight="172.0" fitWidth="204.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                              <ImageView fx:id="imgEditPhoto" fitHeight="91.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
+                                 <image>
+                                    <Image url="@../../images/pickpicture.png" />
+                                 </image>
+                              </ImageView>
+                              <JFXButton fx:id="btnEditPhoto" alignment="BOTTOM_CENTER" prefHeight="166.0" prefWidth="209.0" text="Pilih Foto">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </GridPane>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="boxBtns1" alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="60.0" prefWidth="573.0">
+                     <children>
+                        <JFXButton fx:id="btnEditSave" layoutX="788.0" layoutY="14.0" prefWidth="108.0" stylesheets="@../../css/buttonSave.css" text="Simpan" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+   </padding>
+</VBox>

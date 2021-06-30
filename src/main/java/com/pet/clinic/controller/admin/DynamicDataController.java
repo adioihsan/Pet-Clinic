@@ -8,8 +8,10 @@ import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 
+import com.pet.clinic.helper.ConfirmationDialog;
 import com.pet.clinic.helper.Message;
 import com.pet.clinic.model.Action;
+import com.pet.clinic.model.Guest;
 import com.pet.clinic.model.Pet;
 import com.pet.clinic.model.PetKind;
 import com.pet.clinic.model.dao.ActionDao;
@@ -101,6 +103,21 @@ public class DynamicDataController {
         colActionName.setCellValueFactory(new PropertyValueFactory<Action,String>("name"));
         colActionPrice.setCellValueFactory(new PropertyValueFactory<Action,Double>("price"));
         loadAction();
+
+        //double click to delete
+        tblAction.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(event.getClickCount() == 2 && tblAction.getSelectionModel().getSelectedItem() != null){
+                    Action action = tblAction.getSelectionModel().getSelectedItem();
+                    if(ConfirmationDialog.showMakeSure("Hapus Tindakan ("+action.getActionId()+") "+
+                            action.getName())){
+                        ActionDao.deleteAction(action.getActionId());
+                        loadAction();
+                    };
+                }
+            }
+        });
         //end action table
 
 
@@ -136,6 +153,41 @@ public class DynamicDataController {
             }
         });
 
+        //double click to delte
+        tblAction.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(mouseEvent.getClickCount() == 2 &&  tblAction.getSelectionModel().getSelectedItem() != null){
+                    Action action = tblAction.getSelectionModel().getSelectedItem();
+                    if(ConfirmationDialog.showDelete("Hapus Tindakan "+action.getName()+"("+action.getActionId()+")")) {
+                        if (ActionDao.deleteAction(action.getActionId())) {
+                            Message.showSuccess("Tindakan berhasil di hapus");
+                            loadAction();
+                        } else {
+                            Message.showFailed("Terjadi kesalahan .Tindakan gagal di hapus !");
+                        }
+                    }
+                }
+            }
+        });
+        tblPetKind.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(mouseEvent.getClickCount() == 2 &&  tblPetKind.getSelectionModel().getSelectedItem() != null){
+                    PetKind petKind = tblPetKind.getSelectionModel().getSelectedItem();
+                    if(ConfirmationDialog.showDelete("Hapus Jenis Peliharaan "+petKind.getName()+
+                            " ("+petKind.getPetKindId()+")")) {
+                        if (PetDao.deletePetKind(petKind.getPetKindId())) {
+                            Message.showSuccess("Jenis Peliharaan berhasil di hapus");
+                            loadAction();
+                        } else {
+                            Message.showFailed("Terjadi kesalahan . Jenis Peliharaan gagal di hapus !");
+                        }
+                    }
+                }
+            }
+        });
+
     }
 
     private void loadPetKinds(){
@@ -145,6 +197,7 @@ public class DynamicDataController {
     private boolean savePetKind(){
         return PetDao.insertPetKind(tfNewKindName.getText());
     }
+
     private void loadAction(){
         ArrayList<Action> actions = ActionDao.getAllAction();
         actionList.setAll(actions);

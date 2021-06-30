@@ -72,9 +72,6 @@ public class ViewMedicRecordController {
     private Label lblPetRace;
 
     @FXML
-    private Label lblPetColor;
-
-    @FXML
     private Label lblPetWeight;
 
     @FXML
@@ -218,7 +215,6 @@ public class ViewMedicRecordController {
             lblPetGender.setText(pet.getGender());
             lblPetKind.setText(pet.getKind());
             lblPetRace.setText(pet.getRace());
-            lblPetColor.setText(pet.getColor());
             setPetPhoto(pet.getPhoto());
             ownerId = pet.getOwnerId();
         }
@@ -325,7 +321,6 @@ public class ViewMedicRecordController {
         lblPetKind.setText("Jenis");
         lblPetGender.setText("Jenis Kelamin");
         lblPetRace.setText("Ras");
-        lblPetColor.setText("Warna");
         imgPet.setImage(null);
 
         //clear medic record

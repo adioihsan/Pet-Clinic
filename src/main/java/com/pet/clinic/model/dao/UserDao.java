@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class UserDao {
 
@@ -45,6 +46,35 @@ public class UserDao {
         return user;
     }
 
+    public static ArrayList<User> getAllUser(){
+        ArrayList<User> usersList = new ArrayList<>();
+        try{
+            String query = "SELECT * FROM users";
+            Connection connection = DbConnect.getConnection();
+            ResultSet res = connection.createStatement().executeQuery(query);
+            while(res.next()) {
+                user = new User();
+                user.setId(res.getInt("userId"));
+                user.setType(res.getString("type"));
+                user.setFirstName(res.getString("firstname"));
+                user.setLastName(res.getString("lastname"));
+                user.setUsername(res.getString("username"));
+                user.setHash(res.getString("hash"));
+                user.setSalt(res.getString("salt"));
+                user.setPhoneNumber(res.getDouble("phoneNumber"));
+                user.setPhoto(res.getString("photo"));
+                user.setPrivilege(res.getString("privilege"));
+                user.setType(res.getString("type"));
+                usersList.add(user);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return usersList;
+    }
+
     public static boolean checkIsRegistered(String username){
         try {
             ResultSet res =  DbConnect.getConnection().createStatement().executeQuery("select * from " +
@@ -78,6 +108,26 @@ public class UserDao {
         }
         return 0;
     }
+
+    public static boolean updateUser(User user){
+        String query = "update users set firstname=?,lastname=?,username=?,privilege=?,phoneNumber=?,type=? where userId=?";
+        Connection con = DbConnect.getConnection();
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,user.getFirstName());
+            ps.setString(2,user.getLastName());
+            ps.setString(3,user.getUsername());
+            ps.setString(4,user.getPrivilege());
+            ps.setDouble(5,user.getPhoneNumber());
+            ps.setString(6,user.getType());
+            ps.setInt(7,user.getId());
+            return  ps.executeUpdate() > 0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
+
     public static boolean updateUserPhoto(int userId ,String fileName){
        String query = "update users set photo=? where userId=?";
        Connection con = DbConnect.getConnection();
@@ -90,6 +140,30 @@ public class UserDao {
             throwables.printStackTrace();
         }
 
+        return false;
+    }
+
+    public static boolean updatePassword(String username,String hash,String salt){
+        String query = "update users set hash=? , salt=? where username=?";
+        Connection con = DbConnect.getConnection();
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,hash);
+            ps.setString(2,salt);
+            ps.setString(3,username);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    return false;
+    }
+
+    public static boolean deleteUser(int id){
+        try {
+            return DbConnect.getConnection().createStatement().executeUpdate("delete from users where userId="+id) > 0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         return false;
     }
 /*    public  static void main(String[] args) throws SQLException, ClassNotFoundException {

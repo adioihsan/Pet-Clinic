@@ -219,8 +219,8 @@ public class RegistrationController {
         FileChooser choosePhoto = new FileChooser();
         choosePhoto.setTitle("Piih Foto");
         choosePhoto.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PNG","*.png") ,
-                new FileChooser.ExtensionFilter("JPG","*.JPG"),
-                new FileChooser.ExtensionFilter("JPEG","*.JPEG"));
+                new FileChooser.ExtensionFilter("JPG","*.jpg"),
+                new FileChooser.ExtensionFilter("JPEG","*.jpeg"));
         // pet Owner Photo Chooser
         btnOwnerPhoto.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override

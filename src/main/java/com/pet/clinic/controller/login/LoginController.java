@@ -80,11 +80,11 @@ public class LoginController {
                 }
             }
             else{
-                lblMessage.setText("Username or Password wrong ! ");
+                lblMessage.setText("Username atau Password salah ! ");
             }
         }
         else{
-            lblMessage.setText("Username or Password cant be empty !");
+            lblMessage.setText("Username atau Password tidak boleh kosong !");
         }
     }
     private void loadSetting(){

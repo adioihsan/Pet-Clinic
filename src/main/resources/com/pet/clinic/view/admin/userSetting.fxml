@@ -3,9 +3,13 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -17,7 +21,7 @@
 
 <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pet.clinic.controller.admin.UserSettingController">
    <children>
-      <HBox fx:id="boxHeader" alignment="BOTTOM_LEFT" maxHeight="-Infinity" prefHeight="100.0" prefWidth="1000.0" stylesheets="@../../css/boxHeaderDataMaster.css">
+      <HBox fx:id="boxHeader" alignment="BOTTOM_LEFT" maxHeight="-Infinity" prefHeight="100.0" prefWidth="1000.0" stylesheets="@../../css/boxHeaderUsers.css">
          <children>
             <Label alignment="BOTTOM_LEFT" text="Pegguna " textFill="WHITE">
                <font>
@@ -29,256 +33,615 @@
             </Label>
          </children>
          <VBox.margin>
-            <Insets bottom="25.0" />
+            <Insets />
          </VBox.margin>
       </HBox>
-      <VBox>
-         <children>
-            <Label text="Registarasi Pengguna Baru">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="15.0" />
-               </VBox.margin>
-            </Label>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <VBox HBox.hgrow="ALWAYS">
+      <Accordion prefHeight="644.0" prefWidth="1000.0" style="-fx-box-border: transparent;" VBox.vgrow="ALWAYS">
+        <panes>
+          <TitledPane stylesheets="@../../css/titledPane.css" text="Registrasi">
+               <content>
+                  <VBox prefHeight="196.0" prefWidth="998.0">
                      <children>
-                        <Label text="Data Pengguna">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets bottom="15.0" />
-                           </VBox.margin>
-                        </Label>
-                        <HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <VBox HBox.hgrow="ALWAYS">
                                  <children>
-                                    <TextField fx:id="tfUserFirstName" promptText="Nama Depan" stylesheets="@../../css/textField.css">
+                                    <Label text="Data Pengguna">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
                                        <VBox.margin>
                                           <Insets bottom="15.0" />
-                                       </VBox.margin>
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </TextField>
-                                    <TextField fx:id="tfUserLastName" promptText="Nama Belakang" stylesheets="@../../css/textField.css">
-                                       <VBox.margin>
-                                          <Insets bottom="15.0" />
-                                       </VBox.margin>
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </TextField>
-                                    <TextField fx:id="tfUserPhoneNumber" promptText="Nomer Telpon" stylesheets="@../../css/textField.css">
-                                       <VBox.margin>
-                                          <Insets bottom="15.0" />
-                                       </VBox.margin>
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </TextField>
-                                    <TextField fx:id="tfUserAdminType" layoutX="10.0" layoutY="100.0" promptText="Tipe Admin" stylesheets="@../../css/textField.css">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </TextField>
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets right="30.0" />
-                                 </HBox.margin>
-                              </VBox>
-                              <VBox HBox.hgrow="ALWAYS">
-                                 <children>
-                                    <TextField fx:id="tfUserUsername" promptText="Username" stylesheets="@../../css/textField.css">
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </TextField>
-                                    <Label fx:id="lblCheckUsername" text="Label" textFill="#c31c1c" visible="false">
-                                       <VBox.margin>
-                                          <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <PasswordField fx:id="pfUserPassword" promptText="Password" stylesheets="@../../css/textField.css">
-                                       <VBox.margin>
-                                          <Insets bottom="15.0" />
-                                       </VBox.margin>
+                                    <HBox>
+                                       <children>
+                                          <VBox HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <TextField fx:id="tfUserFirstName" promptText="Nama Depan" stylesheets="@../../css/textField.css">
+                                                   <VBox.margin>
+                                                      <Insets bottom="30.0" />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </TextField>
+                                                <TextField fx:id="tfUserLastName" promptText="Nama Belakang" stylesheets="@../../css/textField.css">
+                                                   <VBox.margin>
+                                                      <Insets bottom="30.0" />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </TextField>
+                                                <TextField fx:id="tfUserPhoneNumber" promptText="Nomer Telpon" stylesheets="@../../css/textField.css">
+                                                   <VBox.margin>
+                                                      <Insets bottom="30.0" />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </TextField>
+                                                <TextField fx:id="tfUserAdminType" layoutX="10.0" layoutY="100.0" promptText="Tipe Admin" stylesheets="@../../css/textField.css">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </TextField>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets right="30.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                          <VBox HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <TextField fx:id="tfUserUsername" promptText="Username" stylesheets="@../../css/textField.css">
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </TextField>
+                                                <Label fx:id="lblCheckUsername" text="Label" textFill="#c31c1c" visible="false">
+                                                   <VBox.margin>
+                                                      <Insets bottom="15.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <PasswordField fx:id="pfUserPassword" promptText="Password" stylesheets="@../../css/textField.css">
+                                                   <VBox.margin>
+                                                      <Insets bottom="30.0" />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </PasswordField>
+                                                <PasswordField fx:id="pfUserPasswordRe" promptText="Ulangi Password" stylesheets="@../../css/textField.css">
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </PasswordField>
+                                                <Label fx:id="lblCheckPassword" prefHeight="16.0" prefWidth="197.0" text="Label" textFill="#c31c1c" visible="false" />
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets right="30.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                          <GridPane fx:id="panePetPhoto" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="168.0" prefWidth="205.0" style="-fx-border-color: gray; -fx-border-style: dotted;">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <ImageView fx:id="imgPhoto" fitHeight="118.0" fitWidth="229.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                <ImageView fx:id="imgAddPhoto" fitHeight="91.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
+                                                   <image>
+                                                      <Image url="@../../images/pickpicture.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <JFXButton fx:id="btnPhoto" alignment="BOTTOM_CENTER" prefHeight="164.0" prefWidth="208.0" text="Pilih Foto">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </JFXButton>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </GridPane>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <VBox>
+                           <children>
+                              <Label text="Hak Akses">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox prefHeight="28.0" prefWidth="938.0">
+                                 <children>
+                                    <VBox>
+                                       <children>
+                                          <JFXCheckBox fx:id="chkPatient" text="Pasien" textFill="#000000b2">
+                                             <VBox.margin>
+                                                <Insets bottom="15.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </JFXCheckBox>
+                                          <JFXCheckBox fx:id="chkMedicRecord" text="Rekam Medis" textFill="#000000b2">
+                                             <VBox.margin>
+                                                <Insets bottom="15.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </JFXCheckBox>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets right="30.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox>
+                                       <children>
+                                          <JFXCheckBox fx:id="chkGuestBook" text="Buku Tamu" textFill="#000000b2">
+                                             <VBox.margin>
+                                                <Insets bottom="15.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </JFXCheckBox>
+                                          <JFXCheckBox fx:id="chkMedicine" text="Obat" textFill="#000000b2">
+                                             <VBox.margin>
+                                                <Insets bottom="15.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </JFXCheckBox>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets right="30.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <JFXCheckBox fx:id="chkPayment" text="Pembayaran" textFill="#000000b2">
+                                             <VBox.margin>
+                                                <Insets bottom="15.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </JFXCheckBox>
+                                          <JFXCheckBox fx:id="chkReport" text="Laporan" textFill="#000000b2">
+                                             <VBox.margin>
+                                                <Insets bottom="15.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </JFXCheckBox>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets right="30.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="173.0" prefWidth="100.0">
+                                       <children>
+                                          <JFXCheckBox fx:id="chkVet" text="Dokter" textFill="#000000b2">
+                                             <VBox.margin>
+                                                <Insets bottom="15.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </JFXCheckBox>
+                                          <JFXCheckBox fx:id="chkAdmin" text="Admin" textFill="#000000b2">
+                                             <VBox.margin>
+                                                <Insets bottom="15.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </JFXCheckBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="30.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <HBox fx:id="boxBtns" alignment="BOTTOM_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="938.0">
+                           <children>
+                              <JFXButton fx:id="btnSave" layoutX="10.0" layoutY="26.0" prefWidth="108.0" stylesheets="@../../css/buttonSave.css" text="Simpan">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="15.0" />
+                     </padding>
+                  </VBox>
+               </content>
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+          </TitledPane>
+          <TitledPane stylesheets="@../../css/titledPane.css" text="Ubah Data">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <content>
+                  <VBox prefHeight="196.0" prefWidth="998.0">
+                     <children>
+                        <HBox prefHeight="370.0" prefWidth="938.0">
+                           <children>
+                              <VBox prefHeight="378.0" prefWidth="349.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="Pengguna Terdaftar">
                                        <font>
-                                          <Font size="16.0" />
+                                          <Font size="18.0" />
                                        </font>
-                                    </PasswordField>
-                                    <PasswordField fx:id="pfUserPasswordRe" promptText="Ulangi Password" stylesheets="@../../css/textField.css">
+                                    </Label>
+                                    <TableView fx:id="tblUsers" prefHeight="443.0" prefWidth="421.0" VBox.vgrow="ALWAYS">
+                                      <columns>
+                                        <TableColumn fx:id="colUserId" prefWidth="76.0" text="ID" />
+                                          <TableColumn fx:id="colUsername" prefWidth="127.0" text="Username" />
+                                          <TableColumn fx:id="colFirstName" prefWidth="136.0" text="Nama Depan" />
+                                          <TableColumn fx:id="colLastName" prefWidth="160.0" text="Nama Belakang" />
+                                          <TableColumn fx:id="colAdminType" minWidth="0.0" prefWidth="96.0" text="Tipe Admin" />
+                                          <TableColumn fx:id="colPhoneNumber" prefWidth="120.0" text="Nomer Telpon" />
+                                      </columns>
                                        <VBox.margin>
-                                          <Insets />
+                                          <Insets top="15.0" />
                                        </VBox.margin>
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </PasswordField>
-                                    <Label fx:id="lblCheckPassword" prefHeight="16.0" prefWidth="197.0" text="Label" textFill="#c31c1c" visible="false" />
+                                    </TableView>
                                  </children>
                                  <HBox.margin>
-                                    <Insets right="30.0" />
+                                    <Insets />
                                  </HBox.margin>
                               </VBox>
-                              <GridPane fx:id="panePetPhoto" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="168.0" prefWidth="205.0" style="-fx-border-color: gray; -fx-border-style: dotted;">
-                                 <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                 </columnConstraints>
-                                 <rowConstraints>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                 </rowConstraints>
+                              <VBox prefHeight="479.0" prefWidth="333.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <ImageView fx:id="imgPhoto" fitHeight="118.0" fitWidth="229.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                                    <ImageView fx:id="imgAddPhoto" fitHeight="91.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
-                                       <image>
-                                          <Image url="@../../images/pickpicture.png" />
-                                       </image>
-                                    </ImageView>
-                                    <JFXButton fx:id="btnPhoto" alignment="BOTTOM_CENTER" prefHeight="161.0" prefWidth="190.0" text="Pilih Foto">
+                                    <Label text="Data Pengguna">
                                        <font>
-                                          <Font size="16.0" />
+                                          <Font size="18.0" />
                                        </font>
-                                    </JFXButton>
+                                       <VBox.margin>
+                                          <Insets bottom="15.0" left="30.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <HBox>
+                                       <children>
+                                          <VBox prefHeight="261.0" prefWidth="323.0" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <TextField fx:id="tfEditUserUsername" editable="false" opacity="0.6" promptText="Username" stylesheets="@../../css/textField.css">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </TextField>
+                                                <Label fx:id="lblEditCheckUsername" text="Label" textFill="#c31c1c" visible="false">
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <TextField fx:id="tfEditUserFirstName" promptText="Nama Depan" stylesheets="@../../css/textField.css">
+                                                   <VBox.margin>
+                                                      <Insets bottom="30.0" />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </TextField>
+                                                <TextField fx:id="tfEditUserLastName" promptText="Nama Belakang" stylesheets="@../../css/textField.css">
+                                                   <VBox.margin>
+                                                      <Insets bottom="30.0" />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </TextField>
+                                                <TextField fx:id="tfEditUserPhoneNumber" promptText="Nomer Telpon" stylesheets="@../../css/textField.css">
+                                                   <VBox.margin>
+                                                      <Insets bottom="30.0" />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </TextField>
+                                                <TextField fx:id="tfEditUserAdminType" promptText="Tipe Admin" stylesheets="@../../css/textField.css">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="-0.0" />
+                                                   </VBox.margin>
+                                                </TextField>
+                                                <Label fx:id="lblEditCheckPassword" prefHeight="16.0" prefWidth="197.0" text="Label" textFill="#c31c1c" visible="false" />
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets left="30.0" right="30.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                          <GridPane fx:id="panePetPhoto1" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="168.0" prefWidth="205.0" style="-fx-border-color: gray; -fx-border-style: dotted;">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <ImageView fx:id="imgPhoto1" fitHeight="172.0" fitWidth="204.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                                                <ImageView fx:id="imgEditPhoto" fitHeight="91.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
+                                                   <image>
+                                                      <Image url="@../../images/pickpicture.png" />
+                                                   </image>
+                                                </ImageView>
+                                                <JFXButton fx:id="btnEditPhoto" alignment="BOTTOM_CENTER" prefHeight="166.0" prefWidth="209.0" text="Pilih Foto">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </JFXButton>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </GridPane>
+                                       </children>
+                                    </HBox>
+                                    <VBox prefHeight="106.0" prefWidth="354.0">
+                                       <children>
+                                          <Label text="Hak Akses">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="15.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <HBox prefHeight="140.0" prefWidth="544.0">
+                                             <children>
+                                                <VBox>
+                                                   <children>
+                                                      <JFXCheckBox fx:id="chkEditPatient" text="Pasien" textFill="#000000b2">
+                                                         <VBox.margin>
+                                                            <Insets bottom="15.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </JFXCheckBox>
+                                                      <JFXCheckBox fx:id="chkEditMedicRecord" text="Rekam Medis" textFill="#000000b2">
+                                                         <VBox.margin>
+                                                            <Insets bottom="15.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </JFXCheckBox>
+                                                      <JFXCheckBox fx:id="chkEditMedicine" text="Obat" textFill="#000000b2">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </JFXCheckBox>
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets right="30.0" />
+                                                   </HBox.margin>
+                                                </VBox>
+                                                <VBox>
+                                                   <HBox.margin>
+                                                      <Insets right="30.0" />
+                                                   </HBox.margin>
+                                                </VBox>
+                                                <VBox prefHeight="200.0" prefWidth="100.0">
+                                                   <children>
+                                                      <JFXCheckBox fx:id="chkEditGuestBook" text="Buku Tamu" textFill="#000000b2">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets bottom="15.0" />
+                                                         </VBox.margin>
+                                                      </JFXCheckBox>
+                                                      <JFXCheckBox fx:id="chkEditPayment" text="Pembayaran" textFill="#000000b2">
+                                                         <VBox.margin>
+                                                            <Insets bottom="15.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </JFXCheckBox>
+                                                      <JFXCheckBox fx:id="chkEditReport" text="Laporan" textFill="#000000b2">
+                                                         <VBox.margin>
+                                                            <Insets bottom="15.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </JFXCheckBox>
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets right="30.0" />
+                                                   </HBox.margin>
+                                                </VBox>
+                                                <VBox prefHeight="173.0" prefWidth="100.0">
+                                                   <children>
+                                                      <JFXCheckBox fx:id="chkEditVet" text="Dokter" textFill="#000000b2">
+                                                         <VBox.margin>
+                                                            <Insets bottom="15.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </JFXCheckBox>
+                                                      <JFXCheckBox fx:id="chkEditAdmin" text="Admin" textFill="#000000b2">
+                                                         <VBox.margin>
+                                                            <Insets bottom="15.0" />
+                                                         </VBox.margin>
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </JFXCheckBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets left="30.0" top="15.0" />
+                                       </VBox.margin>
+                                    </VBox>
                                  </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox fx:id="boxBtns1" alignment="BOTTOM_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="45.0" prefWidth="938.0">
+                           <children>
+                              <JFXButton fx:id="btnDelete" layoutX="628.0" layoutY="14.0" prefWidth="108.0" stylesheets="@../../css/buttonDelete.css" text="Hapus Pengguna">
                                  <HBox.margin>
                                     <Insets right="15.0" />
                                  </HBox.margin>
-                              </GridPane>
+                              </JFXButton>
+                              <JFXButton fx:id="btnEditSave" layoutX="788.0" layoutY="14.0" prefWidth="108.0" stylesheets="@../../css/buttonSave.css" text="Simpan" />
                            </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-                  <VBox>
-                     <children>
-                        <Label text="Hak Akses">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
                            <VBox.margin>
-                              <Insets bottom="15.0" />
+                              <Insets top="15.0" />
                            </VBox.margin>
-                        </Label>
-                        <HBox>
-                           <children>
-                              <VBox>
-                                 <children>
-                                    <JFXCheckBox fx:id="chkPatient" text="Pasien" textFill="#000000b2">
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" />
-                                       </VBox.margin>
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </JFXCheckBox>
-                                    <JFXCheckBox fx:id="chkMedicRecord" text="Rekam Medis" textFill="#000000b2">
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" />
-                                       </VBox.margin>
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </JFXCheckBox>
-                                    <JFXCheckBox fx:id="chkPayment" text="Pembayaran" textFill="#000000b2">
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" />
-                                       </VBox.margin>
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </JFXCheckBox>
-                                    <JFXCheckBox fx:id="chkReport" text="Laporan" textFill="#000000b2">
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" />
-                                       </VBox.margin>
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </JFXCheckBox>
-                                 </children>
-                              </VBox>
-                              <VBox>
-                                 <children>
-                                    <JFXCheckBox fx:id="chkGuestBook" text="Buku Tamu" textFill="#000000b2">
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" />
-                                       </VBox.margin>
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </JFXCheckBox>
-                                    <JFXCheckBox fx:id="chkMedicine" text="Obat" textFill="#000000b2">
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" />
-                                       </VBox.margin>
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </JFXCheckBox>
-                                    <JFXCheckBox fx:id="chkVet" text="Dokter" textFill="#000000b2">
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" />
-                                       </VBox.margin>
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </JFXCheckBox>
-                                    <JFXCheckBox fx:id="chkAdmin" text="Admin" textFill="#000000b2">
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" />
-                                       </VBox.margin>
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </JFXCheckBox>
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets left="15.0" />
-                                 </HBox.margin>
-                              </VBox>
-                           </children>
                         </HBox>
                      </children>
-                     <HBox.margin>
-                        <Insets left="15.0" />
-                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="15.0" />
+                     </padding>
                   </VBox>
-               </children>
-            </HBox>
-            <HBox fx:id="boxBtns" alignment="BOTTOM_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="21.0" prefWidth="940.0">
-               <children>
-                  <JFXButton fx:id="btnSave" layoutX="10.0" layoutY="26.0" prefWidth="108.0" stylesheets="@../../css/buttonSaveMedium.css" text="Simpan">
-                     <HBox.margin>
-                        <Insets right="30.0" />
-                     </HBox.margin>
-                  </JFXButton>
-               </children>
-            </HBox>
-         </children>
-         <VBox.margin>
-            <Insets left="30.0" right="30.0" />
-         </VBox.margin>
-      </VBox>
-      <VBox layoutX="40.0" layoutY="135.0">
-         <children>
-            <Label text="Ubah Data ">
+               </content>
+          </TitledPane>
+            <TitledPane animated="false" stylesheets="@../../css/titledPane.css" text="Ganti Password">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
-            </Label>
-            <HBox prefHeight="100.0" prefWidth="200.0" />
-         </children>
-         <VBox.margin>
-            <Insets left="30.0" right="30.0" />
-         </VBox.margin>
-      </VBox>
+               <content>
+                  <HBox>
+                     <children>
+                        <VBox prefHeight="551.0" prefWidth="396.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets bottom="30.0" left="30.0" />
+                           </HBox.margin>
+                           <children>
+                              <Label text="Pengguna Terdaftar">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Label>
+                              <TableView fx:id="tblCpUsers" prefHeight="443.0" prefWidth="421.0">
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin>
+                                 <columns>
+                                    <TableColumn fx:id="colCpUserId" prefWidth="76.0" text="ID" />
+                                    <TableColumn fx:id="colCpUsername" prefWidth="127.0" text="Username" />
+                                    <TableColumn fx:id="colCpFirstName" prefWidth="136.0" text="Nama Depan" />
+                                    <TableColumn fx:id="colCpLastName" prefWidth="160.0" text="Nama Belakang" />
+                                    <TableColumn fx:id="colCpAdminType" minWidth="0.0" prefWidth="96.0" text="Tipe Admin" />
+                                    <TableColumn fx:id="colCpPhoneNumber" prefWidth="120.0" text="Nomer Telpon" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="551.0" prefWidth="302.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="Ganti Password">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <TextField fx:id="tfCpUsername" editable="false" opacity="0.6" promptText="Username" stylesheets="@../../css/textField.css">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="30.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <PasswordField fx:id="pfCpOldPassword" layoutX="10.0" layoutY="70.0" promptText="Password Lama" stylesheets="@../../css/textField.css">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
+                              </PasswordField>
+                              <Label fx:id="lblCheckOldPassword" prefHeight="16.0" prefWidth="185.0" text="Label" textFill="#c31c1c" visible="false">
+                                 <VBox.margin>
+                                    <Insets bottom="12.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <PasswordField fx:id="pfCpNewPassword" promptText="Password Baru" stylesheets="@../../css/textField.css">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="30.0" />
+                                 </VBox.margin>
+                              </PasswordField>
+                              <PasswordField fx:id="pfCpNewPasswordRe" promptText="Ulangi Password Baru" stylesheets="@../../css/textField.css">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
+                              </PasswordField>
+                              <Label fx:id="lblCheckNewPassword" layoutX="10.0" layoutY="141.0" prefHeight="16.0" prefWidth="185.0" text="Label" textFill="#c31c1c" visible="false" />
+                              <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="45.0" prefWidth="938.0">
+                                 <children>
+                                    <JFXButton fx:id="btnChangePassword" alignment="CENTER" layoutX="788.0" layoutY="14.0" prefWidth="108.0" stylesheets="@../../css/buttonEdit.css" text="Ganti Password" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets bottom="30.0" left="30.0" right="30.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </content>
+            </TitledPane>
+        </panes>
+      </Accordion>
    </children>
 </VBox>

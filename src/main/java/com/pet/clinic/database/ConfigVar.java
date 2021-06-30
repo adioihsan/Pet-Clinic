@@ -65,4 +65,10 @@ public class ConfigVar {
     public void setIsUsed(int isUsed) {
         this.isUsed = isUsed;
     }
+
+    @Override
+    public String toString(){
+        return this.getDbHost()+":"+this.getDbPort()+"/"+
+                this.getDbName()+"?user="+this.getDbUser();
+    }
 }
