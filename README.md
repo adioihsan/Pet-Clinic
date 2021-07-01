@@ -13,7 +13,5 @@
   <li>Data Dokter</li>
   </ul>  
 
-#### Download :
-<ol>
-  <li>PetClinic for Windows 64bit[PetClinic for Windows 64bit](https://github.com/adioihsan/Pet-Clinic/tree/main/Installer/Windows)</li>
-  </ol>
+#### Download :  
+[PetClinic for Windows 64bit](https://github.com/adioihsan/Pet-Clinic/tree/main/Installer/Windows)
