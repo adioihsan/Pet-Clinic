@@ -25,3 +25,6 @@
   <li>PetClinic-WithoutDB-Setup.exe</li>
 <p>Adalah paket instalasi aplikasi yang tidak di sertakan DBMS sehingga di perlukan instalasi DBMS Mysql atau MariaDB . Paket instalasi ini baik di gunakan jika aplikasi  di install di  beberapa komputer yang terkoneksi ke satu DBMS server.</p>
 </ol>
+
+#### Petunjuk Instalasi dan Manual Book  
+[Petunjuk Instalasi](https://drive.google.com/file/d/1PgtvSuyHy5QOeMPdIvLQ-Av5Pp-S2-6h/view?usp=sharing)
