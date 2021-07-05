@@ -12,12 +12,11 @@
   <li>Laporan</li>
   <li>Data Dokter</li>
   </ul>  
-
+  
 #### Download :  
-[PetClinic With Database Included for Windows 64bit](https://drive.google.com/file/d/19x67VHGTue7fLP19qupN54R4Ri1IdlQi/view?usp=sharings) 
-[PetClinic Without Database Included for Windows 64bit](https://drive.google.com/file/d/1_A1IJGDHUbALnl4En0tJQhFgMU0kqALM/view?usp=sharing) 
-
+[PetClinic With Database Included for Windows 64bit](https://drive.google.com/file/d/19x67VHGTue7fLP19qupN54R4Ri1IdlQi/view?usp=sharings)
 <br>
+[PetClinic Without Database Included for Windows 64bit](https://drive.google.com/file/d/1_A1IJGDHUbALnl4En0tJQhFgMU0kqALM/view?usp=sharing) 
 #### Tentang paket instalasi
 <p>Terdapat 2 jenis paket instalasi Aplikasi Pet Clinic Yaitu :</p>
 <ol>
