@@ -30,3 +30,5 @@
 :inbox_tray: [Petunjuk Instalasi](https://drive.google.com/file/d/1PgtvSuyHy5QOeMPdIvLQ-Av5Pp-S2-6h/view?usp=sharing)
 
 :book: [Manual Book](https://drive.google.com/file/d/1_W4A7Xg_Ozq-CmEevT8Blah-jjGT9n0j/view?usp=sharing)
+
+📽️ [Video Tutorial Penggunaan](https://www.youtube.com/watch?v=qMqcgwbdxIg)
